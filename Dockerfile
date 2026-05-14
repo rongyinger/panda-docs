@@ -1,5 +1,5 @@
 # 基于nginx官方镜像
-FROM registry.cn-chengdu.aliyuncs.com/seanly/appset:nginx
+FROM registry.cn-chengdu.aliyuncs.com/seanly/appset:nginx AS pandasite
 
 # 维护者信息
 LABEL maintainer="your-email@example.com"
