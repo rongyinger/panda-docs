@@ -1,5 +1,5 @@
 # 基于nginx官方镜像
-FROM nginx:alpine
+FROM registry.cn-chengdu.aliyuncs.com/seanly/appset:nginx
 
 # 维护者信息
 LABEL maintainer="your-email@example.com"
@@ -12,7 +12,7 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY . /usr/share/nginx/html/
 
 # 复制自定义nginx配置（可选）
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
 
 # 暴露80端口
 EXPOSE 80
