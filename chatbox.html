@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbox 接入教程 - 熊猫Token</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+:root {
+  --font: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;
+  --bg-base: #e8edf5;
+  --tint-1: rgba(255,255,255,0.72);
+  --tint-2: rgba(255,255,255,0.52);
+  --tint-3: rgba(255,255,255,0.32);
+  --tint-fill: rgba(255,255,255,0.18);
+  --tint-sep: rgba(60,60,67,0.10);
+  --tint-sep-2: rgba(60,60,67,0.06);
+  --text-1: rgba(0,0,0,0.88);
+  --text-2: rgba(0,0,0,0.55);
+  --text-3: rgba(0,0,0,0.30);
+  --accent: #007aff;
+  --accent-dim: rgba(0,122,255,0.12);
+  --accent-mid: rgba(0,122,255,0.22);
+  --warn-bg: rgba(255,159,10,0.08);
+  --warn-bd: rgba(255,159,10,0.20);
+  --warn-text: #7a4a00;
+  --blur-heavy: blur(40px) saturate(180%);
+  --blur-mid: blur(24px) saturate(160%);
+  --blur-light: blur(12px) saturate(140%);
+  --r-xl: 24px; --r-lg: 18px; --r-md: 13px; --r-sm: 9px; --r-pill: 50px;
+  --ease: cubic-bezier(0.3,0,0,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font); min-height: 100vh; color: var(--text-1); background: var(--bg-base); overflow-x: hidden; }
+
+/* BG MESH */
+.bg-mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bg-blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.55; }
+.blob-1 { width:700px;height:700px;top:-180px;left:-180px;background:radial-gradient(circle,#b8d4f8 0%,#d6e8ff 60%,transparent 100%); }
+.blob-2 { width:600px;height:600px;top:30%;right:-200px;background:radial-gradient(circle,#ddd6fe 0%,#ede9fe 60%,transparent 100%); }
+.blob-3 { width:500px;height:500px;bottom:-100px;left:30%;background:radial-gradient(circle,#bfdbfe 0%,#e0f2fe 60%,transparent 100%); }
+
+/* HERO */
+.hero { position:relative;z-index:2;text-align:center;padding:80px 24px 64px; }
+.hero-badge {
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--tint-1);backdrop-filter:var(--blur-heavy);-webkit-backdrop-filter:var(--blur-heavy);
+  border:1px solid rgba(255,255,255,0.85);border-radius:var(--r-pill);
+  padding:6px 18px;font-size:13px;font-weight:500;color:var(--accent);
+  letter-spacing:0.02em;margin-bottom:22px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06),inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.hero-live { width:7px;height:7px;border-radius:50%;background:#34c759;box-shadow:0 0 0 2px rgba(52,199,89,0.25);animation:blink 2.4s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.45} }
+.hero h1 { font-size:clamp(36px,5vw,58px);font-weight:700;letter-spacing:-0.03em;line-height:1.08;margin-bottom:14px; }
+.hero h1 span { background:linear-gradient(135deg,#007aff 0%,#5856d6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+.hero-lead { font-size:18px;font-weight:300;color:var(--text-2);max-width:460px;margin:0 auto 40px;line-height:1.75; }
+.hero-strip {
+  display:inline-flex;background:var(--tint-2);backdrop-filter:var(--blur-mid);-webkit-backdrop-filter:var(--blur-mid);
+  border:1px solid rgba(255,255,255,0.70);border-radius:var(--r-xl);padding:6px;gap:2px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.07),inset 0 1px 0 rgba(255,255,255,0.85);flex-wrap:wrap;justify-content:center;
+}
+.hero-stat { padding:14px 24px;text-align:center;border-radius:18px;transition:background 0.25s var(--ease); }
+.hero-stat:hover { background:rgba(255,255,255,0.5); }
+.hero-stat + .hero-stat { border-left:1px solid var(--tint-sep); }
+.hero-stat-n { font-size:22px;font-weight:700;letter-spacing:-0.02em;color:var(--text-1);line-height:1;margin-bottom:3px; }
+.hero-stat-l { font-size:12px;color:var(--text-3);font-weight:500;letter-spacing:0.04em;text-transform:uppercase; }
+
+/* LAYOUT */
+.wrap { max-width:860px;margin:0 auto;padding:48px 20px 80px;position:relative;z-index:2;display:grid;gap:44px; }
+
+/* SEC HEADER */
+.sec-hd { display:flex;align-items:center;gap:14px;margin-bottom:18px; }
+.sec-icon {
+  width:40px;height:40px;border-radius:var(--r-md);background:var(--tint-1);backdrop-filter:var(--blur-light);
+  -webkit-backdrop-filter:var(--blur-light);border:1px solid rgba(255,255,255,0.80);
+  display:grid;place-items:center;font-size:18px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.07),inset 0 1px 0 rgba(255,255,255,0.9);flex-shrink:0;
+}
+.sec-eyebrow { font-size:11px;font-weight:600;letter-spacing:0.10em;text-transform:uppercase;color:var(--text-3); }
+.sec-title { font-size:22px;font-weight:700;letter-spacing:-0.015em;color:var(--text-1);line-height:1.2; }
+
+/* STEP CARDS */
+.steps { display:grid;gap:10px; }
+.step {
+  background:var(--tint-1);backdrop-filter:var(--blur-heavy);-webkit-backdrop-filter:var(--blur-heavy);
+  border:1px solid rgba(255,255,255,0.75);border-radius:var(--r-xl);
+  box-shadow:0 4px 20px rgba(0,0,0,0.055),inset 0 1px 0 rgba(255,255,255,0.9);
+  overflow:hidden;transition:transform 0.28s var(--ease),box-shadow 0.28s var(--ease);
+  opacity:0;transform:translateY(14px);animation:up 0.48s var(--ease) forwards;
+}
+.step:hover { transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,0.10),inset 0 1px 0 rgba(255,255,255,0.95); }
+@keyframes up { to{opacity:1;transform:translateY(0)} }
+.step:nth-child(1){animation-delay:.04s}.step:nth-child(2){animation-delay:.08s}
+.step:nth-child(3){animation-delay:.12s}.step:nth-child(4){animation-delay:.16s}
+.step:nth-child(5){animation-delay:.20s}.step:nth-child(6){animation-delay:.24s}
+
+.step-inner { display:grid;grid-template-columns:58px 1fr; }
+.step-gutter { display:flex;flex-direction:column;align-items:center;padding:22px 0 18px;gap:8px;border-right:1px solid var(--tint-sep-2); }
+.step-num {
+  width:32px;height:32px;border-radius:9px;background:var(--tint-2);backdrop-filter:var(--blur-light);
+  border:1px solid rgba(255,255,255,0.75);display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--text-2);
+  box-shadow:0 1px 4px rgba(0,0,0,0.07);transition:background 0.22s var(--ease),color 0.22s;
+}
+.step:hover .step-num { background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 3px 12px rgba(0,122,255,0.35); }
+.step-line { flex:1;width:1px;background:var(--tint-sep);min-height:8px; }
+.step-content { padding:22px 24px 24px; }
+.step-head { display:flex;align-items:center;gap:9px;margin-bottom:10px; }
+.step-tag {
+  font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  padding:3px 10px;border-radius:var(--r-pill);background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-mid);
+}
+.step-title { font-size:17px;font-weight:600;color:var(--text-1);letter-spacing:-0.01em; }
+.step-body p { font-size:16px;font-weight:400;color:var(--text-2);line-height:1.85;margin-bottom:12px; }
+.step-body p:last-child { margin-bottom:0; }
+.step-body a { color:var(--accent);text-decoration:none;font-weight:500; }
+.step-body a:hover { text-decoration:underline; }
+
+/* CONFIG TABLE */
+.cfg-table { width:100%;border-collapse:collapse;margin:14px 0;font-size:15px; }
+.cfg-table th { background:rgba(0,0,0,0.04);padding:10px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:0.03em;color:var(--text-2); }
+.cfg-table td { padding:11px 16px;border-bottom:1px solid var(--tint-sep);vertical-align:top; }
+.cfg-table td:first-child { font-weight:600;color:var(--text-1);white-space:nowrap;font-size:15px; }
+.cfg-table td:last-child { color:var(--text-2);font-size:15px; }
+
+/* INLINE CODE */
+.code {
+  font-family:'SF Mono','Menlo',monospace;font-size:13.5px;background:rgba(0,0,0,0.06);
+  color:var(--text-1);padding:2px 8px;border-radius:var(--r-sm);border:1px solid rgba(0,0,0,0.07);word-break:break-all;
+}
+
+/* CALLOUT */
+.callout {
+  display:flex;align-items:flex-start;gap:10px;padding:13px 16px;
+  border-radius:var(--r-md);margin:13px 0;font-size:15px;line-height:1.75;
+  border:1px solid transparent;backdrop-filter:var(--blur-light);
+}
+.c-info  { background:rgba(0,122,255,0.07);border-color:rgba(0,122,255,0.14);color:#0051a8; }
+.c-warn  { background:rgba(255,159,10,0.08);border-color:rgba(255,159,10,0.16);color:#7a4a00; }
+.c-danger{ background:rgba(255,59,48,0.07);border-color:rgba(255,59,48,0.14);color:#8f1a14; }
+
+/* PLATFORM CHIPS */
+.chips { display:flex;gap:8px;flex-wrap:wrap;margin:12px 0; }
+.chip {
+  font-size:14px;font-weight:500;color:var(--accent);background:var(--accent-dim);
+  backdrop-filter:var(--blur-light);border:1px solid var(--accent-mid);
+  padding:5px 14px;border-radius:var(--r-pill);
+}
+
+/* FINALE */
+.finale {
+  background:var(--tint-1);backdrop-filter:var(--blur-heavy);-webkit-backdrop-filter:var(--blur-heavy);
+  border:1px solid rgba(255,255,255,0.80);border-radius:var(--r-xl);
+  padding:48px 36px;text-align:center;
+  box-shadow:0 8px 40px rgba(0,0,0,0.08),inset 0 1px 0 rgba(255,255,255,0.95);
+}
+.finale-icon { font-size:46px;display:block;margin-bottom:14px; }
+.finale h3 { font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:9px; }
+.finale p { font-size:16px;font-weight:300;color:var(--text-2);max-width:400px;margin:0 auto;line-height:1.7; }
+
+/* FOOTER */
+footer { text-align:center;padding:32px 20px;color:var(--text-3);font-size:14px;position:relative;z-index:2; }
+footer p { margin-bottom:4px; }
+</style>
+</head>
+<body>
+
+<div class="bg-mesh">
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+</div>
+
+<div class="hero">
+  <div class="hero-badge"><div class="hero-live"></div>接入教程</div>
+  <h1>📦 <span>Chatbox</span> 接入指南</h1>
+  <p class="hero-lead">全平台支持的轻量 AI 客户端，配合熊猫Token平台快速上手</p>
+  <div class="hero-strip">
+    <div class="hero-stat"><div class="hero-stat-n">3 min</div><div class="hero-stat-l">预计用时</div></div>
+    <div class="hero-stat"><div class="hero-stat-n">全平台</div><div class="hero-stat-l">Win / Mac / iOS / Android</div></div>
+    <div class="hero-stat"><div class="hero-stat-n">本地存储</div><div class="hero-stat-l">数据安全</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- 什么是 Chatbox -->
+  <div>
+    <div class="sec-hd">
+      <div class="sec-icon">💡</div>
+      <div><div class="sec-eyebrow">简介</div><div class="sec-title">什么是 Chatbox？</div></div>
+    </div>
+    <div class="step">
+      <div class="step-inner">
+        <div class="step-gutter"><div class="step-num">ℹ</div></div>
+        <div class="step-content">
+          <div class="step-body">
+            <p>Chatbox 是一款开源 AI 客户端，支持所有主流平台，聊天记录完全保存在本地，隐私有保障。操作简单，适合普通用户和开发者。接入熊猫Token平台后，可以低成本使用 GPT-4、Claude、DeepSeek 等所有模型。</p>
+            <div class="chips">
+              <span class="chip">Windows</span><span class="chip">macOS</span><span class="chip">Linux</span>
+              <span class="chip">iOS</span><span class="chip">Android</span><span class="chip">网页版</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第一步：下载安装 -->
+  <div>
+    <div class="sec-hd">
+      <div class="sec-icon">⬇️</div>
+      <div><div class="sec-eyebrow">Step 01</div><div class="sec-title">下载安装 Chatbox</div></div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">1</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">下载</span><span class="step-title">访问官网下载</span></div>
+            <div class="step-body"><p>前往 <a href="https://chatboxai.app/zh" target="_blank">chatboxai.app/zh</a>，选择你的设备平台点击下载。也可以直接使用网页版，免安装。</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">2</div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">安装</span><span class="step-title">安装并打开</span></div>
+            <div class="step-body"><p>桌面端下载完成后双击安装包，按提示完成安装，启动 Chatbox。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第二步：获取 API Key -->
+  <div>
+    <div class="sec-hd">
+      <div class="sec-icon">🔑</div>
+      <div><div class="sec-eyebrow">Step 02</div><div class="sec-title">获取熊猫Token API Key</div></div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">1</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">登录</span><span class="step-title">登录平台</span></div>
+            <div class="step-body"><p>访问 <a href="https://www.pandatoken.net" target="_blank">www.pandatoken.net</a>，注册并登录账号。</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">2</div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">密钥</span><span class="step-title">创建 API Key</span></div>
+            <div class="step-body"><p>进入「控制台」→「令牌」，点击新建令牌，复制生成的 Key（只显示一次，请妥善保存）。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三步：配置 Chatbox -->
+  <div>
+    <div class="sec-hd">
+      <div class="sec-icon">⚙️</div>
+      <div><div class="sec-eyebrow">Step 03</div><div class="sec-title">在 Chatbox 中配置</div></div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">1</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">设置</span><span class="step-title">打开设置</span></div>
+            <div class="step-body"><p>启动 Chatbox 后，如果弹出配置引导直接按提示操作；如果没有，点击左下角「设置」图标 → 「模型提供方」。</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">2</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">配置</span><span class="step-title">添加自定义提供方</span></div>
+            <div class="step-body">
+              <p>点击「添加」或「添加自定义提供方」，在弹出的表单中填写：</p>
+              <table class="cfg-table">
+                <tr><th>配置项</th><th>填写内容</th></tr>
+                <tr><td>名称</td><td>熊猫Token</td></tr>
+                <tr><td>API 域名</td><td><span class="code">https://www.pandatoken.net/v1</span></td></tr>
+                <tr><td>API 路径</td><td><span class="code">/chat/completions</span>（默认，无需修改）</td></tr>
+                <tr><td>API 密钥</td><td>你复制的 Key</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">3</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">模型</span><span class="step-title">添加模型</span></div>
+            <div class="step-body">
+              <p>在模型输入框中，手动输入你想使用的模型名称，例如：</p>
+              <p><span class="code">deepseek-v3</span>　<span class="code">gpt-4o</span>　<span class="code">claude-3-5-sonnet-20241022</span>　<span class="code">gemini-2.0-flash</span></p>
+              <div class="callout c-info">💡 可到熊猫Token平台「模型广场」查看所有可用模型名称。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">4</div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">完成</span><span class="step-title">保存并开始使用</span></div>
+            <div class="step-body"><p>保存配置后，在聊天界面上方的模型选择栏切换到熊猫Token的模型，即可开始对话。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 常见问题 -->
+  <div>
+    <div class="sec-hd">
+      <div class="sec-icon">❓</div>
+      <div><div class="sec-eyebrow">FAQ</div><div class="sec-title">常见问题</div></div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">Q</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">错误</span><span class="step-title">提示 401 / API Key 错误</span></div>
+            <div class="step-body"><p>请确认复制的 Key 完整，没有多余空格。Key 只在创建时显示一次，如果忘了请重新生成。</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">Q</div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">模型</span><span class="step-title">模型列表中选不到想要的模型</span></div>
+            <div class="step-body"><p>Chatbox 需要手动输入模型名称，不会自动拉取列表。请参考熊猫Token平台「模型广场」的模型 ID 手动输入。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINALE -->
+  <div class="finale">
+    <span class="finale-icon">✅</span>
+    <h3>配置完成</h3>
+    <p>Chatbox 已成功接入熊猫Token平台，即可低成本畅用所有模型。</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>🐼 熊猫Token &nbsp;·&nbsp; www.pandatoken.net</p>
+  <p>统一的大模型接口网关 &nbsp;·&nbsp; © 2026</p>
+</footer>
+
+</body>
+</html>

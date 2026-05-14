@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenClaw 接入教程 - 熊猫Token</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+:root {
+  --font: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;
+  --bg-base: #e8edf5;
+  --tint-1: rgba(255,255,255,0.72);
+  --tint-2: rgba(255,255,255,0.52);
+  --tint-3: rgba(255,255,255,0.32);
+  --tint-sep: rgba(60,60,67,0.10);
+  --tint-sep-2: rgba(60,60,67,0.06);
+  --text-1: rgba(0,0,0,0.88);
+  --text-2: rgba(0,0,0,0.55);
+  --text-3: rgba(0,0,0,0.30);
+  --accent: #007aff;
+  --accent-dim: rgba(0,122,255,0.12);
+  --accent-mid: rgba(0,122,255,0.22);
+  --blur-heavy: blur(40px) saturate(180%);
+  --blur-mid: blur(24px) saturate(160%);
+  --blur-light: blur(12px) saturate(140%);
+  --r-xl: 24px; --r-lg: 18px; --r-md: 13px; --r-sm: 9px; --r-pill: 50px;
+  --ease: cubic-bezier(0.3,0,0,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font); min-height: 100vh; color: var(--text-1); background: var(--bg-base); overflow-x: hidden; }
+.bg-mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bg-blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.55; }
+.blob-1 { width:700px;height:700px;top:-180px;left:-180px;background:radial-gradient(circle,#b8d4f8 0%,#d6e8ff 60%,transparent 100%); }
+.blob-2 { width:600px;height:600px;top:30%;right:-200px;background:radial-gradient(circle,#fed6d6 0%,#ffe8e8 60%,transparent 100%); }
+.blob-3 { width:500px;height:500px;bottom:-100px;left:30%;background:radial-gradient(circle,#bfdbfe 0%,#e0f2fe 60%,transparent 100%); }
+.hero { position:relative;z-index:2;text-align:center;padding:80px 24px 64px; }
+.hero-badge {
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--tint-1);backdrop-filter:var(--blur-heavy);-webkit-backdrop-filter:var(--blur-heavy);
+  border:1px solid rgba(255,255,255,0.85);border-radius:var(--r-pill);
+  padding:6px 18px;font-size:13px;font-weight:500;color:var(--accent);
+  letter-spacing:0.02em;margin-bottom:22px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06),inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.hero-live { width:7px;height:7px;border-radius:50%;background:#34c759;box-shadow:0 0 0 2px rgba(52,199,89,0.25);animation:blink 2.4s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.45} }
+.hero h1 { font-size:clamp(36px,5vw,58px);font-weight:700;letter-spacing:-0.03em;line-height:1.08;margin-bottom:14px; }
+.hero h1 span { background:linear-gradient(135deg,#007aff 0%,#5856d6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+.hero-lead { font-size:18px;font-weight:300;color:var(--text-2);max-width:480px;margin:0 auto 40px;line-height:1.75; }
+.hero-strip {
+  display:inline-flex;background:var(--tint-2);backdrop-filter:var(--blur-mid);-webkit-backdrop-filter:var(--blur-mid);
+  border:1px solid rgba(255,255,255,0.70);border-radius:var(--r-xl);padding:6px;gap:2px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.07),inset 0 1px 0 rgba(255,255,255,0.85);flex-wrap:wrap;justify-content:center;
+}
+.hero-stat { padding:14px 24px;text-align:center;border-radius:18px;transition:background 0.25s var(--ease); }
+.hero-stat:hover { background:rgba(255,255,255,0.5); }
+.hero-stat + .hero-stat { border-left:1px solid var(--tint-sep); }
+.hero-stat-n { font-size:22px;font-weight:700;letter-spacing:-0.02em;color:var(--text-1);line-height:1;margin-bottom:3px; }
+.hero-stat-l { font-size:12px;color:var(--text-3);font-weight:500;letter-spacing:0.04em;text-transform:uppercase; }
+.wrap { max-width:860px;margin:0 auto;padding:48px 20px 80px;position:relative;z-index:2;display:grid;gap:44px; }
+.sec-hd { display:flex;align-items:center;gap:14px;margin-bottom:18px; }
+.sec-icon {
+  width:40px;height:40px;border-radius:var(--r-md);background:var(--tint-1);backdrop-filter:var(--blur-light);
+  -webkit-backdrop-filter:var(--blur-light);border:1px solid rgba(255,255,255,0.80);
+  display:grid;place-items:center;font-size:18px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.07),inset 0 1px 0 rgba(255,255,255,0.9);flex-shrink:0;
+}
+.sec-eyebrow { font-size:11px;font-weight:600;letter-spacing:0.10em;text-transform:uppercase;color:var(--text-3); }
+.sec-title { font-size:22px;font-weight:700;letter-spacing:-0.015em;color:var(--text-1);line-height:1.2; }
+.steps { display:grid;gap:10px; }
+.step {
+  background:var(--tint-1);backdrop-filter:var(--blur-heavy);-webkit-backdrop-filter:var(--blur-heavy);
+  border:1px solid rgba(255,255,255,0.75);border-radius:var(--r-xl);
+  box-shadow:0 4px 20px rgba(0,0,0,0.055),inset 0 1px 0 rgba(255,255,255,0.9);
+  overflow:hidden;transition:transform 0.28s var(--ease),box-shadow 0.28s var(--ease);
+  opacity:0;transform:translateY(14px);animation:up 0.48s var(--ease) forwards;
+}
+.step:hover { transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,0.10),inset 0 1px 0 rgba(255,255,255,0.95); }
+@keyframes up { to{opacity:1;transform:translateY(0)} }
+.step:nth-child(1){animation-delay:.04s}.step:nth-child(2){animation-delay:.08s}
+.step:nth-child(3){animation-delay:.12s}.step:nth-child(4){animation-delay:.16s}
+.step-inner { display:grid;grid-template-columns:58px 1fr; }
+.step-gutter { display:flex;flex-direction:column;align-items:center;padding:22px 0 18px;gap:8px;border-right:1px solid var(--tint-sep-2); }
+.step-num {
+  width:32px;height:32px;border-radius:9px;background:var(--tint-2);backdrop-filter:var(--blur-light);
+  border:1px solid rgba(255,255,255,0.75);display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--text-2);
+  box-shadow:0 1px 4px rgba(0,0,0,0.07);transition:background 0.22s var(--ease),color 0.22s;
+}
+.step:hover .step-num { background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 3px 12px rgba(0,122,255,0.35); }
+.step-line { flex:1;width:1px;background:var(--tint-sep);min-height:8px; }
+.step-content { padding:22px 24px 24px; }
+.step-head { display:flex;align-items:center;gap:9px;margin-bottom:10px; }
+.step-tag {
+  font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  padding:3px 10px;border-radius:var(--r-pill);background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-mid);
+}
+.step-title { font-size:17px;font-weight:600;color:var(--text-1);letter-spacing:-0.01em; }
+.step-body p { font-size:16px;font-weight:400;color:var(--text-2);line-height:1.85;margin-bottom:12px; }
+.step-body p:last-child { margin-bottom:0; }
+.step-body a { color:var(--accent);text-decoration:none;font-weight:500; }
+.step-body a:hover { text-decoration:underline; }
+.cfg-table { width:100%;border-collapse:collapse;margin:14px 0;font-size:15px; }
+.cfg-table th { background:rgba(0,0,0,0.04);padding:10px 16px;text-align:left;font-weight:600;font-size:13px;letter-spacing:0.03em;color:var(--text-2); }
+.cfg-table td { padding:11px 16px;border-bottom:1px solid var(--tint-sep);vertical-align:top; }
+.cfg-table td:first-child { font-weight:600;color:var(--text-1);white-space:nowrap;font-size:15px; }
+.cfg-table td:last-child { color:var(--text-2);font-size:15px; }
+.code {
+  font-family:'SF Mono','Menlo',monospace;font-size:13.5px;background:rgba(0,0,0,0.06);
+  color:var(--text-1);padding:2px 8px;border-radius:var(--r-sm);border:1px solid rgba(0,0,0,0.07);word-break:break-all;
+}
+.callout {
+  display:flex;align-items:flex-start;gap:10px;padding:13px 16px;
+  border-radius:var(--r-md);margin:13px 0;font-size:15px;line-height:1.75;
+  border:1px solid transparent;backdrop-filter:var(--blur-light);
+}
+.c-info  { background:rgba(0,122,255,0.07);border-color:rgba(0,122,255,0.14);color:#0051a8; }
+.c-warn  { background:rgba(255,159,10,0.08);border-color:rgba(255,159,10,0.16);color:#7a4a00; }
+.finale {
+  background:var(--tint-1);backdrop-filter:var(--blur-heavy);-webkit-backdrop-filter:var(--blur-heavy);
+  border:1px solid rgba(255,255,255,0.80);border-radius:var(--r-xl);
+  padding:48px 36px;text-align:center;
+  box-shadow:0 8px 40px rgba(0,0,0,0.08),inset 0 1px 0 rgba(255,255,255,0.95);
+}
+.finale-icon { font-size:46px;display:block;margin-bottom:14px; }
+.finale h3 { font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:9px; }
+.finale p { font-size:16px;font-weight:300;color:var(--text-2);max-width:400px;margin:0 auto;line-height:1.7; }
+footer { text-align:center;padding:32px 20px;color:var(--text-3);font-size:14px;position:relative;z-index:2; }
+footer p { margin-bottom:4px; }
+</style>
+</head>
+<body>
+
+<div class="bg-mesh">
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+</div>
+
+<div class="hero">
+  <div class="hero-badge"><div class="hero-live"></div>接入教程</div>
+  <h1>🦀 <span>OpenClaw</span> 接入指南</h1>
+  <p class="hero-lead">国产开源 AI 客户端，接入熊猫Token平台轻松调用各大模型</p>
+  <div class="hero-strip">
+    <div class="hero-stat"><div class="hero-stat-n">5 min</div><div class="hero-stat-l">预计用时</div></div>
+    <div class="hero-stat"><div class="hero-stat-n">三平台</div><div class="hero-stat-l">Win / Mac / Linux</div></div>
+    <div class="hero-stat"><div class="hero-stat-n">国产开源</div><div class="hero-stat-l">自主研发</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div>
+    <div class="sec-hd">
+      <div class="sec-icon">💡</div>
+      <div><div class="sec-eyebrow">简介</div><div class="sec-title">什么是 OpenClaw？</div></div>
+    </div>
+    <div class="step">
+      <div class="step-inner">
+        <div class="step-gutter"><div class="step-num">ℹ</div></div>
+        <div class="step-content">
+          <div class="step-body">
+            <p>OpenClaw 是一款国产开源的跨平台 AI 聊天客户端，界面简洁，支持自定义 API 接入，可配合各类 API 聚合平台使用，无需折腾复杂配置即可使用 GPT、Claude、DeepSeek 等模型。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-hd">
+      <div class="sec-icon">⬇️</div>
+      <div><div class="sec-eyebrow">Step 01</div><div class="sec-title">下载安装 OpenClaw</div></div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">1</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">下载</span><span class="step-title">前往官方 GitHub 下载</span></div>
+            <div class="step-body"><p>访问 OpenClaw 的 GitHub 仓库 Releases 页面，根据你的系统下载对应安装包（Windows 选 <span class="code">.exe</span>，macOS 选 <span class="code">.dmg</span>）。</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">2</div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">安装</span><span class="step-title">安装并启动</span></div>
+            <div class="step-body"><p>双击安装包按提示完成安装，启动 OpenClaw。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-hd">
+      <div class="sec-icon">🔑</div>
+      <div><div class="sec-eyebrow">Step 02</div><div class="sec-title">获取熊猫Token API Key</div></div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">1</div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">密钥</span><span class="step-title">登录并创建令牌</span></div>
+            <div class="step-body"><p>访问 <a href="https://www.pandatoken.net" target="_blank">www.pandatoken.net</a>，注册登录后进入「控制台」→「令牌」，新建令牌并复制。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-hd">
+      <div class="sec-icon">⚙️</div>
+      <div><div class="sec-eyebrow">Step 03</div><div class="sec-title">在 OpenClaw 中配置</div></div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">1</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">设置</span><span class="step-title">打开设置</span></div>
+            <div class="step-body"><p>启动 OpenClaw 后，点击左下角或顶部的「设置」入口，进入 API 配置页面。</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">2</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">模式</span><span class="step-title">选择 OpenAI 兼容模式</span></div>
+            <div class="step-body"><p>在模型服务商选择中，选择「OpenAI 兼容」或「自定义」选项。</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">3</div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">配置</span><span class="step-title">填写配置信息</span></div>
+            <div class="step-body">
+              <table class="cfg-table">
+                <tr><th>配置项</th><th>填写内容</th></tr>
+                <tr><td>API 地址 / Base URL</td><td><span class="code">https://www.pandatoken.net/v1</span></td></tr>
+                <tr><td>API Key</td><td>你从平台复制的令牌</td></tr>
+                <tr><td>模型名称</td><td>例如 <span class="code">deepseek-v3</span>、<span class="code">gpt-4o</span></td></tr>
+              </table>
+              <div class="callout c-info">💡 熊猫Token平台与 OpenAI API 完全兼容，凡是支持自定义 Base URL 的客户端均可按此方式接入。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">4</div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">完成</span><span class="step-title">保存并开始使用</span></div>
+            <div class="step-body"><p>保存配置后，在聊天界面选择对应模型，即可开始对话。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-hd">
+      <div class="sec-icon">❓</div>
+      <div><div class="sec-eyebrow">FAQ</div><div class="sec-title">常见问题</div></div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-gutter"><div class="step-num">Q</div></div>
+          <div class="step-content">
+            <div class="step-head"><span class="step-tag">连接</span><span class="step-title">连接失败 / 无响应</span></div>
+            <div class="step-body"><p>检查 API 地址是否填写正确，确认末尾带 <span class="code">/v1</span>。同时确认 API Key 完整，没有多余空格或换行符。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="finale">
+    <span class="finale-icon">✅</span>
+    <h3>配置完成</h3>
+    <p>OpenClaw 已成功接入熊猫Token平台，国产客户端畅用全球模型。</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>🐼 熊猫Token &nbsp;·&nbsp; www.pandatoken.net</p>
+  <p>统一的大模型接口网关 &nbsp;·&nbsp; © 2026</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教程 - 熊猫算力平台</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;background:#f7f6f2;color:#1a1a2e;line-height:1.7}
+.header{background:linear-gradient(135deg,#0f2356 0%,#1a56db 60%,#3b82f6 100%);color:#fff;padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(255,255,255,.08),transparent 60%);pointer-events:none}
+.header-icon{font-size:52px;display:block;margin-bottom:14px;position:relative}
+.header h1{font-size:clamp(24px,5vw,36px);font-weight:700;margin-bottom:10px;position:relative}
+.header p{font-size:15px;opacity:.85;max-width:480px;margin:0 auto;position:relative}
+.container{max-width:960px;margin:0 auto;padding:40px 24px 60px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.card{background:#fff;border-radius:12px;border:1px solid #e5e7eb;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:24px;transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column}
+.card:hover{box-shadow:0 6px 28px rgba(26,86,219,.14);transform:translateY(-2px)}
+.card-emoji{font-size:28px;margin-bottom:10px}
+.card-title{font-size:16px;font-weight:700;margin-bottom:6px;color:#1a1a2e}
+.card-desc{font-size:13.5px;color:#6b7280;line-height:1.6;flex:1;margin-bottom:16px}
+.card-btn{display:inline-block;background:#1a56db;color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;text-align:center;transition:background .2s}
+.card-btn:hover{background:#1548c0}
+.page-title{font-size:22px;font-weight:700;margin-bottom:8px}
+.page-sub{font-size:14px;color:#6b7280;margin-bottom:28px}
+</style>
+</head>
+<body>
+<div class="header">
+  <span class="header-icon">🐼</span>
+  <h1>熊猫算力平台 · 教程中心</h1>
+  <p>选择下方教程，快速完成平台接入配置</p>
+</div>
+<div class="container">
+  <div class="grid">
+    <div class="card">
+      <div class="card-emoji">📖</div>
+      <div class="card-title">平台使用教程</div>
+      <div class="card-desc">图文详解平台注册、创建 API Key 及接入流程</div>
+      <a class="card-btn" href="guide.html">查看教程</a>
+    </div>
+    <div class="card">
+      <div class="card-emoji">🎬</div>
+      <div class="card-title">视频教程</div>
+      <div class="card-desc">视频演示平台完整操作流程</div>
+      <a class="card-btn" href="video.html">查看教程</a>
+    </div>
+    <div class="card">
+      <div class="card-emoji">🍒</div>
+      <div class="card-title">Cherry Studio 接入</div>
+      <div class="card-desc">在 Cherry Studio 中配置并使用本平台 API</div>
+      <a class="card-btn" href="cherry-studio.html">查看教程</a>
+    </div>
+    <div class="card">
+      <div class="card-emoji">📦</div>
+      <div class="card-title">Chatbox 接入</div>
+      <div class="card-desc">在 Chatbox 中配置并使用本平台 API</div>
+      <a class="card-btn" href="chatbox.html">查看教程</a>
+    </div>
+    <div class="card">
+      <div class="card-emoji">🖱️</div>
+      <div class="card-title">Cursor 接入</div>
+      <div class="card-desc">在 Cursor 编辑器中配置并使用本平台 API</div>
+      <a class="card-btn" href="cursor.html">查看教程</a>
+    </div>
+    <div class="card">
+      <div class="card-emoji">💬</div>
+      <div class="card-title">NextChat 接入</div>
+      <div class="card-desc">在 NextChat 中配置并使用本平台 API</div>
+      <a class="card-btn" href="nextchat.html">查看教程</a>
+    </div>
+    <div class="card">
+      <div class="card-emoji">🔧</div>
+      <div class="card-title">Dify 接入</div>
+      <div class="card-desc">在 Dify 工作流平台中配置并使用本平台 API</div>
+      <a class="card-btn" href="dify.html">查看教程</a>
+    </div>
+    <div class="card">
+      <div class="card-emoji">🦀</div>
+      <div class="card-title">OpenClaw 接入</div>
+      <div class="card-desc">在 OpenClaw 中配置并使用本平台 API</div>
+      <a class="card-btn" href="openclaw.html">查看教程</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

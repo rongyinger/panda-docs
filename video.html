@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>视频教程 - 熊猫算力平台</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #f7f8fa; color: #1e293b; line-height: 1.7;
+  }
+  .header {
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 60%, #3b82f6 100%);
+    color: white; padding: 48px 24px 40px; text-align: center;
+  }
+  .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; }
+  .header p { font-size: 15px; opacity: 0.85; }
+  .container { max-width: 860px; margin: 40px auto; padding: 0 20px 60px; }
+  .video-card {
+    background: #fff; border-radius: 16px; border: 1px solid #e2e8f0;
+    overflow: hidden; box-shadow: 0 4px 24px rgba(37,99,235,0.08);
+  }
+  .video-wrap {
+    position: relative; width: 100%; padding-top: 56.25%;
+  }
+  .video-wrap iframe {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; border: none;
+  }
+  .video-info { padding: 24px 28px; }
+  .video-info h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .video-info p { font-size: 14px; color: #64748b; }
+  .back { display: inline-flex; align-items: center; gap: 6px; color: #2563eb; font-size: 14px; text-decoration: none; margin-bottom: 24px; }
+  .back:hover { text-decoration: underline; }
+  .bilibili-btn {
+    display: inline-block; margin-top: 16px;
+    background: #00a1d6; color: white; border-radius: 8px;
+    padding: 8px 20px; font-size: 14px; text-decoration: none;
+  }
+  .bilibili-btn:hover { background: #0090c1; }
+  .footer { text-align: center; color: #94a3b8; font-size: 13px; padding: 20px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎬 视频教程</h1>
+  <p>跟着视频一步步完成平台接入配置</p>
+</div>
+
+<div class="container">
+  <a class="back" href="/tutorial">← 返回教程列表</a>
+
+  <div class="video-card">
+    <div class="video-wrap">
+      <iframe
+        src="https://player.bilibili.com/player.html?bvid=BV1r1dzBnEJQ&autoplay=0"
+        scrolling="no"
+        allowfullscreen="true">
+      </iframe>
+    </div>
+    <div class="video-info">
+      <h2>熊猫算力平台完整使用教程</h2>
+      <p>视频涵盖：注册登录 → 创建 API Key → 获取 Base URL → 接入各类 AI 工具，全程演示，5 分钟快速上手。</p>
+      <a class="bilibili-btn" href="https://www.bilibili.com/video/BV1r1dzBnEJQ" target="_blank">📺 前往 B 站观看</a>
+    </div>
+  </div>
+</div>
+
+<div class="footer">熊猫算力平台 · 统一的大模型接口网关 · aiplatform.zjsk.cc</div>
+
+</body>
+</html>
