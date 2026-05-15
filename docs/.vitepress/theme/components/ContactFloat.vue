@@ -1,38 +1,38 @@
 <template>
-  <div class="contact-float">
-    <Transition name="panel-slide">
-      <div v-if="expanded" class="contact-panel">
-        <button class="close-btn" aria-label="关闭" @click="expanded = false">✕</button>
-        <h4 class="panel-title">联系我们</h4>
+  <!-- 右下角悬浮联系按钮 -->
+  <div class="cf-wrap">
+    <Transition name="panel">
+      <div v-if="open" v-click-outside="close" class="cf-panel">
+        <button class="cf-close" @click="close">✕</button>
+        <p class="cf-panel-title">联系我们</p>
 
-        <div class="qr-placeholder">
-          <div class="qr-box">
-            <span class="qr-icon">📱</span>
-            <span>二维码占位</span>
+        <!-- 微信二维码占位 -->
+        <div class="cf-qr">
+          <div class="cf-qr-box">
+            <span>📱</span>
+            <span>微信扫码</span>
           </div>
-          <p class="qr-label">微信扫码联系客服</p>
+          <p class="cf-qr-label">添加微信客服</p>
         </div>
 
-        <div class="divider" />
+        <div class="cf-divider" />
 
-        <div class="contact-item">
-          <span class="contact-icon">📧</span>
+        <div class="cf-item">
+          <span>📧</span>
           <a href="mailto:support@pandatoken.com">support@pandatoken.com</a>
         </div>
-        <div class="contact-item">
-          <span class="contact-icon">🌐</span>
+        <div class="cf-item">
+          <span>🌐</span>
           <a href="https://pandatoken.com" target="_blank" rel="noopener">pandatoken.com</a>
         </div>
       </div>
     </Transition>
 
-    <button
-      class="float-btn"
-      :class="{ active: expanded }"
-      :aria-label="expanded ? '关闭联系面板' : '联系我们'"
-      @click="expanded = !expanded"
-    >
-      <span class="float-icon">{{ expanded ? '✕' : '💬' }}</span>
+    <button class="cf-fab" :class="{ active: open }" @click="open = !open" aria-label="联系我们">
+      <svg v-if="!open" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+      </svg>
+      <span v-else style="font-size:1rem;line-height:1">✕</span>
     </button>
   </div>
 </template>
@@ -40,11 +40,25 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const expanded = ref(false)
+const open = ref(false)
+function close() { open.value = false }
+
+// 简单的 click-outside 指令
+const vClickOutside = {
+  mounted(el: HTMLElement, binding: { value: () => void }) {
+    el._clickOutsideHandler = (e: MouseEvent) => {
+      if (!el.contains(e.target as Node)) binding.value()
+    }
+    document.addEventListener('mousedown', el._clickOutsideHandler)
+  },
+  unmounted(el: HTMLElement) {
+    document.removeEventListener('mousedown', el._clickOutsideHandler)
+  },
+}
 </script>
 
 <style scoped>
-.contact-float {
+.cf-wrap {
   position: fixed;
   bottom: 2rem;
   right: 1.5rem;
@@ -55,132 +69,96 @@ const expanded = ref(false)
   gap: 0.75rem;
 }
 
-/* 悬浮按钮 */
-.float-btn {
+/* 悬浮圆形按钮 */
+.cf-fab {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 212, 255, 0.4);
-  background: linear-gradient(135deg, #0d1b2a, #1a2d45);
-  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.25), 0 0 0 0 rgba(0, 212, 255, 0);
-  cursor: pointer;
+  background: #22c55e;
+  border: none;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.35);
+  transition: all 0.25s;
 }
 
-.float-btn:hover,
-.float-btn.active {
-  box-shadow: 0 4px 24px rgba(0, 212, 255, 0.45), 0 0 0 4px rgba(0, 212, 255, 0.1);
-  border-color: rgba(0, 212, 255, 0.7);
+.cf-fab svg { width: 22px; height: 22px; }
+
+.cf-fab:hover,
+.cf-fab.active {
+  background: #15803d;
   transform: scale(1.08);
-}
-
-.float-icon {
-  font-size: 1.25rem;
-  line-height: 1;
+  box-shadow: 0 6px 24px rgba(34, 197, 94, 0.45);
 }
 
 /* 展开面板 */
-.contact-panel {
-  background: var(--vp-c-bg-soft, #111827);
-  border: 1px solid rgba(0, 212, 255, 0.2);
+.cf-panel {
+  background: white;
+  border: 1px solid #d1fae5;
   border-radius: 14px;
   padding: 1.25rem;
   width: 220px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 212, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
-.close-btn {
+.cf-close {
   position: absolute;
   top: 0.6rem;
   right: 0.75rem;
   background: none;
   border: none;
-  color: var(--vp-c-text-3, #64748b);
+  color: #9ca3af;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   padding: 0.2rem;
-  line-height: 1;
   transition: color 0.2s;
 }
-.close-btn:hover {
-  color: var(--vp-c-brand-1, #00d4ff);
+.cf-close:hover { color: #22c55e; }
+
+.cf-panel-title {
+  margin: 0 0 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #111827;
 }
 
-.panel-title {
-  margin: 0 0 1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--vp-c-text-1, #e2e8f0);
-}
+.cf-qr { text-align: center; margin-bottom: 0.75rem; }
 
-.qr-placeholder {
-  text-align: center;
-  margin-bottom: 0.75rem;
-}
-
-.qr-box {
+.cf-qr-box {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.3rem;
+  height: 90px;
   justify-content: center;
-  gap: 0.4rem;
-  height: 100px;
-  border: 2px dashed rgba(0, 212, 255, 0.2);
+  border: 2px dashed #d1fae5;
   border-radius: 8px;
-  color: var(--vp-c-text-3, #64748b);
   font-size: 0.78rem;
-  background: rgba(0, 212, 255, 0.03);
+  color: #9ca3af;
+  background: #f9fafb;
 }
 
-.qr-icon {
-  font-size: 2rem;
-}
+.cf-qr-box span:first-child { font-size: 1.8rem; }
+.cf-qr-label { margin: 0.35rem 0 0; font-size: 0.75rem; color: #9ca3af; }
 
-.qr-label {
-  margin: 0.4rem 0 0;
-  font-size: 0.78rem;
-  color: var(--vp-c-text-3, #64748b);
-}
+.cf-divider { height: 1px; background: #f3f4f6; margin: 0.75rem 0; }
 
-.divider {
-  height: 1px;
-  background: var(--vp-c-divider, rgba(0, 212, 255, 0.12));
-  margin: 0.75rem 0;
-}
-
-.contact-item {
+.cf-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.82rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.8rem;
 }
 
-.contact-icon {
-  flex-shrink: 0;
-}
+.cf-item a { color: #15803d; text-decoration: none; word-break: break-all; }
+.cf-item a:hover { text-decoration: underline; }
 
-.contact-item a {
-  color: var(--vp-c-brand-1, #00d4ff);
-  text-decoration: none;
-  word-break: break-all;
-}
-.contact-item a:hover {
-  text-decoration: underline;
-}
-
-/* 面板动画 */
-.panel-slide-enter-active,
-.panel-slide-leave-active {
-  transition: opacity 0.25s, transform 0.25s;
-}
-.panel-slide-enter-from,
-.panel-slide-leave-to {
-  opacity: 0;
-  transform: translateY(12px) scale(0.96);
-}
+/* 动画 */
+.panel-enter-active, .panel-leave-active { transition: opacity .22s, transform .22s; }
+.panel-enter-from, .panel-leave-to { opacity: 0; transform: translateY(10px) scale(0.96); }
 </style>

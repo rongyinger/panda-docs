@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 熊猫算力知识中心
+title: 熊猫知识中心
 ---
 
-<HomePage />
+<HomePageSections />
