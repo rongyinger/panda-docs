@@ -1,0 +1,123 @@
+/* ── VitePress 品牌色覆盖 ── */
+:root {
+  --vp-c-brand-1: #00d4ff;
+  --vp-c-brand-2: #00b8d9;
+  --vp-c-brand-3: #0090aa;
+  --vp-c-brand-soft: rgba(0, 212, 255, 0.14);
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(135deg, #00d4ff 30%, #00ff88 100%);
+  --vp-home-hero-image-background-image: radial-gradient(ellipse, #00d4ff22 0%, transparent 70%);
+}
+
+/* ── 深色模式 ── */
+.dark {
+  --vp-c-bg: #0a0f1e;
+  --vp-c-bg-soft: #111827;
+  --vp-c-bg-mute: #1a2235;
+  --vp-c-bg-alt: #0d1520;
+  --vp-c-divider: rgba(0, 212, 255, 0.12);
+  --vp-c-text-1: #e2e8f0;
+  --vp-c-text-2: #94a3b8;
+  --vp-c-text-3: #64748b;
+}
+
+/* ── 导航栏 ── */
+.dark .VPNav {
+  background: rgba(10, 15, 30, 0.85) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+/* ── 代码块 ── */
+.dark .vp-code-group .tabs {
+  background: #0d1520;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.dark div[class*='language-'] {
+  background: #0d1520 !important;
+  border: 1px solid rgba(0, 212, 255, 0.08);
+  border-radius: 8px;
+}
+
+/* ── 链接 ── */
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.vp-doc a:hover {
+  border-bottom-color: var(--vp-c-brand-1);
+}
+
+/* ── 行内代码 ── */
+.dark .vp-doc code {
+  background: rgba(0, 212, 255, 0.08);
+  color: #00d4ff;
+  border: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+/* ── 提示框 ── */
+.dark .custom-block.tip {
+  background: rgba(0, 212, 255, 0.06);
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+.dark .custom-block.warning {
+  background: rgba(255, 170, 0, 0.06);
+}
+
+.dark .custom-block.danger {
+  background: rgba(255, 70, 70, 0.06);
+}
+
+/* ── 侧边栏 ── */
+.dark .VPSidebar {
+  background: var(--vp-c-bg-alt);
+  border-right: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+.dark .VPSidebarItem.is-active > .item .text {
+  color: var(--vp-c-brand-1);
+}
+
+/* ── 右侧目录 ── */
+.dark .VPDocAsideOutline .outline-link.active {
+  color: var(--vp-c-brand-1);
+}
+
+/* ── 搜索框 ── */
+.dark .VPNavBarSearch .DocSearch-Button {
+  background: rgba(0, 212, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+/* ── 滚动条 ── */
+.dark ::-webkit-scrollbar {
+  width: 6px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: var(--vp-c-bg);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.2);
+  border-radius: 3px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 255, 0.4);
+}
+
+/* ── 全局选中色 ── */
+::selection {
+  background: rgba(0, 212, 255, 0.25);
+  color: #ffffff;
+}
+
+/* ── page 布局：去掉首页多余内边距 ── */
+.VPPage {
+  padding-top: 0 !important;
+  min-height: calc(100vh - var(--vp-nav-height));
+}
