@@ -81,6 +81,7 @@ export default defineConfig({
           items: [
             { text: '知识总览', link: '/ai-knowledge/' },
             { text: 'Transformer 架构详解', link: '/ai-knowledge/transformer' },
+            { text: '横评 DeepSeek、Claude、GPT、Kimi', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },
             // 新增知识文章：{ text: '标题', link: '/ai-knowledge/文件名' }
           ],
         },

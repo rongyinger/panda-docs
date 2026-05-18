@@ -65,6 +65,15 @@ const readingPanda = computed(() => withBase('reading-panda.png'))
 // 修改这里的数组来更新首页最新内容列表
 const latestItems = [
   {
+    icon: '📖',
+    title: '横评 DeepSeek、Claude、GPT、Kimi，结果大跌眼镜…',
+    tag: '知识',
+    tagBg: 'rgba(168,85,247,0.1)',
+    tagColor: '#7c3aed',
+    date: '2026-05-18',
+    link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi',
+  },
+  {
     icon: '💡',
     title: '省 80% Token！给 Claude Code 装「第二大脑」的开源神器',
     tag: '技巧',
