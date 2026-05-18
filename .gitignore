@@ -5,3 +5,4 @@ docs/.vitepress/cache/
 *.local
 .claude/
 微信截图*.png
+pnpm-workspace.yaml
