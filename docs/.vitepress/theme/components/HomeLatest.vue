@@ -93,6 +93,15 @@ const latestItems = [
   },
   {
     icon: '💡',
+    title: '省 Token 终极指南：10 个技巧让你的 API 费用降低 50%-80%',
+    tag: '技巧',
+    tagBg: 'rgba(236,72,153,0.1)',
+    tagColor: '#be185d',
+    date: '2026-05-18',
+    link: '/tips/save-token-ultimate-guide',
+  },
+  {
+    icon: '💡',
     title: '省 80% Token！给 Claude Code 装「第二大脑」的开源神器',
     tag: '技巧',
     tagBg: 'rgba(236,72,153,0.1)',

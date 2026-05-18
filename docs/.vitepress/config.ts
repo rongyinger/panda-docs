@@ -153,6 +153,7 @@ export default defineConfig({
           text: '技巧分享',
           items: [
             { text: '省 80% Token！给 Claude Code 装「第二大脑」', link: '/tips/openwolf-claude-code-memory' },
+            { text: '省 Token 终极指南：10 个技巧降低 50%-80% 费用', link: '/tips/save-token-ultimate-guide' },
             // 新增技巧文章：{ text: '标题', link: '/tips/文件名' }
           ],
         },
