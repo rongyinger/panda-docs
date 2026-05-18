@@ -45,28 +45,28 @@ const cards = [
     iconBg: 'rgba(59, 130, 246, 0.12)',
     title: '拓展连接',
     desc: '了解如何将熊猫算力平台与其他软件和服务连接',
-    link: '/connect/',
+    link: '/connect/chatbox',
   },
   {
     icon: '❓',
     iconBg: 'rgba(249, 115, 22, 0.12)',
     title: '常见问题',
     desc: '查看用户常见问题及官方详细解答',
-    link: '/faq/',
+    link: '/faq/personal/',
   },
   {
     icon: '📖',
     iconBg: 'rgba(168, 85, 247, 0.12)',
     title: 'AI 知识分享',
     desc: '探索 AI 领域知识、技术原理和行业动态',
-    link: '/ai-knowledge/',
+    link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi',
   },
   {
     icon: '💡',
     iconBg: 'rgba(236, 72, 153, 0.12)',
     title: '技巧分享',
     desc: '学习实用 AI 使用技巧，提升效率和创造力',
-    link: '/tips/',
+    link: '/tips/openwolf-claude-code-memory',
   },
 ]
 </script>

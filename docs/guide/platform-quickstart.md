@@ -173,4 +173,4 @@ print(response.choices[0].message.content)
 
 ---
 
-*遇到问题？查看 [常见问题](/faq/) 或通过右下角联系按钮联系我们。*
+*遇到问题？查看 [常见问题](/faq/personal/) 或通过右下角联系按钮联系我们。*

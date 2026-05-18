@@ -27,10 +27,10 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '使用教程', link: '/guide/platform-quickstart' },
-      { text: '拓展连接', link: '/connect/' },
-      { text: '常见问题', link: '/faq/' },
-      { text: 'AI 知识分享', link: '/ai-knowledge/' },
-      { text: '技巧分享', link: '/tips/' },
+      { text: '拓展连接', link: '/connect/chatbox' },
+      { text: '常见问题', link: '/faq/personal/' },
+      { text: 'AI 知识分享', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },
+      { text: '技巧分享', link: '/tips/openwolf-claude-code-memory' },
     ],
 
     // ── 侧边栏 ─────────────────────────────────────────────────
@@ -53,8 +53,6 @@ export default defineConfig({
         {
           text: '拓展连接',
           items: [
-            { text: '连接总览', link: '/connect/' },
-            { text: '连接 ComfyUI', link: '/connect/comfyui' },
             { text: '连接 Chatbox', link: '/connect/chatbox' },
             { text: '连接 Cherry Studio', link: '/connect/cherry-studio' },
             { text: '连接 Cursor', link: '/connect/cursor' },
@@ -69,8 +67,9 @@ export default defineConfig({
         {
           text: '常见问题',
           items: [
-            { text: '问题总览', link: '/faq/' },
-            { text: '显存不足导致任务失败怎么办？', link: '/faq/vram-issue' },
+            { text: '个人用户 FAQ', link: '/faq/personal/' },
+            { text: '为什么响应速度比官方 API 慢？', link: '/faq/personal/why-slower-than-official' },
+            { text: '企业用户 FAQ', link: '/faq/enterprise/' },
             // 新增 FAQ：{ text: '问题标题', link: '/faq/文件名' }
           ],
         },
@@ -79,8 +78,6 @@ export default defineConfig({
         {
           text: 'AI 知识分享',
           items: [
-            { text: '知识总览', link: '/ai-knowledge/' },
-            { text: 'Transformer 架构详解', link: '/ai-knowledge/transformer' },
             { text: '横评 DeepSeek、Claude、GPT、Kimi', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },
             { text: '文献综述哪家强：五模型引用核查实测', link: '/ai-knowledge/literature-review-model-comparison' },
             { text: 'AI 补贴时代落幕，渠道商黄金时期到来', link: '/ai-knowledge/ai-subsidy-era-channel-opportunity' },
@@ -92,8 +89,6 @@ export default defineConfig({
         {
           text: '技巧分享',
           items: [
-            { text: '技巧总览', link: '/tips/' },
-            { text: 'Prompt Engineering 技巧大全', link: '/tips/prompt-engineering' },
             { text: '省 80% Token！给 Claude Code 装「第二大脑」', link: '/tips/openwolf-claude-code-memory' },
             // 新增技巧文章：{ text: '标题', link: '/tips/文件名' }
           ],

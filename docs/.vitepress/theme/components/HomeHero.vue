@@ -49,11 +49,11 @@ import { withBase } from 'vitepress'
 
 // 热门搜索标签，修改 text/link 即可调整
 const hotTags = [
-  { text: 'API 连接',        link: '/connect/' },
-  { text: '模型部署',        link: '/guide/' },
-  { text: '计费说明',        link: '/faq/' },
+  { text: 'API 连接',        link: '/connect/chatbox' },
+  { text: '模型部署',        link: '/guide/platform-quickstart' },
+  { text: '计费说明',        link: '/faq/personal/' },
   { text: 'Stable Diffusion', link: '/guide/platform-quickstart' },
-  { text: '显存优化',        link: '/faq/vram-issue' },
+  { text: '显存优化',        link: '/faq/personal/why-slower-than-official' },
 ]
 
 // Hero 背景：熊猫插画叠加渐变，右侧保留插画，左侧纯白方便读文字

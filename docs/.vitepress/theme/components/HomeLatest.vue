@@ -163,42 +163,6 @@ const latestItems = [
     date: '2026-05-18',
     link: '/guide/platform-quickstart',
   },
-  {
-    icon: '🔗',
-    title: '熊猫算力平台与 ComfyUI 连接教程',
-    tag: '拓展',
-    tagBg: 'rgba(59,130,246,0.1)',
-    tagColor: '#1d4ed8',
-    date: '2026-05-08',
-    link: '/connect/comfyui',
-  },
-  {
-    icon: '❓',
-    title: '显存不足导致任务失败怎么办？',
-    tag: '问题',
-    tagBg: 'rgba(249,115,22,0.1)',
-    tagColor: '#c2410c',
-    date: '2026-05-05',
-    link: '/faq/vram-issue',
-  },
-  {
-    icon: '📖',
-    title: '大模型基础知识：Transformer 架构详解',
-    tag: '知识',
-    tagBg: 'rgba(168,85,247,0.1)',
-    tagColor: '#7c3aed',
-    date: '2026-05-02',
-    link: '/ai-knowledge/transformer',
-  },
-  {
-    icon: '💡',
-    title: '提示词工程（Prompt Engineering）技巧大全',
-    tag: '技巧',
-    tagBg: 'rgba(236,72,153,0.1)',
-    tagColor: '#be185d',
-    date: '2026-04-30',
-    link: '/tips/prompt-engineering',
-  },
 ]
 </script>
 
