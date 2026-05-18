@@ -66,6 +66,15 @@ const readingPanda = computed(() => withBase('reading-panda.png'))
 const latestItems = [
   {
     icon: '📖',
+    title: '文献综述哪家强：Claude、DeepSeek、Kimi、GLM 还是 GPT？',
+    tag: '知识',
+    tagBg: 'rgba(168,85,247,0.1)',
+    tagColor: '#7c3aed',
+    date: '2026-05-18',
+    link: '/ai-knowledge/literature-review-model-comparison',
+  },
+  {
+    icon: '📖',
     title: '横评 DeepSeek、Claude、GPT、Kimi，结果大跌眼镜…',
     tag: '知识',
     tagBg: 'rgba(168,85,247,0.1)',
