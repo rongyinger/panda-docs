@@ -59,6 +59,12 @@ export default defineConfig({
             { text: '连接 Dify', link: '/connect/dify' },
             { text: '连接 NextChat', link: '/connect/nextchat' },
             { text: '连接 OpenClaw', link: '/connect/openclaw' },
+            { text: '连接 Claude Code', link: '/connect/claude-code' },
+            { text: '连接 Open WebUI', link: '/connect/open-webui' },
+            { text: '连接 Lobe Chat', link: '/connect/lobe-chat' },
+            { text: '连接 Cline', link: '/connect/cline' },
+            { text: '连接 Windsurf', link: '/connect/windsurf' },
+            { text: '连接 AnythingLLM', link: '/connect/anythingllm' },
             // 新增连接教程：{ text: '标题', link: '/connect/文件名' }
           ],
         },
