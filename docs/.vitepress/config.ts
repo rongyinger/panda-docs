@@ -55,6 +55,12 @@ export default defineConfig({
           items: [
             { text: '连接总览', link: '/connect/' },
             { text: '连接 ComfyUI', link: '/connect/comfyui' },
+            { text: '连接 Chatbox', link: '/connect/chatbox' },
+            { text: '连接 Cherry Studio', link: '/connect/cherry-studio' },
+            { text: '连接 Cursor', link: '/connect/cursor' },
+            { text: '连接 Dify', link: '/connect/dify' },
+            { text: '连接 NextChat', link: '/connect/nextchat' },
+            { text: '连接 OpenClaw', link: '/connect/openclaw' },
             // 新增连接教程：{ text: '标题', link: '/connect/文件名' }
           ],
         },
