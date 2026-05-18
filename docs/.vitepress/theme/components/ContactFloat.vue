@@ -6,24 +6,17 @@
         <button class="cf-close" @click="close">✕</button>
         <p class="cf-panel-title">联系我们</p>
 
-        <!-- 微信二维码占位 -->
+        <!-- 微信二维码 -->
         <div class="cf-qr">
-          <div class="cf-qr-box">
-            <span>📱</span>
-            <span>微信扫码</span>
-          </div>
-          <p class="cf-qr-label">添加微信客服</p>
+          <img :src="qrcode" alt="微信二维码" class="cf-qr-img" />
+          <p class="cf-qr-label">微信扫码联系客服</p>
         </div>
 
         <div class="cf-divider" />
 
         <div class="cf-item">
-          <span>📧</span>
-          <a href="mailto:support@pandatoken.com">support@pandatoken.com</a>
-        </div>
-        <div class="cf-item">
           <span>🌐</span>
-          <a href="https://pandatoken.com" target="_blank" rel="noopener">pandatoken.com</a>
+          <a href="https://www.pandatoken.net" target="_blank" rel="noopener">www.pandatoken.net</a>
         </div>
       </div>
     </Transition>
@@ -38,12 +31,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { withBase } from 'vitepress'
 
 const open = ref(false)
 function close() { open.value = false }
 
-// 简单的 click-outside 指令
+const qrcode = computed(() => withBase('wechat-qrcode.png'))
+
 const vClickOutside = {
   mounted(el: HTMLElement, binding: { value: () => void }) {
     el._clickOutsideHandler = (e: MouseEvent) => {
@@ -69,7 +64,6 @@ const vClickOutside = {
   gap: 0.75rem;
 }
 
-/* 悬浮圆形按钮 */
 .cf-fab {
   width: 52px;
   height: 52px;
@@ -94,13 +88,12 @@ const vClickOutside = {
   box-shadow: 0 6px 24px rgba(34, 197, 94, 0.45);
 }
 
-/* 展开面板 */
 .cf-panel {
   background: white;
   border: 1px solid #d1fae5;
   border-radius: 14px;
   padding: 1.25rem;
-  width: 220px;
+  width: 200px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   position: relative;
 }
@@ -128,21 +121,15 @@ const vClickOutside = {
 
 .cf-qr { text-align: center; margin-bottom: 0.75rem; }
 
-.cf-qr-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  height: 90px;
-  justify-content: center;
-  border: 2px dashed #d1fae5;
+.cf-qr-img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
   border-radius: 8px;
-  font-size: 0.78rem;
-  color: #9ca3af;
-  background: #f9fafb;
+  display: block;
+  margin: 0 auto;
 }
 
-.cf-qr-box span:first-child { font-size: 1.8rem; }
 .cf-qr-label { margin: 0.35rem 0 0; font-size: 0.75rem; color: #9ca3af; }
 
 .cf-divider { height: 1px; background: #f3f4f6; margin: 0.75rem 0; }
@@ -151,14 +138,12 @@ const vClickOutside = {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.45rem;
   font-size: 0.8rem;
 }
 
 .cf-item a { color: #15803d; text-decoration: none; word-break: break-all; }
 .cf-item a:hover { text-decoration: underline; }
 
-/* 动画 */
 .panel-enter-active, .panel-leave-active { transition: opacity .22s, transform .22s; }
 .panel-enter-from, .panel-leave-to { opacity: 0; transform: translateY(10px) scale(0.96); }
 </style>

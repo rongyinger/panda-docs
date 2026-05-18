@@ -136,10 +136,6 @@ export default defineConfig({
       formatOptions: { dateStyle: 'short' },
     },
 
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/pandatoken' },
-    ],
-
     returnToTopLabel: '返回顶部',
     sidebarMenuLabel: '目录',
     darkModeSwitchLabel: '深色模式',

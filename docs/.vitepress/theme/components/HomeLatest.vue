@@ -45,7 +45,7 @@
           <p class="cta-desc">
             高效、稳定、易用的 AI 算力服务，助力您的 AI 创新之旅
           </p>
-          <a href="https://pandatoken.com" class="cta-btn" target="_blank" rel="noopener">
+          <a href="https://www.pandatoken.net" class="cta-btn" target="_blank" rel="noopener">
             立即访问官网 →
           </a>
           <a :href="withBase('/guide/platform-quickstart')" class="cta-link">新用户注册指南 →</a>
