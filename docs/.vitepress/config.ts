@@ -46,6 +46,7 @@ export default defineConfig({
           items: [
             { text: '教程总览', link: '/guide/' },
             { text: '快速开始', link: '/guide/quickstart' },
+            { text: '平台快速上手指南（12 步）', link: '/guide/platform-quickstart' },
             // 新增教程：{ text: '标题', link: '/guide/文件名' }
           ],
         },

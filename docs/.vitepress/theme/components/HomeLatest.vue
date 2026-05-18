@@ -66,6 +66,15 @@ const readingPanda = computed(() => withBase('reading-panda.png'))
 const latestItems = [
   {
     icon: '📄',
+    title: '熊猫算力平台 · 快速上手指南（12 步完整流程）',
+    tag: '教程',
+    tagBg: 'rgba(34,197,94,0.1)',
+    tagColor: '#15803d',
+    date: '2026-05-18',
+    link: '/guide/platform-quickstart',
+  },
+  {
+    icon: '📄',
     title: '如何在熊猫算力平台上部署 Stable Diffusion WebUI',
     tag: '教程',
     tagBg: 'rgba(34,197,94,0.1)',
