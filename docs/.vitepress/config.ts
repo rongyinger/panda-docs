@@ -83,6 +83,7 @@ export default defineConfig({
             { text: 'Transformer 架构详解', link: '/ai-knowledge/transformer' },
             { text: '横评 DeepSeek、Claude、GPT、Kimi', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },
             { text: '文献综述哪家强：五模型引用核查实测', link: '/ai-knowledge/literature-review-model-comparison' },
+            { text: 'AI 补贴时代落幕，渠道商黄金时期到来', link: '/ai-knowledge/ai-subsidy-era-channel-opportunity' },
             // 新增知识文章：{ text: '标题', link: '/ai-knowledge/文件名' }
           ],
         },

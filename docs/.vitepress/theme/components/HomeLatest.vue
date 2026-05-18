@@ -66,6 +66,15 @@ const readingPanda = computed(() => withBase('reading-panda.png'))
 const latestItems = [
   {
     icon: '📖',
+    title: 'AI 补贴时代落幕，渠道商黄金时期到来',
+    tag: '知识',
+    tagBg: 'rgba(168,85,247,0.1)',
+    tagColor: '#7c3aed',
+    date: '2026-05-18',
+    link: '/ai-knowledge/ai-subsidy-era-channel-opportunity',
+  },
+  {
+    icon: '📖',
     title: '文献综述哪家强：Claude、DeepSeek、Kimi、GLM 还是 GPT？',
     tag: '知识',
     tagBg: 'rgba(168,85,247,0.1)',
