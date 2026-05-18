@@ -91,6 +91,7 @@ export default defineConfig({
           items: [
             { text: '技巧总览', link: '/tips/' },
             { text: 'Prompt Engineering 技巧大全', link: '/tips/prompt-engineering' },
+            { text: '省 80% Token！给 Claude Code 装「第二大脑」', link: '/tips/openwolf-claude-code-memory' },
             // 新增技巧文章：{ text: '标题', link: '/tips/文件名' }
           ],
         },

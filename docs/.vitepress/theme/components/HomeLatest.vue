@@ -65,6 +65,15 @@ const readingPanda = computed(() => withBase('reading-panda.png'))
 // 修改这里的数组来更新首页最新内容列表
 const latestItems = [
   {
+    icon: '💡',
+    title: '省 80% Token！给 Claude Code 装「第二大脑」的开源神器',
+    tag: '技巧',
+    tagBg: 'rgba(236,72,153,0.1)',
+    tagColor: '#be185d',
+    date: '2026-05-18',
+    link: '/tips/openwolf-claude-code-memory',
+  },
+  {
     icon: '🔗',
     title: 'OpenClaw 接入熊猫Token平台教程',
     tag: '拓展',
