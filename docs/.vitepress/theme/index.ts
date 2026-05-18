@@ -3,6 +3,8 @@ import { h } from 'vue'
 import Feedback from './components/Feedback.vue'
 import ContactFloat from './components/ContactFloat.vue'
 import HomePageSections from './components/HomePageSections.vue'
+import HomeSteps from './components/HomeSteps.vue'
+import HomeHotFaq from './components/HomeHotFaq.vue'
 import './style.css'
 
 export default {
@@ -18,7 +20,8 @@ export default {
   },
 
   enhanceApp({ app }) {
-    // 首页 index.md 中通过 <HomePageSections /> 调用，无需 import
     app.component('HomePageSections', HomePageSections)
+    app.component('HomeSteps', HomeSteps)
+    app.component('HomeHotFaq', HomeHotFaq)
   },
 }

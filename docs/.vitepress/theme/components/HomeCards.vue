@@ -31,7 +31,6 @@
 <script setup lang="ts">
 import { withBase } from 'vitepress'
 
-// 修改 title/desc/link 即可调整卡片内容；iconBg 控制图标圆底色
 const cards = [
   {
     icon: '🎓',
@@ -112,10 +111,11 @@ const cards = [
   overflow: hidden;
 }
 
+/* hover 顶部绿色渐变线 */
 .card::before {
   content: '';
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
   height: 3px;
@@ -123,6 +123,18 @@ const cards = [
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s;
+}
+
+/* 右侧极浅装饰竖线 */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  right: 0;
+  width: 1px;
+  height: 70%;
+  background: rgba(34, 197, 94, 0.08);
+  pointer-events: none;
 }
 
 .card:hover {
@@ -140,7 +152,7 @@ const cards = [
   color: #22c55e;
 }
 
-/* 图标圆 */
+/* 图标圆（含外发光） */
 .card-icon-wrap {
   width: 52px;
   height: 52px;
@@ -151,6 +163,7 @@ const cards = [
   margin-bottom: 1rem;
   font-size: 1.5rem;
   flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.2);
 }
 
 .card-title {

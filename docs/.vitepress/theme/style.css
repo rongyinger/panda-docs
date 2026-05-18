@@ -53,7 +53,7 @@
 .VPNav {
   background: rgba(255, 255, 255, 0.92) !important;
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid #e5e7eb !important;
+  border-bottom: 1px solid rgba(34, 197, 94, 0.15) !important;
 }
 
 .dark .VPNav {
@@ -71,8 +71,12 @@
   white-space: nowrap;
 }
 
-/* 导航激活项绿色下划线 */
-.VPNavBarMenuLink.active,
+/* 导航激活项绿色高亮 */
+.VPNavBarMenuLink.active {
+  color: var(--panda-green) !important;
+  font-weight: 600;
+}
+
 .VPNavBarMenuLink:hover {
   color: var(--panda-green) !important;
 }
@@ -131,7 +135,7 @@
 
 .vp-doc a:hover {
   border-bottom-color: var(--panda-green);
-  color: var(--panda-green);
+  color: var(--panda-green-dark);
 }
 
 /* ── 行内代码 ── */
@@ -152,7 +156,7 @@
 
 /* ── 代码块 ── */
 div[class*='language-'] {
-  border-radius: 10px !important;
+  border-radius: 12px !important;
   border: 1px solid #e5e7eb;
 }
 
@@ -162,6 +166,10 @@ div[class*='language-'] {
 }
 
 /* ── 提示框 ── */
+.custom-block {
+  border-radius: 10px;
+}
+
 .custom-block.tip {
   background: var(--panda-bg);
   border-color: var(--panda-green);
@@ -184,16 +192,16 @@ div[class*='language-'] {
 /* ── 全局选中色 ── */
 ::selection {
   background: rgba(34, 197, 94, 0.2);
-  color: #14532d;
+  color: inherit;
 }
 
-/* ── 滚动条 ── */
+/* ── 滚动条美化 ── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(34, 197, 94, 0.25);
+  background: #22c55e;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(34, 197, 94, 0.45);
+  background: #15803d;
 }
