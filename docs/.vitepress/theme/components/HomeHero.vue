@@ -52,7 +52,7 @@ const hotTags = [
   { text: 'API 连接',        link: '/connect/' },
   { text: '模型部署',        link: '/guide/' },
   { text: '计费说明',        link: '/faq/' },
-  { text: 'Stable Diffusion', link: '/guide/quickstart' },
+  { text: 'Stable Diffusion', link: '/guide/platform-quickstart' },
   { text: '显存优化',        link: '/faq/vram-issue' },
 ]
 

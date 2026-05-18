@@ -38,7 +38,7 @@ const cards = [
     iconBg: 'rgba(34, 197, 94, 0.12)',
     title: '使用教程',
     desc: '从入门到进阶，学习如何使用熊猫算力平台',
-    link: '/guide/',
+    link: '/guide/platform-quickstart',
   },
   {
     icon: '🔗',

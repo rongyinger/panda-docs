@@ -7,7 +7,7 @@
       <div class="latest-list-wrap">
         <div class="latest-header">
           <h2 class="section-title">最新内容</h2>
-          <a :href="withBase('/guide/')" class="more-link">查看更多 →</a>
+          <a :href="withBase('/guide/platform-quickstart')" class="more-link">查看更多 →</a>
         </div>
 
         <div class="latest-list">
@@ -48,7 +48,7 @@
           <a href="https://pandatoken.com" class="cta-btn" target="_blank" rel="noopener">
             立即访问官网 →
           </a>
-          <a href="/guide/quickstart" class="cta-link">新用户注册指南 →</a>
+          <a :href="withBase('/guide/platform-quickstart')" class="cta-link">新用户注册指南 →</a>
         </div>
       </div>
 
@@ -72,15 +72,6 @@ const latestItems = [
     tagColor: '#15803d',
     date: '2026-05-18',
     link: '/guide/platform-quickstart',
-  },
-  {
-    icon: '📄',
-    title: '如何在熊猫算力平台上部署 Stable Diffusion WebUI',
-    tag: '教程',
-    tagBg: 'rgba(34,197,94,0.1)',
-    tagColor: '#15803d',
-    date: '2026-05-10',
-    link: '/guide/quickstart',
   },
   {
     icon: '🔗',

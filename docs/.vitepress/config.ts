@@ -26,7 +26,7 @@ export default defineConfig({
     // ── 顶部导航栏 ─────────────────────────────────────────────
     nav: [
       { text: '首页', link: '/' },
-      { text: '使用教程', link: '/guide/' },
+      { text: '使用教程', link: '/guide/platform-quickstart' },
       { text: '拓展连接', link: '/connect/' },
       { text: '常见问题', link: '/faq/' },
       { text: 'AI 知识分享', link: '/ai-knowledge/' },
@@ -44,8 +44,6 @@ export default defineConfig({
         {
           text: '使用教程',
           items: [
-            { text: '教程总览', link: '/guide/' },
-            { text: '快速开始', link: '/guide/quickstart' },
             { text: '平台快速上手指南（12 步）', link: '/guide/platform-quickstart' },
             // 新增教程：{ text: '标题', link: '/guide/文件名' }
           ],
