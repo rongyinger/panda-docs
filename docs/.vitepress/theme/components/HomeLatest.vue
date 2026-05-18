@@ -7,14 +7,14 @@
       <div class="latest-list-wrap">
         <div class="latest-header">
           <h2 class="section-title">最新内容</h2>
-          <a href="/guide/" class="more-link">查看更多 →</a>
+          <a :href="withBase('/guide/')" class="more-link">查看更多 →</a>
         </div>
 
         <div class="latest-list">
           <a
             v-for="item in latestItems"
             :key="item.link"
-            :href="item.link"
+            :href="withBase(item.link)"
             class="list-item"
           >
             <span class="item-icon">{{ item.icon }}</span>

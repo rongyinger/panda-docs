@@ -31,7 +31,7 @@
           <a
             v-for="tag in hotTags"
             :key="tag.text"
-            :href="tag.link"
+            :href="withBase(tag.link)"
             class="hero-tag"
           >{{ tag.text }}</a>
         </div>

@@ -5,7 +5,7 @@
       <a
         v-for="card in cards"
         :key="card.link"
-        :href="card.link"
+        :href="withBase(card.link)"
         class="card"
       >
         <!-- 顶部彩色图标圆 -->
@@ -29,6 +29,8 @@
 </template>
 
 <script setup lang="ts">
+import { withBase } from 'vitepress'
+
 // 修改 title/desc/link 即可调整卡片内容；iconBg 控制图标圆底色
 const cards = [
   {
