@@ -73,6 +73,26 @@ export default defineConfig({
           ],
         },
         {
+          text: '新手入门',
+          items: [
+            { text: '如何注册账号？', link: '/faq/how-to-register' },
+            { text: '怎么创建和管理 API Key？', link: '/faq/how-to-create-apikey' },
+            { text: '充值了但余额没到账', link: '/faq/recharge-not-arrived' },
+            { text: '怎么查看余额和用量？', link: '/faq/check-balance' },
+            { text: '个人端和企业端有什么区别？', link: '/faq/which-endpoint' },
+            { text: '直接用官方 API 和熊猫算力有什么区别？', link: '/faq/compare-direct-vs-panda' },
+          ],
+        },
+        {
+          text: '接入教程',
+          items: [
+            { text: 'Cursor 接入熊猫算力', link: '/faq/cursor-setup' },
+            { text: 'Claude Code 接入熊猫算力', link: '/faq/claude-code-setup' },
+            { text: 'Python 快速上手', link: '/faq/python-quickstart' },
+            { text: 'Node.js 快速上手', link: '/faq/nodejs-quickstart' },
+          ],
+        },
+        {
           text: '报错处理',
           items: [
             { text: '401 Unauthorized', link: '/faq/401-unauthorized' },
@@ -89,6 +109,31 @@ export default defineConfig({
             { text: 'Token 消耗为什么这么快？', link: '/faq/token-consumption-high' },
             { text: '不同客户端效果为什么不一样？', link: '/faq/different-clients-different-results' },
             { text: '为什么每次回答都不一样？', link: '/faq/unstable-model-output' },
+            { text: '怎么实现多轮对话？', link: '/faq/multi-turn-conversation' },
+            { text: '怎么让模型稳定输出 JSON？', link: '/faq/json-output' },
+            { text: '怎么让模型分析 PDF？', link: '/faq/pdf-analysis' },
+            { text: 'temperature 等参数怎么设置？', link: '/faq/temperature-params' },
+            { text: '各模型最大上下文是多少？', link: '/faq/model-context-window' },
+          ],
+        },
+        {
+          text: '费用与发票',
+          items: [
+            { text: '怎么开发票？', link: '/faq/invoice' },
+          ],
+        },
+        {
+          text: '开发者进阶',
+          items: [
+            { text: 'API 调用失败怎么自动重试？', link: '/faq/retry-strategy' },
+            { text: '怎么控制并发和请求频率？', link: '/faq/rate-limit-concurrent' },
+            { text: 'System Prompt 怎么写效果最好？', link: '/faq/system-prompt-best-practice' },
+          ],
+        },
+        {
+          text: '平台说明',
+          items: [
+            { text: '平台支持哪些模型？怎么选？', link: '/faq/supported-models' },
           ],
         },
       ],
