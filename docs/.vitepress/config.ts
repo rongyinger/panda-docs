@@ -70,7 +70,25 @@ export default defineConfig({
             { text: '个人用户 FAQ', link: '/faq/personal/' },
             { text: '为什么响应速度比官方 API 慢？', link: '/faq/personal/why-slower-than-official' },
             { text: '企业用户 FAQ', link: '/faq/enterprise/' },
-            // 新增 FAQ：{ text: '问题标题', link: '/faq/文件名' }
+          ],
+        },
+        {
+          text: '报错处理',
+          items: [
+            { text: '401 Unauthorized', link: '/faq/401-unauthorized' },
+            { text: '403 Forbidden', link: '/faq/403-forbidden' },
+            { text: '429 Too Many Requests', link: '/faq/429-too-many-requests' },
+            { text: '500 Internal Server Error', link: '/faq/500-internal-server-error' },
+            { text: 'context_length_exceeded', link: '/faq/context-length-exceeded' },
+          ],
+        },
+        {
+          text: '使用问题',
+          items: [
+            { text: '模型响应为什么慢？', link: '/faq/slow-response' },
+            { text: 'Token 消耗为什么这么快？', link: '/faq/token-consumption-high' },
+            { text: '不同客户端效果为什么不一样？', link: '/faq/different-clients-different-results' },
+            { text: '为什么每次回答都不一样？', link: '/faq/unstable-model-output' },
           ],
         },
       ],
