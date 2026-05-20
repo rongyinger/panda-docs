@@ -2,160 +2,90 @@
 title: Codex 桌面版接入熊猫算力 · 完整教程
 date: 2026-05-19
 category: 拓展连接
-tags: [Codex, 桌面版, 教程]
+tags: [Codex, 桌面版, 接入教程, 开发者]
 ---
 
-熊猫算力 · 接入指南
+# Codex 桌面版接入熊猫算力 · 完整教程
 
-## Codex 桌面版接入熊猫算力 不登 OpenAI 账号,走国内中转直连 GPT
+Codex 桌面版没有图形化的 API 配置入口，需要手动改 `auth.json` 和 `config.toml`。只要把两个文件配对好，就能通过熊猫算力的 OpenAI 兼容网关直连 GPT。
 
-Codex 桌面版没有图形化配置入口,接中转站要改两个本地文件——`config.toml` 和 `auth.json`。改对了就能跑通,改错一个字符就连不上。本教程把每一步、每一行配置、每一个易错点都拆开讲清楚,Windows 为主,Mac 路径同步给出。
+**预计用时：10 分钟 · 推荐人群：开发者 · 支持平台：Windows / macOS**
 
-适用系统
+---
 
-Windows · macOS
+## 什么是 Codex 桌面版？
 
-耗时
+Codex 桌面版是 OpenAI 的桌面编程助手，可以读项目、改文件、跑命令。接入熊猫算力后，不需要登录 OpenAI 账号，也能直接使用中转的模型接口。
 
-约 10 分钟
+::: tip 提前说明
+本教程以 Windows 为主，macOS 只是在路径上不同，配置逻辑是一样的。
+:::
 
-难度
+---
 
-★★☆☆☆
+## Step 01：准备安装包
 
-需要终端基础
+### 1. 下载 Codex 桌面客户端
 
-否
-
-为什么这么做 · Why
-
-### 不登 ChatGPT 账号,*也能用上 Codex*
-
-官方账号路径要 ChatGPT Plus 订阅、要海外支付、还要稳定的网络。改成走熊猫算力的 OpenAI 兼容入口之后,这三个问题一起解决——**用一个 sk- 开头的 Key,直接对接 Codex 桌面端**,可以选 `gpt-5.3-codex` 等模型(以中转站后台开通的为准)。
-
-🇨🇳
-
-##### 国内可直连
-
-熊猫算力网关部署在国内,日常对话不需要科学上网,链路稳定。
-
-🔑
-
-##### 一个 Key 一站式
-
-同一个熊猫算力账号可以同时给 Claude Desktop 和 Codex 用,额度统一管理。
-
-📂
-
-##### 本地项目体验完整
-
-Codex 的核心价值是能读项目目录、改文件、跑命令,这些功能走中转后完全不受影响。
-
-### 开始前,准备这四样
-
-✓
-
-##### 科学上网工具(仅下载阶段用)
-
-访问 `openai.com/codex` 在国内无法直连,需要科学上网才能下载安装包。**Clash、V2Ray** 任选一个,装好客户端就可以关掉了——后续对话走熊猫算力,不再依赖代理。
-
-✓
-
-##### 熊猫算力账号 & API Key
-
-登录 `b.pandatoken.net`,进入「控制台 → 令牌管理」,创建一个新令牌,得到 `sk-` 开头的字符串。**同一个 Key 同时支持 OpenAI 和 Claude 两套接口**,Codex 这边用的就是这同一个 Key。
-
-✓
-
-##### Codex 桌面客户端安装包
-
-从 `openai.com/codex` 下载对应系统版本。Windows 是 **Codex Installer.exe**,Mac 是 `.dmg` 文件。
-
-✓
-
-##### 中转站的 Base URL
-
-熊猫算力的接入地址是 `https://b.pandatoken.net/v1`。**末尾的 /v1 不能丢**——这是最常见的踩坑点之一。
-
-STEP 01
-
-DOWNLOAD
-
-### 下载并安装 Codex 桌面版
-
-开启科学上网,访问 **openai.com/codex**,根据系统选对应安装包。Windows 下载下来是 **Codex Installer.exe**,双击运行,会走系统自带商店的安装/更新逻辑。安装完成后**先不要登录任何账号**——直接关掉客户端,我们接下来要改配置文件。
+前往 OpenAI 官方下载页，获取对应系统的安装包。Windows 一般是 `Codex Installer.exe`，macOS 是 `.dmg` 文件。
 
 ![Codex Installer.exe 下载弹窗](/images/connect/codex-desktop-01.jpg)
 
-浏览器下载完成提示 · 安装包名称 Codex Installer.exe
+### 2. 安装后先不要登录
 
-提示
+安装完成后直接退出客户端，不要先登录任何账号。Codex 之后是否走中转，主要取决于本地配置文件。
 
-· Mac 用户首次启动可能会被 Gatekeeper 拦截,在「系统设置 → 隐私与安全性」里允许即可。
+::: warning 注意
+第一次启动时如果遇到系统拦截，先放行安装，不要急着登录。
+:::
 
-STEP 02
+---
 
-GET API KEY
+## Step 02：获取熊猫算力 API Key
 
-### 在熊猫算力后台拿到 *API Key*
+### 1. 登录熊猫算力后台
 
-登录 `b.pandatoken.net`,进入**「控制台 → 令牌管理」**。如果还没创建过令牌,点「添加令牌」新建一个;如果已有,直接点密钥列的复制按钮拿到完整 Key。**得到一个 `sk-` 开头的字符串**,保管好,稍后要用。
+进入控制台的令牌管理页面，新建一个以 `sk-` 开头的 API Key。
+
+### 2. 记住这把 Key 的用途
+
+同一个 Key 可以同时给 Claude Desktop 和 Codex 使用，额度统一走熊猫算力后台管理。
 
 ![熊猫算力后台令牌管理页](/images/connect/codex-desktop-02.jpg)
 
-熊猫算力后台 · 控制台 → 令牌管理 · 复制 sk- 开头的密钥
+---
 
-关于 Key 的复用
+## Step 03：找到 `.codex` 配置目录
 
-· 熊猫算力的 Key 同时支持 OpenAI 和 Anthropic 两套接口协议,客户端走哪边由 Base URL 决定。所以这同一个 Key,既可以给 Claude Desktop 用,也可以给 Codex 用,额度共用一份。
+### 1. 打开配置目录
 
-STEP 03
+Codex 会读取用户目录下的 `.codex` 文件夹。
 
-LOCATE CONFIG DIR
+| 平台 | 路径 |
+|---|---|
+| Windows | `%USERPROFILE%\.codex` |
+| macOS | `~/.codex` |
 
-### 打开 *Codex 配置目录*
+### 2. 确认两个文件
 
-Codex 启动时会读取用户目录下的 `.codex` 文件夹。**先彻底退出 Codex**(系统托盘里也要退干净),然后按下表打开配置目录:
+目录里主要只需要处理这两个文件：
 
-WINDOWS
-
-##### 地址栏粘贴并回车
-
-%USERPROFILE%\.codex
-
-或者打开「此电脑」,在地址栏粘贴这行。如果 .codex 文件夹不存在,新建一个即可(注意点号开头)。
-
-MACOS
-
-##### Finder 前往文件夹
-
-~/.codex
-
-Finder 按 `⌘+Shift+G`,粘贴路径后回车。或终端 `mkdir -p ~/.codex && open ~/.codex`。
-
-如果 Codex 启动过一次,目录里会有一堆自动生成的文件(`.codex-global-state.json`、`history.jsonl`、`logs_2.sqlite` 等),这些不用管。我们要操作的只有两个文件:**`auth.json`** 和 **`config.toml`**。
+- `auth.json`
+- `config.toml`
 
 ![.codex 目录里的文件结构](/images/connect/codex-desktop-03.jpg)
 
-.codex 目录结构 · 重点关注被框出的 auth.json 和 config.toml
+::: tip 找不到目录
+`.codex` 是点号开头的隐藏目录。Windows 需要开启“显示隐藏的项目”，macOS 需要显示隐藏文件。
+:::
 
-看不到 .codex 文件夹?
+---
 
-· 点号开头的文件夹默认是隐藏的。Windows 文件管理器顶部「查看 → 显示 → 隐藏的项目」勾选;Mac 在 Finder 里按
+## Step 04：编辑 `auth.json`
 
-⌘+Shift+.
+### 1. 写入 API Key
 
-切换显示隐藏文件。
-
-STEP 04
-
-EDIT auth.json
-
-### 编辑 *auth.json*,填入 API Key
-
-`auth.json` 用来存放认证信息。在 `.codex` 目录下新建这个文件(已有就直接编辑),用记事本或 VS Code 打开,粘贴下面的内容,把 Key 换成你自己刚才复制的:
-
-~/.codex/auth.json
+在 `.codex` 目录下新建或编辑 `auth.json`，内容如下：
 
 ```json
 {
@@ -165,39 +95,19 @@ EDIT auth.json
 
 ![auth.json 在记事本里打开,Key 部分打码](/images/connect/codex-desktop-04.jpg)
 
-auth.json 内容示例 · 单行 JSON 格式,只有一个键值对
+### 2. 常见错误
 
-三个常见坑
+- Key 不是 OpenAI 官方 Key，而是熊猫算力后台生成的 `sk-` 开头密钥
+- Key 前后不要多空格、换行
+- JSON 必须使用英文半角引号
 
-① 这里的 Key
+---
 
-不是 OpenAI 官方 Key
+## Step 05：编辑 `config.toml`
 
-,是熊猫算力后台生成的
+### 1. 写入最小可用配置
 
-sk-
-
-开头中转 Key
-
-② Key 前后不要有
-
-空格、引号嵌套或换行
-
-③ JSON 格式严格,逗号、引号都要用
-
-英文半角
-
-,不要用中文标点
-
-STEP 05
-
-EDIT config.toml
-
-### 编辑 *config.toml*,指定模型和网关
-
-在 `.codex` 目录下新建 `config.toml` 文件(已存在就编辑),粘贴下面的内容。**这是经过实测可用的最小配置**,三段都不能少:
-
-~/.codex/config.toml
+把下面内容粘贴到 `config.toml`：
 
 ```toml
 # ---------- 全局核心(必须)----------
@@ -218,286 +128,72 @@ requires_openai_auth = false
 trust_level = "trusted"
 ```
 
-#### 关键字段说明
-
-model_provider
-
-指定使用哪个 provider · 名称要和下面
-
-[model_providers.xxx]
-
-段落对得上。本例都叫
-
-Pandaapi
-
-,你也可以改成任意名字,但两处要完全一致(注意大小写)。
-
-model
-
-默认调用的模型 · 这里用
-
-gpt-5.3-codex
-
-。你也可以改成
-
-gpt-5.4
-
-等熊猫算力后台开通的模型,具体看「模型广场」页。
-
-preferred_auth_method
-
-认证方式 · 设为
-
-"apikey"
-
-,告诉 Codex 用 API Key 而不是 ChatGPT 账号登录。
-
-type
-
-provider 协议类型 · 必须是
-
-"openai"
-
-(OpenAI 兼容)。
-
-base_url
-
-最关键的字段
-
-· 熊猫算力接入地址
-
-https://b.pandatoken.net/v1
-
-。
-
-末尾 /v1 不能丢
-
-,错一个斜杠都连不上。
-
-wire_api
-
-通信协议 · Codex 桌面版必须用
-
-"responses"
-
-(Responses API),不是 Chat Completions。
-
-requires_openai_auth
-
-第三方 provider 设为
-
-false
-
-· 这个字段只对 OpenAI 官方接口有意义,走中转时关掉它,避免认证逻辑冲突。
-
-[projects.'路径']
-
-信任目录 ·
-
-至少要有一个
-
-,否则 Codex 不会让你在该目录下执行操作。把你的常用项目目录写进来,路径要用
-
-单引号
-
-包裹,反斜杠原样写。
-
 ![config.toml 在记事本里打开,显示完整配置](/images/connect/codex-desktop-05.jpg)
 
-config.toml 实测可用配置 · 三个 section 一个都不能少
+### 2. 配置含义
 
-TOML 格式提醒
+| 字段 | 作用 |
+|---|---|
+| `model_provider` | 指定使用哪个 provider，必须和下面的 section 名一致 |
+| `model` | 默认模型名，例如 `gpt-5.3-codex` |
+| `preferred_auth_method` | 设为 `apikey`，让 Codex 读取本地 Key |
+| `base_url` | 熊猫算力的 OpenAI 兼容入口，末尾 `/v1` 不能少 |
+| `wire_api` | Codex 桌面版必须使用 `responses` |
+| `trust_level` | 至少要有一个信任目录，否则 Codex 不会执行目录内操作 |
 
-· 字符串两边要用
+::: warning 格式提醒
+`config.toml` 里字符串要用英文双引号，布尔值写 `true / false`，section 标记前不能缩进。
+:::
 
-英文双引号
+---
 
-"..."
+## Step 06：重启并验证
 
-,布尔值是
+### 1. 完全退出 Codex
 
-true / false
+Windows 右下角系统托盘里把 Codex 退干净，macOS 用 `⌘+Q` 完全退出。
 
-不带引号。
+### 2. 重新打开并测试
 
-[model_providers.xxx]
-
-和
-
-[projects.'...']
-
-是节(section)标记,前面不能有缩进。
-
-STEP 06
-
-LAUNCH & VERIFY
-
-### 重启 Codex,*验证连通*
-
-两个文件保存好之后,**确认 Codex 完全退出**——Windows 看一下系统托盘把 Codex 退干净,Mac 用 `⌘+Q` 而不是关窗口。然后重新启动 Codex 桌面版,进入主界面,新建对话或选项目,发一句「你好」测试。
-
-1
-
-右下角模型标识
-
-· 输入框右下角应该显示
-
-Pandaapi
-
-配合一个模型选择(如
-
-5.5 中
-
-)。看到 Pandaapi 字样就说明配置生效了。
-
-2
-
-正常返回回复
-
-· 发送「你好」后,Codex 应该秒回类似「你好,有什么我可以帮你的吗?」的回复。
-
-3
-
-熊猫算力后台有日志
-
-· 在熊猫算力后台「使用日志」页能看到这次调用的记录,模型名、token 用量一目了然。
+启动后新建一个对话，发一句“你好”。如果右下角显示 `Pandaapi`，并且能正常返回回复，就说明接入成功。
 
 ![Codex 主界面成功对话,右下角显示 Pandaapi](/images/connect/codex-desktop-06.jpg)
 
-Codex 主界面连通成功 · 右下角 Pandaapi 模型标识 · 对话正常往返
+### 3. 成功标志
 
-成功了
+1. 输入框右下角出现 `Pandaapi`
+2. 对话可以正常返回
+3. 熊猫算力后台能看到调用日志
 
-· 此时 Codex 已经完全走熊猫算力网关。同一个 Key 也可以同步给 Claude Desktop 用(改 Base URL 为 Anthropic 兼容入口即可),两边共用一份额度。
+---
 
-### 常见问题
+## 常见问题
 
-配置文件类问题最多,按提示信息对号入座
+### 1. 还是走官方接口
 
-Codex 启动后还是走官方接口,没用我配的中转
+先完全退出 Codex，再重新打开。然后检查 `config.toml` 里的 `model_provider = "Pandaapi"` 和 `[model_providers.Pandaapi]` 是否完全一致。
 
-三步排查:
+### 2. 401 Unauthorized
 
-1. 确认 Codex
-  完全退出后再启动
-  。Windows 任务管理器搜
-  Codex
-  全部结束;Mac 用
-  ⌘+Q
-  或终端
-  killall Codex
-  。
-2. 确认两个文件
-  放在了正确目录
-  · Windows 是
-  %USERPROFILE%\.codex\
-  ,Mac 是
-  ~/.codex/
-  。点号开头不能漏。
-3. 检查
-  config.toml
-  里
-  model_provider = "Pandaapi"
-  和
-  [model_providers.Pandaapi]
-  的名字
-  完全一致
-  (包括大小写)。错一个字母就匹配不上,Codex 会 fallback 到默认 provider。
+检查 `auth.json` 里的 Key 是否复制正确，前后有没有空格，`preferred_auth_method` 是否写成了 `apikey`.
 
-提示 401 Unauthorized / 认证失败
+### 3. model not found
 
-Key 没读对。检查三处:
+检查模型名是否写错，例如 `gpt-5.3-codex` 不要写成 `gpt5.3-codex`，同时确认熊猫算力后台已经开通这个模型。
 
-1. auth.json
-  里的 Key 是不是
-  熊猫算力后台的密钥
-  (不是登录密码、不是别的站点的 Key)。
-2. Key 前后
-  不要有空格或换行
-  ,引号要用英文半角双引号。
-3. config.toml
-  里
-  preferred_auth_method = "apikey"
-  没漏。漏了 Codex 不会去读 auth.json。
+### 4. Connection refused / 超时
 
-提示 model not found / 模型不存在
+确认 `base_url` 是 `https://b.pandatoken.net/v1`，并检查本地代理是否干扰了请求。
 
-两个原因:
+### 5. TOML parse error
 
-1. config.toml
-  里
-  model = "xxx"
-  写的模型名,
-  熊猫算力后台没开通这个渠道
-  。去熊猫算力「模型广场」看一下当前可用模型列表,选一个开通了的。
-2. 模型名拼写错误。注意横杠、点号位置,例如
-  gpt-5.3-codex
-  不要写成
-  gpt5.3-codex
-  。
+最常见原因是：
 
-提示 Connection refused / 超时 / 无法连接
+- 字符串没加英文引号
+- 布尔值被写成了字符串
+- section 前面有缩进
+- 文件被错误地保存成了带 BOM 的编码
 
-检查三点:
+---
 
-1. base_url
-  协议
-  必须是 https
-  ,域名拼写正确,
-  末尾的 /v1 不能丢
-  。完整地址:
-  https://b.pandatoken.net/v1
-  。
-2. 本地代理软件(Clash、V2Ray)在干扰。
-  关掉代理软件
-  ,或把
-  b.pandatoken.net
-  加到代理的直连白名单。
-3. 用浏览器打开
-  https://b.pandatoken.net
-  看看能不能访问。能打开说明网络通,问题在配置;打不开就先解决网络。
-
-提示 TOML parse error / 配置文件解析失败
-
-TOML 格式错了。最常见的四种:
-
-1. 字符串没加引号,或者用了
-  中文引号
-  (
-  "..."
-  而不是
-  "..."
-  )。
-2. 布尔值加了引号 · 应该是
-  false
-  不是
-  "false"
-  。
-3. 用了 Windows 记事本默认保存,带了
-  UTF-8 BOM
-  。改用 VS Code 或 Notepad++ 另存为「无 BOM 的 UTF-8」。
-4. [model_providers.xxx]
-  或
-  [projects.'...']
-  节标记前有空格 · 必须顶格写。
-
-提示项目目录未授权 / 不能在此目录执行操作
-
-`config.toml` 里的 `[projects.'...']` 段路径写错了,或者没写当前项目目录。
-
-路径要**用单引号包裹**,反斜杠原样写,例如:
-
-```bash
-[projects.'c:\users\xiaoying\projects']
-trust_level = "trusted"
-```
-
-如果有多个常用项目目录,可以加多个 `[projects.'...']` 段。
-
-改对了,但中转站后台看不到调用记录
-
-调用其实没发到中转站,Codex 还在用旧配置或官方接口。**必须完全退出 Codex 后再启动**——不重启的话内存里加载的还是旧配置。Windows 系统托盘里的 Codex 图标也要右键退出干净。
-
-改完配置无法保存(权限不足)
-
-Windows 上有时 `%USERPROFILE%\.codex\` 因为 Codex 在写入,文件被锁。**先彻底退出 Codex**(系统托盘也要退干净),再编辑配置。如果还提示权限不足,右键 .codex 文件夹 → 属性 → 安全 → 编辑,给当前用户加上「完全控制」权限。
+配置完成后，Codex 就会通过熊猫算力网关运行。后续如果你还想把 Claude Desktop 也接进去，可以直接用同一把 Key。
