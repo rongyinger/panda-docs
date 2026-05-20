@@ -65,6 +65,15 @@ const readingPanda = computed(() => withBase('reading-panda.png'))
 // 修改这里的数组来更新首页最新内容列表
 const latestItems = [
   {
+    icon: '💡',
+    title: '字节跳动开源 OpenViking：用文件系统范式重构 AI Agent 记忆中枢',
+    tag: '技巧',
+    tagBg: '#f97316',
+    tagColor: '#ffffff',
+    date: '2026-05-19',
+    link: '/tips/openviking-agent-memory-system',
+  },
+  {
     icon: '📖',
     title: 'AI 补贴时代落幕，渠道商黄金时期到来',
     tag: '知识',
