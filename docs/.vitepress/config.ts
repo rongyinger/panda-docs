@@ -55,6 +55,8 @@ export default defineConfig({
           items: [
             { text: '连接 Cursor', link: '/connect/cursor' },
             { text: '连接 Claude Code', link: '/connect/claude-code' },
+            { text: '连接 Codex 桌面版', link: '/connect/codex-desktop' },
+            { text: '连接 Claude 桌面版', link: '/connect/claude-desktop' },
             { text: '连接 Cline', link: '/connect/cline' },
             { text: '连接 Windsurf', link: '/connect/windsurf' },
             { text: '连接 Zed', link: '/connect/zed' },

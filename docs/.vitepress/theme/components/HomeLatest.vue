@@ -65,6 +65,24 @@ const readingPanda = computed(() => withBase('reading-panda.png'))
 // 修改这里的数组来更新首页最新内容列表
 const latestItems = [
   {
+    icon: '🔌',
+    title: 'Codex 桌面版接入熊猫算力 · 完整教程',
+    tag: '拓展',
+    tagBg: '#3b82f6',
+    tagColor: '#ffffff',
+    date: '2026-05-19',
+    link: '/connect/codex-desktop',
+  },
+  {
+    icon: '🔌',
+    title: 'Claude 桌面版接入熊猫算力 · 完整教程',
+    tag: '拓展',
+    tagBg: '#3b82f6',
+    tagColor: '#ffffff',
+    date: '2026-05-19',
+    link: '/connect/claude-desktop',
+  },
+  {
     icon: '💡',
     title: '字节跳动开源 OpenViking：用文件系统范式重构 AI Agent 记忆中枢',
     tag: '技巧',
