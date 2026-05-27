@@ -1,22 +1,19 @@
 <template>
-  <!-- Hero 区：左侧文案 + 搜索 + 指标栏 + 热词，右侧熊猫插画 -->
+  <!-- Hero 区：核心文案 + 搜索 + 主入口，右侧使用熊猫主题背景图 -->
   <section class="hero" :style="heroBg">
-    <!-- 背景装饰层 -->
     <div class="hero-overlay" />
 
     <div class="hero-inner">
-      <!-- 左侧文案区 -->
       <div class="hero-text">
+        <span class="hero-eyebrow">PandaToken Knowledge Base</span>
         <h1 class="hero-title">
-          欢迎来到<br />
-          <span class="hero-title-green">熊猫知识中心</span>
+          熊猫知识中心
         </h1>
 
         <p class="hero-desc">
-          这里汇集了熊猫算力平台的使用教程、拓展连接方案、常见问题解答、AI 知识分享和实用技巧，助您高效使用，探索 AI 无限可能。
+          汇集熊猫算力的上手教程、工具接入、常见问题和 AI 实用知识。先搜索问题，再按路径完成配置。
         </p>
 
-        <!-- 搜索框（样式组件，点击触发 VitePress 内置搜索） -->
         <div class="hero-search" @click="openSearch">
           <svg class="search-icon" viewBox="0 0 20 20" fill="none">
             <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.8"/>
@@ -25,43 +22,25 @@
           <span class="search-placeholder">搜索教程、问题或关键词...</span>
         </div>
 
-        <!-- 数字指标栏 -->
-        <div class="stats-bar">
-          <div class="stat-item">
-            <span class="stat-number">40+</span>
-            <span class="stat-label">支持模型</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-number">个人 / 企业</span>
-            <span class="stat-label">双端接入</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-number">国内直连</span>
-            <span class="stat-label">无需代理</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-number">按量计费</span>
-            <span class="stat-label">无月费无套餐</span>
-          </div>
+        <div class="hero-actions">
+          <a :href="withBase('/guide/platform-quickstart')" class="hero-btn hero-btn-primary">新手上手</a>
+          <a :href="withBase('/connect/chatbox')" class="hero-btn hero-btn-secondary">查看接入教程</a>
         </div>
 
-        <!-- 热门搜索标签 -->
-        <div class="hero-tags">
-          <span class="tags-label">热门搜索：</span>
+        <div class="hero-quick">
+          <span>常用入口</span>
           <a
-            v-for="tag in hotTags"
-            :key="tag.text"
-            :href="withBase(tag.link)"
-            class="hero-tag"
-          >{{ tag.text }}</a>
+            v-for="item in quickLinks"
+            :key="item.text"
+            :href="withBase(item.link)"
+          >{{ item.text }}</a>
         </div>
       </div>
 
-      <!-- 右侧区域（插画通过背景已呈现，此处留白占位保持布局） -->
-      <div class="hero-illus" />
+      <div class="hero-visual" aria-hidden="true">
+        <div class="bamboo-stem stem-one"></div>
+        <div class="bamboo-stem stem-two"></div>
+      </div>
     </div>
   </section>
 </template>
@@ -70,23 +49,22 @@
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
 
-const hotTags = [
-  { text: 'API 接入',     link: '/connect/chatbox' },
+const quickLinks = [
+  { text: 'API Key', link: '/faq/how-to-create-apikey' },
+  { text: 'Cursor', link: '/connect/cursor' },
   { text: 'Claude Code', link: '/connect/claude-code' },
-  { text: '429 报错',    link: '/faq/429-too-many-requests' },
-  { text: 'Token 计费',  link: '/faq/personal/' },
-  { text: 'Cursor 配置', link: '/connect/cursor' },
+  { text: '429 报错', link: '/faq/429-too-many-requests' },
 ]
 
 const heroBg = computed(() => ({
   backgroundImage: [
-    'linear-gradient(to right, #ffffff 38%, rgba(255,255,255,0.82) 54%, rgba(255,255,255,0.3) 72%, transparent 90%)',
+    'linear-gradient(105deg, #ffffff 0%, rgba(255,255,255,0.96) 44%, rgba(240,253,244,0.62) 66%, rgba(240,253,244,0.18) 100%)',
     `url(${withBase('hero-panda.png')})`,
   ].join(', '),
   backgroundPosition: 'left, right center',
-  backgroundSize:     'auto, 62% auto',
+  backgroundSize:     'auto, min(58vw, 760px) auto',
   backgroundRepeat:   'no-repeat, no-repeat',
-  backgroundColor:    '#f0fdf4',
+  backgroundColor:    '#f6fff8',
 }))
 
 function openSearch() {
@@ -98,19 +76,21 @@ function openSearch() {
 <style scoped>
 .hero {
   position: relative;
-  min-height: 520px;
+  min-height: 560px;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
-/* 背景竹节纹路装饰 */
 .hero::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  inset: 0;
   background-image:
-    radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.08) 0%, transparent 40%);
+    linear-gradient(90deg, rgba(21, 128, 61, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 18% 26%, rgba(34, 197, 94, 0.11) 0%, transparent 28%),
+    radial-gradient(circle at 76% 78%, rgba(132, 204, 22, 0.12) 0%, transparent 26%);
+  background-size: 74px 100%, auto, auto;
   pointer-events: none;
   z-index: 0;
 }
@@ -118,6 +98,8 @@ function openSearch() {
 .hero-overlay {
   position: absolute;
   inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.72) 100%);
   pointer-events: none;
 }
 
@@ -127,53 +109,61 @@ function openSearch() {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 5rem 2rem 4rem;
+  padding: 5.5rem 2rem 4.5rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 0.92fr) minmax(280px, 1fr);
   align-items: center;
-  gap: 2rem;
+  gap: 3rem;
 }
 
-.hero-illus {
-  min-height: 360px;
+.hero-text {
+  max-width: 560px;
 }
 
-/* ── 标题 ── */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.9rem;
+  padding: 0.28rem 0.75rem;
+  border: 1px solid rgba(34, 197, 94, 0.22);
+  border-radius: 999px;
+  background: rgba(240, 253, 244, 0.86);
+  color: #15803d;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
 .hero-title {
   margin: 0 0 1rem;
-  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-size: clamp(2.25rem, 5vw, 4.25rem);
   font-weight: 800;
-  line-height: 1.2;
-  color: #111827;
-}
-
-.hero-title-green {
-  color: #22c55e;
-  background: linear-gradient(135deg, #22c55e, #15803d);
+  line-height: 1.05;
+  color: #14532d;
+  background: linear-gradient(135deg, #14532d 0%, #16a34a 72%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .hero-desc {
-  margin: 0 0 1.75rem;
-  font-size: 1rem;
-  color: #4b5563;
+  margin: 0 0 1.5rem;
+  font-size: 1.05rem;
+  color: #36513d;
   line-height: 1.75;
-  max-width: 480px;
+  max-width: 520px;
 }
 
-/* ── 搜索框 ── */
 .hero-search {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  max-width: 460px;
-  padding: 0.8rem 1.2rem;
-  border-radius: 50px;
+  max-width: 520px;
+  padding: 0.95rem 1.15rem;
+  border-radius: 10px;
   border: 1.5px solid #d1fae5;
   background: white;
-  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.12);
+  box-shadow: 0 14px 36px rgba(21, 128, 61, 0.11);
   cursor: pointer;
   transition: all 0.25s;
   margin-bottom: 1rem;
@@ -181,7 +171,7 @@ function openSearch() {
 
 .hero-search:hover {
   border-color: #22c55e;
-  box-shadow: 0 6px 28px rgba(34, 197, 94, 0.2);
+  box-shadow: 0 18px 42px rgba(21, 128, 61, 0.16);
   transform: translateY(-1px);
 }
 
@@ -193,107 +183,126 @@ function openSearch() {
 }
 
 .search-placeholder {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #9ca3af;
 }
 
-/* ── 数字指标栏 ── */
-.stats-bar {
-  display: flex;
-  align-items: center;
-  max-width: 460px;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 12px;
-  padding: 0.65rem 1rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  margin-bottom: 1.25rem;
-  border: 1px solid rgba(34, 197, 94, 0.12);
-}
-
-.stat-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.15rem;
-}
-
-.stat-number {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #22c55e;
-  white-space: nowrap;
-  line-height: 1.2;
-}
-
-.stat-label {
-  font-size: 0.7rem;
-  color: #6b7280;
-  white-space: nowrap;
-}
-
-.stat-divider {
-  width: 1px;
-  height: 30px;
-  background: #e5e7eb;
-  flex-shrink: 0;
-  margin: 0 0.25rem;
-}
-
-/* ── 热门标签 ── */
-.hero-tags {
+.hero-actions {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 
-.tags-label {
-  font-size: 0.82rem;
-  color: #9ca3af;
-  white-space: nowrap;
-}
-
-.hero-tag {
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  background: white;
-  border: 1px solid #d1fae5;
-  color: #15803d;
-  font-size: 0.8rem;
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0.65rem 1.05rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
   text-decoration: none;
-  transition: all 0.2s;
-  white-space: nowrap;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
-.hero-tag:hover {
-  background: #dcfce7;
-  border-color: #22c55e;
+.hero-btn:hover {
+  transform: translateY(-1px);
+}
+
+.hero-btn-primary {
+  background: #16a34a;
+  color: white;
+  box-shadow: 0 10px 22px rgba(22, 163, 74, 0.24);
+}
+
+.hero-btn-primary:hover {
+  background: #15803d;
+}
+
+.hero-btn-secondary {
+  border: 1px solid #d1fae5;
+  background: rgba(255, 255, 255, 0.88);
+  color: #14532d;
+}
+
+.hero-btn-secondary:hover {
+  background: #f0fdf4;
+  box-shadow: 0 8px 20px rgba(21, 128, 61, 0.1);
+}
+
+.hero-quick {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  color: #6b7280;
+  font-size: 0.84rem;
+}
+
+.hero-quick span {
+  color: #15803d;
+  font-weight: 700;
+}
+
+.hero-quick a {
+  color: #36513d;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(34, 197, 94, 0.24);
+}
+
+.hero-quick a:hover {
   color: #15803d;
 }
 
-/* ── 响应式 ── */
+.hero-visual {
+  min-height: 370px;
+  position: relative;
+}
+
+.bamboo-stem {
+  position: absolute;
+  width: 18px;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.42), transparent 18%),
+    repeating-linear-gradient(180deg, #86efac 0 46px, #15803d 47px 50px);
+  opacity: 0.52;
+  box-shadow: 0 0 34px rgba(34, 197, 94, 0.12);
+}
+
+.stem-one {
+  right: 18%;
+  top: -14px;
+  height: 430px;
+  transform: rotate(7deg);
+}
+
+.stem-two {
+  right: 8%;
+  top: 34px;
+  height: 330px;
+  transform: rotate(-5deg);
+}
+
 @media (max-width: 768px) {
   .hero-inner {
     grid-template-columns: 1fr;
-    padding: 3rem 1.5rem 2.5rem;
+    padding: 3.25rem 1.5rem 2.75rem;
   }
-  .hero-illus { display: none; }
+  .hero-visual { display: none; }
   .hero {
     background-position: left, center bottom !important;
-    background-size: auto, 120% auto !important;
+    background-size: auto, 132% auto !important;
     min-height: auto;
   }
-
-  /* 移动端 2x2 网格 */
-  .stats-bar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
-    max-width: 100%;
-    padding: 0.75rem;
+  .hero-actions {
+    align-items: stretch;
   }
-  .stat-divider { display: none; }
-  .stat-item { padding: 0.25rem 0; }
+  .hero-btn {
+    flex: 1 1 150px;
+  }
 }
 </style>

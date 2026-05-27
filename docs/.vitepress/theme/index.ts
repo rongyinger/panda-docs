@@ -13,7 +13,7 @@ export default {
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       'nav-bar-title-after': () =>
-        h('span', { class: 'nav-subtitle' }, '熊猫算力平台官方知识库'),
+        h('span', { class: 'nav-subtitle' }, '熊猫算力官方知识库'),
       'doc-after': () => h(Feedback),
       'layout-bottom': () => h(ContactFloat),
     })

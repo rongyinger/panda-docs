@@ -1,7 +1,7 @@
 <template>
   <section class="hot-faq-section">
     <div class="hot-faq-bar">
-      <span class="hot-faq-label">🔥 热门问题：</span>
+      <span class="hot-faq-label">常见问题</span>
       <div class="hot-faq-links">
         <a
           v-for="faq in faqs"
@@ -30,7 +30,7 @@ const faqs = [
 
 <style scoped>
 .hot-faq-section {
-  padding: 0.75rem 1.5rem 1.25rem;
+  padding: 1.25rem 1.5rem 1.5rem;
   background: white;
 }
 
@@ -40,18 +40,18 @@ const faqs = [
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: white;
-  border-left: 4px solid #f97316;
+  background: #f7fff9;
+  border-left: 4px solid #22c55e;
   border-radius: 10px;
   padding: 0.75rem 1.25rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 22px rgba(21, 128, 61, 0.06);
   overflow-x: auto;
 }
 
 .hot-faq-label {
   font-size: 0.85rem;
-  font-weight: 600;
-  color: #374151;
+  font-weight: 800;
+  color: #14532d;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -71,8 +71,8 @@ const faqs = [
   display: inline-block;
   padding: 0.25rem 0.7rem;
   border-radius: 20px;
-  background: #f0fdf4;
-  color: #16a34a;
+  background: white;
+  color: #15803d;
   font-size: 0.78rem;
   text-decoration: none;
   white-space: nowrap;

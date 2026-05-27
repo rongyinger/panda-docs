@@ -14,7 +14,7 @@
           <span class="hp-title-main">知识中心</span>
         </h1>
         <p class="hp-subtitle">
-          一站式 AI 模型聚合平台 · 文档、教程与解答<br>
+          一站式 AI 模型聚合服务 · 文档、教程与解答<br>
           帮助个人开发者和企业客户高效接入 AI 能力
         </p>
         <div class="hp-actions">
@@ -145,7 +145,7 @@
         <div class="hp-footer-grid">
           <div class="hp-footer-brand">
             <div class="hp-footer-logo">🐼 熊猫算力</div>
-            <p>一站式 AI 模型聚合平台</p>
+            <p>一站式 AI 模型聚合服务</p>
           </div>
           <div class="hp-footer-col">
             <h4>文档</h4>

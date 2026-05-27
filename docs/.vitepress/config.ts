@@ -7,7 +7,7 @@ export default defineConfig({
   base,
   lang: 'zh-CN',
   title: '熊猫知识中心',
-  description: '熊猫算力平台官方知识库',
+  description: '熊猫算力官方知识库',
   lastUpdated: true,
   cleanUrls: true,
 
@@ -16,7 +16,7 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#22c55e' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: '熊猫知识中心' }],
-    ['meta', { property: 'og:description', content: '熊猫算力平台官方知识库' }],
+    ['meta', { property: 'og:description', content: '熊猫算力官方知识库' }],
   ],
 
   themeConfig: {
@@ -44,7 +44,7 @@ export default defineConfig({
         {
           text: '使用教程',
           items: [
-            { text: '平台快速上手指南（12 步）', link: '/guide/platform-quickstart' },
+            { text: '熊猫算力快速上手指南（12 步）', link: '/guide/platform-quickstart' },
             // 新增教程：{ text: '标题', link: '/guide/文件名' }
           ],
         },
@@ -64,7 +64,7 @@ export default defineConfig({
           ],
         },
         {
-          text: '平台与框架',
+          text: '应用与框架',
           items: [
             { text: '连接 Chatbox', link: '/connect/chatbox' },
             { text: '连接 Cherry Studio', link: '/connect/cherry-studio' },
@@ -151,9 +151,9 @@ export default defineConfig({
           ],
         },
         {
-          text: '平台说明',
+          text: '服务说明',
           items: [
-            { text: '平台支持哪些模型？怎么选？', link: '/faq/supported-models' },
+            { text: '支持哪些模型？怎么选？', link: '/faq/supported-models' },
           ],
         },
       ],

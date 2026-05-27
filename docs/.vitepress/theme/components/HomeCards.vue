@@ -1,6 +1,10 @@
 <template>
-  <!-- 5 个入口卡片区 -->
+  <!-- 核心入口卡片区 -->
   <section class="cards-section">
+    <div class="section-heading">
+      <span class="section-kicker">按任务进入</span>
+      <h2>先选路径，再查细节</h2>
+    </div>
     <div class="cards-container">
       <a
         v-for="card in cards"
@@ -33,17 +37,17 @@ import { withBase } from 'vitepress'
 
 const cards = [
   {
-    icon: '🎓',
+    icon: '🐼',
     iconBg: 'rgba(34, 197, 94, 0.12)',
-    title: '使用教程',
-    desc: '从入门到进阶，学习如何使用熊猫算力平台',
+    title: '新手上手',
+    desc: '注册、充值、创建 API Key，快速完成第一次调用',
     link: '/guide/platform-quickstart',
   },
   {
-    icon: '🔗',
-    iconBg: 'rgba(59, 130, 246, 0.12)',
-    title: '拓展连接',
-    desc: '了解如何将熊猫算力平台与其他软件和服务连接',
+    icon: '🎋',
+    iconBg: 'rgba(132, 204, 22, 0.14)',
+    title: '工具接入',
+    desc: '连接 Cursor、Claude Code、Chatbox 等常用工具',
     link: '/connect/chatbox',
   },
   {
@@ -54,44 +58,55 @@ const cards = [
     link: '/faq/personal/',
   },
   {
-    icon: '📖',
-    iconBg: 'rgba(168, 85, 247, 0.12)',
-    title: 'AI 知识分享',
-    desc: '探索 AI 领域知识、技术原理和行业动态',
+    icon: '📚',
+    iconBg: 'rgba(20, 83, 45, 0.1)',
+    title: '进阶内容',
+    desc: '阅读 AI 知识、效率技巧和模型使用经验',
     link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi',
-  },
-  {
-    icon: '💡',
-    iconBg: 'rgba(236, 72, 153, 0.12)',
-    title: '技巧分享',
-    desc: '学习实用 AI 使用技巧，提升效率和创造力',
-    link: '/tips/openwolf-claude-code-memory',
   },
 ]
 </script>
 
 <style scoped>
 .cards-section {
-  background: #f9fafb;
-  padding: 3.5rem 1.5rem;
-  border-top: 1px solid #f3f4f6;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f7fff9 100%);
+  padding: 3.75rem 1.5rem;
+  border-top: 1px solid rgba(34, 197, 94, 0.1);
+}
+
+.section-heading {
+  max-width: 1200px;
+  margin: 0 auto 1.35rem;
+}
+
+.section-kicker {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  color: #15803d;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: #14532d;
+  font-size: 1.45rem;
+  line-height: 1.3;
 }
 
 .cards-container {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
 }
 
 @media (max-width: 1024px) {
-  .cards-container { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 640px) {
   .cards-container { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 400px) {
+@media (max-width: 640px) {
   .cards-container { grid-template-columns: 1fr; }
 }
 
@@ -100,13 +115,14 @@ const cards = [
   position: relative;
   display: flex;
   flex-direction: column;
+  min-height: 190px;
   padding: 1.5rem 1.25rem 1.25rem;
-  border-radius: 14px;
+  border-radius: 10px;
   background: white;
-  border: 1px solid #f0fdf4;
+  border: 1px solid #dff7e8;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 28px rgba(21, 128, 61, 0.06);
   transition: transform 0.25s, box-shadow 0.25s;
   overflow: hidden;
 }
@@ -118,33 +134,26 @@ const cards = [
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #22c55e, #86efac);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s;
+  height: 4px;
+  background: linear-gradient(90deg, #14532d, #22c55e, #a3e635);
 }
 
-/* 右侧极浅装饰竖线 */
 .card::after {
   content: '';
   position: absolute;
-  top: 15%;
-  right: 0;
-  width: 1px;
-  height: 70%;
-  background: rgba(34, 197, 94, 0.08);
+  right: -16px;
+  bottom: -36px;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: rgba(187, 247, 208, 0.32);
   pointer-events: none;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 32px rgba(34, 197, 94, 0.14);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px rgba(21, 128, 61, 0.12);
   border-color: #d1fae5;
-}
-
-.card:hover::before {
-  transform: scaleX(1);
 }
 
 .card:hover .card-arrow {
@@ -154,23 +163,23 @@ const cards = [
 
 /* 图标圆（含外发光） */
 .card-icon-wrap {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
   font-size: 1.5rem;
   flex-shrink: 0;
-  box-shadow: 0 0 12px rgba(34, 197, 94, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.08);
 }
 
 .card-title {
   margin: 0 0 0.5rem;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: #111827;
+  color: #14532d;
 }
 
 .card-desc {

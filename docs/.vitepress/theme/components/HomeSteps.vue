@@ -1,7 +1,8 @@
 <template>
   <section class="home-steps">
     <div class="steps-header">
-      <h2 class="steps-title">🚀 三步开始使用熊猫算力</h2>
+      <span class="steps-kicker">快速开始</span>
+      <h2 class="steps-title">三步开始使用熊猫算力</h2>
       <p class="steps-subtitle">从注册到第一次 API 调用，只需 5 分钟</p>
     </div>
     <div class="steps-container">
@@ -49,8 +50,10 @@ const steps = [
 
 <style scoped>
 .home-steps {
-  padding: 3rem 1.5rem;
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  padding: 3.5rem 1.5rem;
+  background:
+    linear-gradient(135deg, rgba(240, 253, 244, 0.96) 0%, rgba(220, 252, 231, 0.94) 100%),
+    repeating-linear-gradient(90deg, transparent 0 58px, rgba(21, 128, 61, 0.05) 59px 60px);
   border-top: 1px solid #d1fae5;
   border-bottom: 1px solid #d1fae5;
 }
@@ -60,11 +63,19 @@ const steps = [
   margin-bottom: 2rem;
 }
 
+.steps-kicker {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  color: #15803d;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
 .steps-title {
   margin: 0 0 0.5rem;
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   font-weight: 700;
-  color: #111827;
+  color: #14532d;
 }
 
 .steps-subtitle {
@@ -89,7 +100,7 @@ const steps = [
   align-items: center;
   text-align: center;
   padding: 2rem 1.5rem 1.5rem;
-  border-radius: 16px;
+  border-radius: 10px;
   background: white;
   border: 1px solid #d1fae5;
   text-decoration: none;
@@ -131,7 +142,7 @@ const steps = [
   margin: 0 0 0.5rem;
   font-size: 1rem;
   font-weight: 700;
-  color: #111827;
+  color: #14532d;
 }
 
 .step-desc {
