@@ -5,13 +5,13 @@
 
     <div class="hero-inner">
       <div class="hero-text">
-        <span class="hero-eyebrow">PandaToken Knowledge Base</span>
+        <span class="hero-eyebrow">熊猫算力知识库</span>
         <h1 class="hero-title">
           熊猫知识中心
         </h1>
 
         <p class="hero-desc">
-          汇集熊猫算力的上手教程、工具接入、常见问题和 AI 实用知识。先搜索问题，再按路径完成配置。
+          把上手教程、工具接入、常见问题和 AI 使用经验整理成清晰路径，帮助你更快找到答案。
         </p>
 
         <div class="hero-search" @click="openSearch">
@@ -27,6 +27,12 @@
           <a :href="withBase('/connect/chatbox')" class="hero-btn hero-btn-secondary">查看接入教程</a>
         </div>
 
+        <div class="hero-metrics" aria-label="熊猫算力特点">
+          <span>40+ 模型</span>
+          <span>国内直连</span>
+          <span>按量计费</span>
+        </div>
+
         <div class="hero-quick">
           <span>常用入口</span>
           <a
@@ -38,8 +44,8 @@
       </div>
 
       <div class="hero-visual" aria-hidden="true">
-        <div class="bamboo-stem stem-one"></div>
-        <div class="bamboo-stem stem-two"></div>
+        <div class="hero-leaf leaf-one"></div>
+        <div class="hero-leaf leaf-two"></div>
       </div>
     </div>
   </section>
@@ -58,13 +64,13 @@ const quickLinks = [
 
 const heroBg = computed(() => ({
   backgroundImage: [
-    'linear-gradient(105deg, #ffffff 0%, rgba(255,255,255,0.96) 44%, rgba(240,253,244,0.62) 66%, rgba(240,253,244,0.18) 100%)',
+    'linear-gradient(105deg, #ffffff 0%, rgba(255,255,255,0.98) 43%, rgba(245,250,246,0.72) 65%, rgba(245,250,246,0.16) 100%)',
     `url(${withBase('hero-panda.png')})`,
   ].join(', '),
   backgroundPosition: 'left, right center',
-  backgroundSize:     'auto, min(58vw, 760px) auto',
+  backgroundSize:     'auto, min(56vw, 730px) auto',
   backgroundRepeat:   'no-repeat, no-repeat',
-  backgroundColor:    '#f6fff8',
+  backgroundColor:    '#f8fbf7',
 }))
 
 function openSearch() {
@@ -87,10 +93,9 @@ function openSearch() {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(90deg, rgba(21, 128, 61, 0.05) 1px, transparent 1px),
-    radial-gradient(circle at 18% 26%, rgba(34, 197, 94, 0.11) 0%, transparent 28%),
-    radial-gradient(circle at 76% 78%, rgba(132, 204, 22, 0.12) 0%, transparent 26%);
-  background-size: 74px 100%, auto, auto;
+    linear-gradient(90deg, rgba(20, 83, 45, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 18% 25%, rgba(22, 101, 52, 0.075) 0%, transparent 30%);
+  background-size: 88px 100%, auto;
   pointer-events: none;
   z-index: 0;
 }
@@ -99,7 +104,7 @@ function openSearch() {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.72) 100%);
+    linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.86) 100%);
   pointer-events: none;
 }
 
@@ -127,7 +132,7 @@ function openSearch() {
   padding: 0.28rem 0.75rem;
   border: 1px solid rgba(34, 197, 94, 0.22);
   border-radius: 999px;
-  background: rgba(240, 253, 244, 0.86);
+  background: rgba(247, 255, 249, 0.9);
   color: #15803d;
   font-size: 0.78rem;
   font-weight: 700;
@@ -136,11 +141,11 @@ function openSearch() {
 
 .hero-title {
   margin: 0 0 1rem;
-  font-size: clamp(2.25rem, 5vw, 4.25rem);
+  font-size: clamp(2.35rem, 5vw, 4.45rem);
   font-weight: 800;
   line-height: 1.05;
   color: #14532d;
-  background: linear-gradient(135deg, #14532d 0%, #16a34a 72%);
+  background: linear-gradient(135deg, #111827 0%, #14532d 46%, #16a34a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -149,7 +154,7 @@ function openSearch() {
 .hero-desc {
   margin: 0 0 1.5rem;
   font-size: 1.05rem;
-  color: #36513d;
+  color: #405046;
   line-height: 1.75;
   max-width: 520px;
 }
@@ -161,9 +166,9 @@ function openSearch() {
   max-width: 520px;
   padding: 0.95rem 1.15rem;
   border-radius: 10px;
-  border: 1.5px solid #d1fae5;
+  border: 1px solid #dbeee0;
   background: white;
-  box-shadow: 0 14px 36px rgba(21, 128, 61, 0.11);
+  box-shadow: 0 16px 40px rgba(17, 24, 39, 0.07);
   cursor: pointer;
   transition: all 0.25s;
   margin-bottom: 1rem;
@@ -171,7 +176,7 @@ function openSearch() {
 
 .hero-search:hover {
   border-color: #22c55e;
-  box-shadow: 0 18px 42px rgba(21, 128, 61, 0.16);
+  box-shadow: 0 20px 46px rgba(21, 128, 61, 0.12);
   transform: translateY(-1px);
 }
 
@@ -192,7 +197,7 @@ function openSearch() {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .hero-btn {
@@ -213,17 +218,17 @@ function openSearch() {
 }
 
 .hero-btn-primary {
-  background: #16a34a;
+  background: #14532d;
   color: white;
-  box-shadow: 0 10px 22px rgba(22, 163, 74, 0.24);
+  box-shadow: 0 10px 24px rgba(20, 83, 45, 0.22);
 }
 
 .hero-btn-primary:hover {
-  background: #15803d;
+  background: #166534;
 }
 
 .hero-btn-secondary {
-  border: 1px solid #d1fae5;
+  border: 1px solid #dbeee0;
   background: rgba(255, 255, 255, 0.88);
   color: #14532d;
 }
@@ -231,6 +236,23 @@ function openSearch() {
 .hero-btn-secondary:hover {
   background: #f0fdf4;
   box-shadow: 0 8px 20px rgba(21, 128, 61, 0.1);
+}
+
+.hero-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.hero-metrics span {
+  padding: 0.32rem 0.62rem;
+  border: 1px solid #e5efe7;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #405046;
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 .hero-quick {
@@ -262,29 +284,27 @@ function openSearch() {
   position: relative;
 }
 
-.bamboo-stem {
+.hero-leaf {
   position: absolute;
-  width: 18px;
-  border-radius: 999px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.42), transparent 18%),
-    repeating-linear-gradient(180deg, #86efac 0 46px, #15803d 47px 50px);
-  opacity: 0.52;
-  box-shadow: 0 0 34px rgba(34, 197, 94, 0.12);
+  width: 118px;
+  height: 38px;
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(135deg, rgba(132, 204, 22, 0.36), rgba(21, 128, 61, 0.12));
+  border: 1px solid rgba(21, 128, 61, 0.08);
+  filter: blur(0.1px);
 }
 
-.stem-one {
-  right: 18%;
-  top: -14px;
-  height: 430px;
-  transform: rotate(7deg);
+.leaf-one {
+  right: 5%;
+  top: 26px;
+  transform: rotate(-18deg);
 }
 
-.stem-two {
-  right: 8%;
-  top: 34px;
-  height: 330px;
-  transform: rotate(-5deg);
+.leaf-two {
+  right: 32%;
+  bottom: 28px;
+  transform: rotate(18deg);
+  opacity: 0.72;
 }
 
 @media (max-width: 768px) {

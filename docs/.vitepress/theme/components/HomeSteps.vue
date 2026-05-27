@@ -52,10 +52,10 @@ const steps = [
 .home-steps {
   padding: 3.5rem 1.5rem;
   background:
-    linear-gradient(135deg, rgba(240, 253, 244, 0.96) 0%, rgba(220, 252, 231, 0.94) 100%),
-    repeating-linear-gradient(90deg, transparent 0 58px, rgba(21, 128, 61, 0.05) 59px 60px);
-  border-top: 1px solid #d1fae5;
-  border-bottom: 1px solid #d1fae5;
+    linear-gradient(135deg, rgba(250, 252, 249, 0.98) 0%, rgba(240, 253, 244, 0.92) 100%),
+    repeating-linear-gradient(90deg, transparent 0 72px, rgba(21, 128, 61, 0.04) 73px 74px);
+  border-top: 1px solid #e4eee6;
+  border-bottom: 1px solid #e4eee6;
 }
 
 .steps-header {
@@ -102,16 +102,16 @@ const steps = [
   padding: 2rem 1.5rem 1.5rem;
   border-radius: 10px;
   background: white;
-  border: 1px solid #d1fae5;
+  border: 1px solid #e4eee6;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 2px 12px rgba(34, 197, 94, 0.08);
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.045);
   transition: transform 0.25s, box-shadow 0.25s;
 }
 
 .step-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 28px rgba(34, 197, 94, 0.16);
+  box-shadow: 0 18px 40px rgba(17, 24, 39, 0.075);
 }
 
 /* 绿色圆形编号 */
@@ -123,18 +123,18 @@ const steps = [
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #22c55e;
+  background: #14532d;
   color: white;
   font-size: 0.8rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4);
+  box-shadow: 0 4px 12px rgba(20, 83, 45, 0.24);
 }
 
 .step-icon {
-  font-size: 3rem;
+  font-size: 2.35rem;
   margin-bottom: 0.75rem;
 }
 

@@ -40,11 +40,11 @@ const faqs = [
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: #f7fff9;
+  background: #fbfdfb;
   border-left: 4px solid #22c55e;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 0.75rem 1.25rem;
-  box-shadow: 0 8px 22px rgba(21, 128, 61, 0.06);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.045);
   overflow-x: auto;
 }
 
@@ -72,6 +72,7 @@ const faqs = [
   padding: 0.25rem 0.7rem;
   border-radius: 20px;
   background: white;
+  border: 1px solid #e4eee6;
   color: #15803d;
   font-size: 0.78rem;
   text-decoration: none;

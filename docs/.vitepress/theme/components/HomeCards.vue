@@ -14,7 +14,7 @@
       >
         <!-- 顶部彩色图标圆 -->
         <div class="card-icon-wrap" :style="{ background: card.iconBg }">
-          <span class="card-icon">{{ card.icon }}</span>
+          <span class="card-icon">{{ card.mark }}</span>
         </div>
 
         <h3 class="card-title">{{ card.title }}</h3>
@@ -37,28 +37,28 @@ import { withBase } from 'vitepress'
 
 const cards = [
   {
-    icon: '🐼',
+    mark: '01',
     iconBg: 'rgba(34, 197, 94, 0.12)',
     title: '新手上手',
     desc: '注册、充值、创建 API Key，快速完成第一次调用',
     link: '/guide/platform-quickstart',
   },
   {
-    icon: '🎋',
+    mark: '02',
     iconBg: 'rgba(132, 204, 22, 0.14)',
     title: '工具接入',
     desc: '连接 Cursor、Claude Code、Chatbox 等常用工具',
     link: '/connect/chatbox',
   },
   {
-    icon: '❓',
+    mark: '03',
     iconBg: 'rgba(249, 115, 22, 0.12)',
     title: '常见问题',
     desc: '查看用户常见问题及官方详细解答',
     link: '/faq/personal/',
   },
   {
-    icon: '📚',
+    mark: '04',
     iconBg: 'rgba(20, 83, 45, 0.1)',
     title: '进阶内容',
     desc: '阅读 AI 知识、效率技巧和模型使用经验',
@@ -70,7 +70,7 @@ const cards = [
 <style scoped>
 .cards-section {
   background:
-    linear-gradient(180deg, #ffffff 0%, #f7fff9 100%);
+    linear-gradient(180deg, #ffffff 0%, #fafcf9 100%);
   padding: 3.75rem 1.5rem;
   border-top: 1px solid rgba(34, 197, 94, 0.1);
 }
@@ -117,12 +117,12 @@ const cards = [
   flex-direction: column;
   min-height: 190px;
   padding: 1.5rem 1.25rem 1.25rem;
-  border-radius: 10px;
+  border-radius: 8px;
   background: white;
-  border: 1px solid #dff7e8;
+  border: 1px solid #e4eee6;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 12px 28px rgba(21, 128, 61, 0.06);
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.045);
   transition: transform 0.25s, box-shadow 0.25s;
   overflow: hidden;
 }
@@ -135,7 +135,7 @@ const cards = [
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #14532d, #22c55e, #a3e635);
+  background: linear-gradient(90deg, #14532d, #22c55e);
 }
 
 .card::after {
@@ -146,14 +146,14 @@ const cards = [
   width: 86px;
   height: 86px;
   border-radius: 50%;
-  background: rgba(187, 247, 208, 0.32);
+  background: rgba(220, 252, 231, 0.42);
   pointer-events: none;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 38px rgba(21, 128, 61, 0.12);
-  border-color: #d1fae5;
+  box-shadow: 0 18px 40px rgba(17, 24, 39, 0.08);
+  border-color: #cdebd5;
 }
 
 .card:hover .card-arrow {
@@ -165,12 +165,14 @@ const cards = [
 .card-icon-wrap {
   width: 48px;
   height: 48px;
-  border-radius: 10px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #14532d;
   flex-shrink: 0;
   box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.08);
 }

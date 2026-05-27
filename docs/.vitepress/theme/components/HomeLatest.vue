@@ -17,7 +17,7 @@
             :href="withBase(item.link)"
             class="list-item"
           >
-            <span class="item-icon">{{ item.icon }}</span>
+            <span class="item-icon">{{ item.mark }}</span>
             <div class="item-main">
               <span class="item-title">{{ item.title }}</span>
               <span class="item-tag" :class="`tag-${item.type}`">{{ item.tag }}</span>
@@ -43,7 +43,7 @@
             :href="withBase(category.link)"
             class="category-item"
           >
-            <span>{{ category.icon }}</span>
+            <span>{{ category.mark }}</span>
             <strong>{{ category.title }}</strong>
           </a>
         </div>
@@ -60,7 +60,7 @@ const readingPanda = computed(() => withBase('reading-panda.png'))
 
 const latestItems = [
   {
-    icon: '🔌',
+    mark: '接',
     title: 'Codex 桌面版接入熊猫算力 · 完整教程',
     tag: '接入',
     type: 'connect',
@@ -68,7 +68,7 @@ const latestItems = [
     link: '/connect/codex-desktop',
   },
   {
-    icon: '🔌',
+    mark: '接',
     title: 'Claude 桌面版接入熊猫算力 · 完整教程',
     tag: '接入',
     type: 'connect',
@@ -76,7 +76,7 @@ const latestItems = [
     link: '/connect/claude-desktop',
   },
   {
-    icon: '💡',
+    mark: '技',
     title: '字节跳动开源 OpenViking：重构 AI Agent 记忆中枢',
     tag: '技巧',
     type: 'tips',
@@ -84,7 +84,7 @@ const latestItems = [
     link: '/tips/openviking-agent-memory-system',
   },
   {
-    icon: '📖',
+    mark: '知',
     title: 'AI 补贴时代落幕，渠道商黄金时期到来',
     tag: '知识',
     type: 'knowledge',
@@ -92,7 +92,7 @@ const latestItems = [
     link: '/ai-knowledge/ai-subsidy-era-channel-opportunity',
   },
   {
-    icon: '📖',
+    mark: '知',
     title: '文献综述哪家强：五模型引用核查实测',
     tag: '知识',
     type: 'knowledge',
@@ -100,7 +100,7 @@ const latestItems = [
     link: '/ai-knowledge/literature-review-model-comparison',
   },
   {
-    icon: '💡',
+    mark: '技',
     title: '省 Token 终极指南：10 个技巧降低 50%-80% 费用',
     tag: '技巧',
     type: 'tips',
@@ -108,7 +108,7 @@ const latestItems = [
     link: '/tips/save-token-ultimate-guide',
   },
   {
-    icon: '🔗',
+    mark: '接',
     title: 'Spring AI 接入熊猫算力教程',
     tag: '接入',
     type: 'connect',
@@ -116,7 +116,7 @@ const latestItems = [
     link: '/connect/spring-ai',
   },
   {
-    icon: '📄',
+    mark: '新',
     title: '熊猫算力 · 快速上手指南（12 步完整流程）',
     tag: '教程',
     type: 'guide',
@@ -126,10 +126,10 @@ const latestItems = [
 ]
 
 const categories = [
-  { icon: '🎋', title: '工具接入', link: '/connect/chatbox' },
-  { icon: '❓', title: '常见问题', link: '/faq/personal/' },
-  { icon: '📚', title: 'AI 知识', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },
-  { icon: '💡', title: '使用技巧', link: '/tips/openwolf-claude-code-memory' },
+  { mark: '接', title: '工具接入', link: '/connect/chatbox' },
+  { mark: '问', title: '常见问题', link: '/faq/personal/' },
+  { mark: '知', title: 'AI 知识', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },
+  { mark: '技', title: '使用技巧', link: '/tips/openwolf-claude-code-memory' },
 ]
 </script>
 
@@ -184,10 +184,10 @@ const categories = [
 }
 
 .latest-list {
-  border: 1px solid #e4f7ea;
-  border-radius: 10px;
+  border: 1px solid #e4eee6;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 12px 30px rgba(21, 128, 61, 0.05);
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.045);
 }
 
 .list-item {
@@ -229,9 +229,17 @@ const categories = [
 
 .item-icon {
   width: 28px;
+  height: 28px;
   flex-shrink: 0;
-  font-size: 1rem;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dbeee0;
+  border-radius: 7px;
+  background: #f7fff9;
+  color: #15803d;
+  font-size: 0.76rem;
+  font-weight: 800;
 }
 
 .item-main {
@@ -253,20 +261,20 @@ const categories = [
 
 .item-tag {
   flex-shrink: 0;
-  padding: 0.16rem 0.52rem;
-  border-radius: 999px;
+  padding: 0.14rem 0.48rem;
+  border-radius: 6px;
   font-size: 0.72rem;
   font-weight: 700;
 }
 
 .tag-connect,
 .tag-guide {
-  background: #dcfce7;
+  background: #eefbf2;
   color: #15803d;
 }
 
 .tag-knowledge {
-  background: #ecfccb;
+  background: #f1f6e8;
   color: #3f6212;
 }
 
@@ -290,10 +298,10 @@ const categories = [
 .panda-card {
   overflow: hidden;
   border: 1px solid #d1fae5;
-  border-radius: 10px;
+  border-radius: 8px;
   background:
-    linear-gradient(160deg, rgba(240,253,244,0.96), rgba(220,252,231,0.88));
-  box-shadow: 0 12px 30px rgba(21, 128, 61, 0.07);
+    linear-gradient(160deg, rgba(250,252,249,0.98), rgba(240,253,244,0.9));
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.045);
 }
 
 .panda-image {
@@ -335,11 +343,11 @@ const categories = [
   gap: 0.45rem;
   padding: 0.9rem;
   border: 1px solid #e4f7ea;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #ffffff;
   color: #14532d;
   text-decoration: none;
-  box-shadow: 0 8px 20px rgba(21, 128, 61, 0.04);
+  box-shadow: 0 8px 20px rgba(17, 24, 39, 0.035);
   transition: transform 0.2s, border-color 0.2s;
 }
 
@@ -349,7 +357,16 @@ const categories = [
 }
 
 .category-item span {
-  font-size: 1.25rem;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background: #f0fdf4;
+  color: #15803d;
+  font-size: 0.78rem;
+  font-weight: 800;
 }
 
 .category-item strong {
