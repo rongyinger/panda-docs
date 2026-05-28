@@ -1,5 +1,5 @@
 <template>
-  <section class="hero">
+  <section class="hero" :style="{ '--hero-panda-image': `url(${pandaImage})` }">
     <div class="hero-inner">
       <div class="hero-copy">
         <span class="hero-badge">熊猫算力官方知识库</span>
@@ -38,10 +38,6 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
-        <div class="panda-glow"></div>
-        <img :src="pandaImage" alt="" class="hero-panda" />
-      </div>
     </div>
   </section>
 </template>
@@ -68,7 +64,7 @@ function openSearch() {
 <style scoped>
 .hero {
   position: relative;
-  min-height: 560px;
+  min-height: calc(100vh - 64px);
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -90,6 +86,30 @@ function openSearch() {
   pointer-events: none;
 }
 
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: -7% -6% -10% 22%;
+  background-image: var(--hero-panda-image);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: min(1180px, 92vw) auto;
+  filter: drop-shadow(0 34px 58px rgba(15, 23, 42, 0.18));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-inner::before {
+  content: '';
+  position: absolute;
+  inset: -120px -24px -110px -24px;
+  background:
+    linear-gradient(90deg, rgba(247,251,248,0.98) 0%, rgba(247,251,248,0.88) 33%, rgba(247,251,248,0.42) 58%, rgba(247,251,248,0.05) 100%),
+    radial-gradient(circle at 82% 62%, rgba(187,247,208,0.22), transparent 38%);
+  pointer-events: none;
+  z-index: -1;
+}
+
 .hero-inner {
   position: relative;
   z-index: 1;
@@ -97,10 +117,8 @@ function openSearch() {
   max-width: 1200px;
   margin: 0 auto;
   padding: 72px 24px 64px;
-  display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(480px, 1.08fr);
+  display: flex;
   align-items: center;
-  gap: 56px;
 }
 
 .hero-copy {
@@ -267,47 +285,10 @@ function openSearch() {
   background: #fff;
 }
 
-.hero-visual {
-  position: relative;
-  min-height: 540px;
-  align-self: stretch;
-  overflow: visible;
-}
-
-.panda-glow {
-  position: absolute;
-  inset: -4% -22% -6% -8%;
-  border-radius: 48px;
-  background:
-    radial-gradient(circle at 70% 20%, rgba(187, 247, 208, 0.5), transparent 32%),
-    radial-gradient(ellipse at 62% 86%, rgba(6,95,70,0.16), transparent 42%);
-  filter: blur(4px);
-  pointer-events: none;
-}
-
-.hero-panda {
-  position: absolute;
-  right: -170px;
-  bottom: -74px;
-  width: min(154%, 820px);
-  max-height: 700px;
-  object-fit: contain;
-  filter: drop-shadow(0 30px 52px rgba(15, 23, 42, 0.18));
-}
-
 @media (max-width: 1024px) {
-  .hero-inner {
-    grid-template-columns: minmax(0, 1fr) minmax(340px, 0.95fr);
-    gap: 32px;
-  }
-
-  .hero-visual {
-    min-height: 470px;
-  }
-
-  .hero-panda {
-    right: -150px;
-    width: min(154%, 700px);
+  .hero::after {
+    inset: -4% -16% -8% 18%;
+    background-size: min(980px, 98vw) auto;
   }
 }
 
@@ -317,28 +298,23 @@ function openSearch() {
   }
 
   .hero-inner {
-    grid-template-columns: 1fr;
-    padding: 48px 24px 52px;
+    padding: 48px 24px 330px;
+  }
+
+  .hero-inner::before {
+    background:
+      linear-gradient(180deg, rgba(247,251,248,0.98) 0%, rgba(247,251,248,0.92) 48%, rgba(247,251,248,0.3) 76%, rgba(247,251,248,0.08) 100%);
+  }
+
+  .hero::after {
+    inset: auto -18% -52px -18%;
+    height: 380px;
+    background-position: center bottom;
+    background-size: min(720px, 138vw) auto;
   }
 
   .hero-desc {
     font-size: 16px;
-  }
-
-  .hero-visual {
-    order: 2;
-  }
-
-  .hero-visual {
-    min-height: 360px;
-    overflow: hidden;
-  }
-
-  .hero-panda {
-    right: 50%;
-    bottom: -24px;
-    width: min(100%, 410px);
-    transform: translateX(50%);
   }
 }
 
@@ -355,12 +331,13 @@ function openSearch() {
     display: none;
   }
 
-  .hero-visual {
-    min-height: 310px;
+  .hero-inner {
+    padding-bottom: 290px;
   }
 
-  .hero-panda {
-    width: min(108%, 360px);
+  .hero::after {
+    height: 330px;
+    background-size: min(620px, 148vw) auto;
   }
 }
 </style>
