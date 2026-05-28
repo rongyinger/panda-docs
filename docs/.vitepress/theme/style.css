@@ -17,13 +17,15 @@
   --vp-c-brand-soft: rgba(22, 163, 74, 0.12);
 
   --panda-green:       #16A34A;
-  --panda-green-light: #F0FDF4;
+  --panda-green-light: #ECFDF3;
   --panda-green-dark:  #065F46;
   --panda-green-border:#BBF7D0;
   --panda-text:        #1F2937;
   --panda-muted:       #6B7280;
+  --panda-card-bg:     rgba(255,255,255,0.88);
+  --panda-border-light:#E5E7EB;
   --panda-page-bg:     #F8FAF9;
-  --panda-bg:          #F0FDF4;
+  --panda-bg:          #ECFDF3;
 }
 
 /* ── 浅色模式 ── */
@@ -54,9 +56,9 @@
 
 /* ── 导航栏 ── */
 .VPNav {
-  background: rgba(255, 255, 255, 0.92) !important;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(187, 247, 208, 0.8) !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.75) !important;
   height: 64px;
 }
 
@@ -73,7 +75,7 @@
 
 /* 导航副标题 */
 .nav-subtitle {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--vp-c-text-3);
   display: block;
   line-height: 1;
@@ -83,7 +85,7 @@
 
 /* 导航激活项绿色高亮 */
 .VPNavBarMenuLink.active {
-  color: var(--panda-green-dark) !important;
+  color: var(--panda-green) !important;
   font-weight: 600;
 }
 
@@ -94,9 +96,9 @@
 .VPNavBarMenuLink.active::after {
   content: '';
   position: absolute;
-  bottom: 8px;
-  left: 10px;
-  right: 10px;
+  bottom: 9px;
+  left: 14px;
+  right: 14px;
   height: 2px;
   background: var(--panda-green);
   border-radius: 1px;
@@ -104,7 +106,8 @@
 
 .VPNavBarMenuLink {
   position: relative;
-  padding: 0 10px !important;
+  padding: 0 12px !important;
+  font-size: 14px !important;
 }
 
 .VPNavBarMenuLink:hover {
@@ -114,17 +117,46 @@
 
 .VPNavBarSearch .DocSearch-Button,
 .VPNavBarSearch .VPNavBarSearchButton {
-  border: 1px solid var(--panda-green-border);
-  background: #fff;
+  border: 1px solid var(--panda-border-light);
+  background: rgba(255,255,255,0.82);
   border-radius: 999px;
+  transition: border-color 200ms ease, background 200ms ease;
+}
+
+.VPNavBarSearch .DocSearch-Button:hover,
+.VPNavBarSearch .VPNavBarSearchButton:hover {
+  border-color: rgba(22, 163, 74, 0.42);
+  background: #fff;
+}
+
+.VPNavBarSearch .DocSearch-Button {
+  min-width: 176px;
+}
+
+.VPNavBarSearch .DocSearch-Button::after,
+.VPNavBarSearch .VPNavBarSearchButton::after {
+  content: 'Ctrl K';
+  margin-left: 14px;
+  padding: 2px 6px;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  background: #F9FAFB;
+  color: #9CA3AF;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.VPNavBarTitle .logo {
+  width: 28px !important;
+  height: 28px !important;
 }
 
 .VPSwitchAppearance {
-  width: 34px !important;
-  height: 34px !important;
+  width: 32px !important;
+  height: 32px !important;
   border-radius: 999px !important;
-  border: 1px solid var(--panda-green-border) !important;
-  background: #fff !important;
+  border: 1px solid var(--panda-border-light) !important;
+  background: rgba(255,255,255,0.82) !important;
   cursor: pointer;
 }
 

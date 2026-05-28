@@ -25,7 +25,8 @@ import HomeFooter  from './HomeFooter.vue'
   /* 覆盖 VitePress page 布局的默认内边距 */
   margin-top: calc(-1 * var(--vp-nav-height, 64px));
   padding-top: var(--vp-nav-height, 64px);
-  background: white;
+  background: linear-gradient(180deg, #F7FBF8 0%, #FFFFFF 45%, #F7FAF8 100%);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 </style>

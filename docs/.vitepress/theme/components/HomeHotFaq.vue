@@ -4,10 +4,11 @@
       <a :href="withBase('/faq/personal/')" class="hot-faq-label">常见问题</a>
       <div class="hot-faq-links">
         <a
-          v-for="faq in faqs"
+          v-for="(faq, index) in faqs"
           :key="faq.link"
           :href="withBase(faq.link)"
           class="hot-faq-item"
+          :class="{ featured: index === 0 }"
         >
           {{ faq.text }}
         </a>
@@ -30,8 +31,8 @@ const faqs = [
 
 <style scoped>
 .hot-faq-section {
-  padding: 48px 24px 0;
-  background: #F8FAF9;
+  padding: 10px 24px 64px;
+  background: #F7FAF8;
 }
 
 .hot-faq-bar {
@@ -39,60 +40,77 @@ const faqs = [
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  background: white;
-  border: 1px solid #E5E7EB;
-  border-radius: 8px;
-  padding: 0.8rem;
-  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.045);
+  gap: 18px;
+  padding: 14px;
+  border: 1px solid rgba(229, 231, 235, 0.9);
+  border-radius: 22px;
+  background: rgba(255,255,255,0.88);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.06);
   overflow-x: auto;
 }
 
 .hot-faq-label {
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: #065F46;
+  padding: 9px 13px;
+  border-radius: 14px;
+  background: #111827;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 760;
   text-decoration: none;
-  border: 1px solid #16A34A;
-  background: #F0FDF4;
-  border-radius: 999px;
-  padding: 0.32rem 0.76rem;
   white-space: nowrap;
-  flex-shrink: 0;
   cursor: pointer;
 }
 
 .hot-faq-links {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex-wrap: nowrap;
+  gap: 8px;
+  min-width: 0;
   overflow-x: auto;
   scrollbar-width: none;
 }
 
-.hot-faq-links::-webkit-scrollbar { display: none; }
-
-.hot-faq-item {
-  display: inline-block;
-  padding: 0.25rem 0.7rem;
-  border-radius: 20px;
-  background: white;
-  border: 1px solid #E5E7EB;
-  color: #1F2937;
-  font-size: 0.78rem;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 200ms ease;
-  font-weight: 500;
-  flex-shrink: 0;
+.hot-faq-links::-webkit-scrollbar {
+  display: none;
 }
 
-.hot-faq-item:hover {
-  background: #F0FDF4;
+.hot-faq-item {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: #F9FAFB;
+  color: #4B5563;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 200ms ease, color 200ms ease, background 200ms ease, transform 200ms ease;
+}
+
+.hot-faq-item.featured {
+  border-color: #BBF7D0;
+  background: #ECFDF3;
   color: #065F46;
-  border-color: #16A34A;
+}
+
+.hot-faq-item:hover,
+.hot-faq-item:focus-visible {
+  border-color: rgba(22, 163, 74, 0.36);
+  background: #fff;
+  color: #065F46;
   transform: translateY(-1px);
+  outline: none;
+}
+
+@media (max-width: 640px) {
+  .hot-faq-section {
+    padding-bottom: 52px;
+  }
+
+  .hot-faq-bar {
+    align-items: flex-start;
+    gap: 10px;
+  }
 }
 </style>

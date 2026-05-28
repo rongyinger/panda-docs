@@ -1,25 +1,30 @@
 <template>
   <section class="home-steps">
-    <div class="steps-header">
-      <span class="steps-kicker">快速开始</span>
-      <h2 class="steps-title">三步开始使用熊猫算力</h2>
-      <p class="steps-subtitle">从注册到第一次 API 调用，只需 5 分钟</p>
-    </div>
-    <div class="steps-container">
-      <template v-for="(step, index) in steps" :key="index">
-        <a :href="withBase(step.link)" class="step-item">
-          <div class="step-number">{{ index + 1 }}</div>
-          <div class="step-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path :d="step.icon" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+    <div class="steps-shell">
+      <div class="steps-header">
+        <span class="steps-kicker">快速开始</span>
+        <h2 class="steps-title">三步开始使用熊猫算力</h2>
+        <p class="steps-subtitle">从注册到第一次 API 调用，只需 5 分钟。</p>
+      </div>
+
+      <div class="steps-container">
+        <template v-for="(step, index) in steps" :key="step.link">
+          <a :href="withBase(step.link)" class="step-item">
+            <span class="step-number">{{ String(index + 1).padStart(2, '0') }}</span>
+            <div class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path :d="step.icon" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="step-title">{{ step.title }}</h3>
+            <p class="step-desc">{{ step.desc }}</p>
+            <span class="step-link">{{ step.linkText }} →</span>
+          </a>
+          <div class="step-connector" v-if="index < steps.length - 1" aria-hidden="true">
+            <span></span>
           </div>
-          <h3 class="step-title">{{ step.title }}</h3>
-          <p class="step-desc">{{ step.desc }}</p>
-          <span class="step-link">{{ step.linkText }} →</span>
-        </a>
-        <div class="step-arrow" v-if="index < steps.length - 1">›</div>
-      </template>
+        </template>
+      </div>
     </div>
   </section>
 </template>
@@ -31,21 +36,21 @@ const steps = [
   {
     icon: 'M8 7h8M8 11h8M8 15h5M6 3h12a2 2 0 0 1 2 2v14l-3-2-3 2-3-2-3 2-3-2-3 2V5a2 2 0 0 1 2-2Z',
     title: '注册并充值',
-    desc: '注册账号，最低充值 $7 美元，支持微信、支付宝',
+    desc: '注册账号，完成充值，准备开始调用。',
     link: '/faq/how-to-register',
     linkText: '注册指南',
   },
   {
     icon: 'M15 7a4 4 0 1 0-3.46 3.97L4 18.5V21h2.5l1-1H10v-2.5l1.53-1.53A4 4 0 0 0 15 7Z',
     title: '获取 API Key',
-    desc: '在控制台创建 API Key，复制保存备用',
+    desc: '在控制台创建 API Key，复制并安全保存。',
     link: '/faq/how-to-create-apikey',
     linkText: '创建 Key',
   },
   {
-    icon: 'M12 3c3.5 1.2 5.6 3.9 6 8.2L14.5 14 10 9.5l2-6.5ZM10 9.5 5.5 14 4 20l6-1.5 4.5-4.5M8 16l-2 2',
+    icon: 'M7 8h10M7 12h6m-7 8h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2Zm11-6 2 2 4-4',
     title: '接入你的工具',
-    desc: '选择 Cursor、Claude Code、Cherry Studio 等工具完成配置',
+    desc: '配置 Cursor、Claude Code 或其他客户端。',
     link: '/connect/chatbox',
     linkText: '查看教程',
   },
@@ -54,154 +59,171 @@ const steps = [
 
 <style scoped>
 .home-steps {
-  padding: 72px 24px;
+  padding: 70px 24px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F7FAF8 100%);
+}
+
+.steps-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 44px;
+  border: 1px solid rgba(229, 231, 235, 0.82);
+  border-radius: 28px;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 253, 244, 0.9) 100%),
-    repeating-linear-gradient(90deg, transparent 0 72px, rgba(22, 163, 74, 0.04) 73px 74px);
-  border-top: 1px solid #BBF7D0;
-  border-bottom: 1px solid #BBF7D0;
+    radial-gradient(circle at 16% 20%, rgba(22, 163, 74, 0.1), transparent 28%),
+    linear-gradient(135deg, rgba(236, 253, 243, 0.9), rgba(255,255,255,0.92));
+  box-shadow: 0 24px 62px rgba(15, 23, 42, 0.07);
 }
 
 .steps-header {
-  text-align: center;
-  margin-bottom: 2rem;
+  max-width: 620px;
+  margin-bottom: 30px;
 }
 
 .steps-kicker {
   display: inline-block;
-  margin-bottom: 0.35rem;
+  margin-bottom: 8px;
   color: #16A34A;
-  font-size: 0.78rem;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 760;
 }
 
 .steps-title {
-  margin: 0 0 0.5rem;
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: #065F46;
+  margin: 0;
+  color: #111827;
+  font-size: 28px;
+  font-weight: 760;
+  line-height: 1.25;
 }
 
 .steps-subtitle {
-  margin: 0;
-  font-size: 0.9rem;
+  margin: 10px 0 0;
   color: #6B7280;
+  font-size: 15px;
 }
 
 .steps-container {
-  max-width: 980px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 52px 1fr 52px 1fr;
+  align-items: stretch;
 }
 
-/* 步骤卡片 */
 .step-item {
-  flex: 1;
-  position: relative;
+  min-height: 232px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 2rem 1.5rem 1.5rem;
-  border-radius: 10px;
-  background: white;
-  border: 1px solid #E5E7EB;
-  text-decoration: none;
+  padding: 22px;
+  border: 1px solid rgba(229, 231, 235, 0.9);
+  border-radius: 20px;
+  background: rgba(255,255,255,0.9);
   color: inherit;
-  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.045);
+  text-decoration: none;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.055);
   cursor: pointer;
   transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
 }
 
-.step-item:hover {
+.step-item:hover,
+.step-item:focus-visible {
   transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(17, 24, 39, 0.075);
-  border-color: #16A34A;
+  border-color: rgba(22, 163, 74, 0.35);
+  box-shadow: 0 20px 42px rgba(15, 23, 42, 0.08);
+  outline: none;
 }
 
-/* 绿色圆形编号 */
 .step-number {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #065F46;
-  color: white;
-  font-size: 0.8rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(6, 95, 70, 0.24);
+  color: #9CA3AF;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
 .step-icon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 0.75rem;
+  width: 44px;
+  height: 44px;
+  margin: 20px 0 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  background: #F0FDF4;
+  border-radius: 14px;
+  background: #ECFDF3;
   color: #065F46;
-  box-shadow: inset 0 0 0 1px #BBF7D0;
 }
 
 .step-icon svg {
-  width: 25px;
-  height: 25px;
+  width: 22px;
+  height: 22px;
 }
 
 .step-title {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #065F46;
+  margin: 0 0 8px;
+  color: #111827;
+  font-size: 17px;
+  font-weight: 740;
 }
 
 .step-desc {
-  margin: 0 0 0.75rem;
-  font-size: 0.82rem;
+  margin: 0 0 18px;
   color: #6B7280;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.65;
+  flex: 1;
 }
 
 .step-link {
-  font-size: 0.82rem;
-  color: #16A34A;
-  text-decoration: underline;
-  font-weight: 500;
+  color: #065F46;
+  font-size: 14px;
+  font-weight: 720;
 }
 
-/* 箭头分隔 */
-.step-arrow {
-  font-size: 2.5rem;
-  color: #16A34A;
-  padding: 0 1rem;
-  flex-shrink: 0;
-  font-weight: 300;
-  line-height: 1;
-  user-select: none;
+.step-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ── 移动端纵向排列 ── */
-@media (max-width: 768px) {
+.step-connector span {
+  width: 100%;
+  height: 1px;
+  position: relative;
+  background: linear-gradient(90deg, rgba(156, 163, 175, 0.2), rgba(22, 163, 74, 0.35));
+}
+
+.step-connector span::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid rgba(22, 163, 74, 0.55);
+  border-right: 1px solid rgba(22, 163, 74, 0.55);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@media (max-width: 900px) {
+  .steps-shell {
+    padding: 32px;
+  }
+
   .steps-container {
-    flex-direction: column;
-    gap: 1.75rem;
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
-  .step-item {
-    width: 100%;
+
+  .step-connector {
+    display: none;
   }
-  .step-arrow {
-    font-size: 1.8rem;
-    padding: 0;
-    transform: rotate(90deg);
+}
+
+@media (max-width: 640px) {
+  .home-steps {
+    padding: 56px 24px;
+  }
+
+  .steps-shell {
+    padding: 24px;
+    border-radius: 24px;
   }
 }
 </style>
