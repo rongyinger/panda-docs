@@ -39,10 +39,8 @@
       </div>
 
       <div class="hero-visual" aria-hidden="true">
-        <div class="assistant-card glass-green-card">
-          <div class="assistant-card-bg"></div>
-          <img :src="pandaImage" alt="" class="assistant-panda" />
-        </div>
+        <div class="panda-glow"></div>
+        <img :src="pandaImage" alt="" class="hero-panda" />
       </div>
     </div>
   </section>
@@ -100,7 +98,7 @@ function openSearch() {
   margin: 0 auto;
   padding: 72px 24px 64px;
   display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(360px, 0.94fr);
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 1fr);
   align-items: center;
   gap: 56px;
 }
@@ -271,32 +269,30 @@ function openSearch() {
 
 .hero-visual {
   position: relative;
+  min-height: 470px;
+  align-self: stretch;
+  overflow: visible;
 }
 
-.assistant-card {
-  position: relative;
-  min-height: 430px;
-  border-radius: 28px;
-  overflow: hidden;
-}
-
-.assistant-card-bg {
+.panda-glow {
   position: absolute;
-  inset: 0;
+  inset: 5% -8% 2% 2%;
+  border-radius: 48px;
   background:
-    radial-gradient(circle at 22% 16%, rgba(255,255,255,0.74), transparent 24%),
-    radial-gradient(ellipse at 56% 92%, rgba(6,95,70,0.13), transparent 38%);
+    radial-gradient(circle at 70% 20%, rgba(187, 247, 208, 0.5), transparent 32%),
+    radial-gradient(ellipse at 62% 86%, rgba(6,95,70,0.16), transparent 42%);
+  filter: blur(4px);
   pointer-events: none;
 }
 
-.assistant-panda {
+.hero-panda {
   position: absolute;
-  right: 24px;
-  bottom: 18px;
-  width: min(86%, 410px);
-  max-height: 380px;
+  right: -70px;
+  bottom: -30px;
+  width: min(118%, 620px);
+  max-height: 540px;
   object-fit: contain;
-  filter: drop-shadow(0 26px 44px rgba(15, 23, 42, 0.16));
+  filter: drop-shadow(0 30px 52px rgba(15, 23, 42, 0.18));
 }
 
 @media (max-width: 1024px) {
@@ -305,8 +301,13 @@ function openSearch() {
     gap: 32px;
   }
 
-  .assistant-card {
-    min-height: 390px;
+  .hero-visual {
+    min-height: 420px;
+  }
+
+  .hero-panda {
+    right: -80px;
+    width: min(124%, 560px);
   }
 }
 
@@ -328,13 +329,16 @@ function openSearch() {
     order: 2;
   }
 
-  .assistant-card {
-    min-height: 350px;
+  .hero-visual {
+    min-height: 360px;
+    overflow: hidden;
   }
 
-  .assistant-panda {
-    width: min(88%, 350px);
-    right: 20px;
+  .hero-panda {
+    right: 50%;
+    bottom: -24px;
+    width: min(100%, 410px);
+    transform: translateX(50%);
   }
 }
 
@@ -351,8 +355,12 @@ function openSearch() {
     display: none;
   }
 
-  .assistant-card {
-    min-height: 320px;
+  .hero-visual {
+    min-height: 310px;
+  }
+
+  .hero-panda {
+    width: min(108%, 360px);
   }
 }
 </style>
