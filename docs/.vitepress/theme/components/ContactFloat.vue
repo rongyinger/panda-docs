@@ -68,14 +68,14 @@ const vClickOutside = {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: #22c55e;
+  background: #16A34A;
   border: none;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.35);
+  box-shadow: 0 4px 16px rgba(22, 163, 74, 0.35);
   transition: all 0.25s;
 }
 
@@ -83,9 +83,9 @@ const vClickOutside = {
 
 .cf-fab:hover,
 .cf-fab.active {
-  background: #15803d;
+  background: #065F46;
   transform: scale(1.08);
-  box-shadow: 0 6px 24px rgba(34, 197, 94, 0.45);
+  box-shadow: 0 6px 24px rgba(22, 163, 74, 0.45);
 }
 
 .cf-panel {
@@ -110,7 +110,7 @@ const vClickOutside = {
   padding: 0.2rem;
   transition: color 0.2s;
 }
-.cf-close:hover { color: #22c55e; }
+.cf-close:hover { color: #16A34A; }
 
 .cf-panel-title {
   margin: 0 0 0.9rem;
@@ -141,7 +141,7 @@ const vClickOutside = {
   font-size: 0.8rem;
 }
 
-.cf-item a { color: #15803d; text-decoration: none; word-break: break-all; }
+.cf-item a { color: #065F46; text-decoration: none; word-break: break-all; }
 .cf-item a:hover { text-decoration: underline; }
 
 .panel-enter-active, .panel-leave-active { transition: opacity .22s, transform .22s; }

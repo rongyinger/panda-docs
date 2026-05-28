@@ -13,7 +13,7 @@ export default defineConfig({
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}logo.svg` }],
-    ['meta', { name: 'theme-color', content: '#22c55e' }],
+    ['meta', { name: 'theme-color', content: '#16A34A' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: '熊猫知识中心' }],
     ['meta', { property: 'og:description', content: '熊猫算力官方知识库' }],
@@ -27,7 +27,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '使用教程', link: '/guide/platform-quickstart' },
-      { text: '拓展连接', link: '/connect/chatbox' },
+      { text: '拓展链接', link: '/connect/chatbox' },
       { text: '常见问题', link: '/faq/personal/' },
       { text: 'AI 知识分享', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },
       { text: '技巧分享', link: '/tips/openwolf-claude-code-memory' },

@@ -1,7 +1,7 @@
 <template>
   <section class="hot-faq-section">
     <div class="hot-faq-bar">
-      <span class="hot-faq-label">常见问题</span>
+      <a :href="withBase('/faq/personal/')" class="hot-faq-label">常见问题</a>
       <div class="hot-faq-links">
         <a
           v-for="faq in faqs"
@@ -30,8 +30,8 @@ const faqs = [
 
 <style scoped>
 .hot-faq-section {
-  padding: 1.25rem 1.5rem 1.5rem;
-  background: white;
+  padding: 48px 24px 0;
+  background: #F8FAF9;
 }
 
 .hot-faq-bar {
@@ -40,10 +40,10 @@ const faqs = [
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: #fbfdfb;
-  border-left: 4px solid #22c55e;
+  background: white;
+  border: 1px solid #E5E7EB;
   border-radius: 8px;
-  padding: 0.75rem 1.25rem;
+  padding: 0.8rem;
   box-shadow: 0 10px 24px rgba(17, 24, 39, 0.045);
   overflow-x: auto;
 }
@@ -51,9 +51,15 @@ const faqs = [
 .hot-faq-label {
   font-size: 0.85rem;
   font-weight: 800;
-  color: #14532d;
+  color: #065F46;
+  text-decoration: none;
+  border: 1px solid #16A34A;
+  background: #F0FDF4;
+  border-radius: 999px;
+  padding: 0.32rem 0.76rem;
   white-space: nowrap;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .hot-faq-links {
@@ -72,18 +78,21 @@ const faqs = [
   padding: 0.25rem 0.7rem;
   border-radius: 20px;
   background: white;
-  border: 1px solid #e4eee6;
-  color: #15803d;
+  border: 1px solid #E5E7EB;
+  color: #1F2937;
   font-size: 0.78rem;
   text-decoration: none;
   white-space: nowrap;
-  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 200ms ease;
   font-weight: 500;
   flex-shrink: 0;
 }
 
 .hot-faq-item:hover {
-  background: #dcfce7;
-  color: #15803d;
+  background: #F0FDF4;
+  color: #065F46;
+  border-color: #16A34A;
+  transform: translateY(-1px);
 }
 </style>

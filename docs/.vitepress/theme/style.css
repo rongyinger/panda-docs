@@ -1,6 +1,6 @@
 /* ════════════════════════════════════════════════════
    熊猫知识中心 · 全局样式
-   主绿 #22c55e  浅绿 #dcfce7  深绿 #15803d
+   主绿 #16A34A  浅绿 #F0FDF4  深绿 #065F46
    ════════════════════════════════════════════════════ */
 
 /* ── 字体变量 ── */
@@ -11,38 +11,41 @@
 
 /* ── 品牌色变量（全局生效）── */
 :root {
-  --vp-c-brand-1: #22c55e;
-  --vp-c-brand-2: #16a34a;
-  --vp-c-brand-3: #15803d;
-  --vp-c-brand-soft: rgba(34, 197, 94, 0.12);
+  --vp-c-brand-1: #16A34A;
+  --vp-c-brand-2: #065F46;
+  --vp-c-brand-3: #BBF7D0;
+  --vp-c-brand-soft: rgba(22, 163, 74, 0.12);
 
-  --panda-green:       #22c55e;
-  --panda-green-light: #dcfce7;
-  --panda-green-dark:  #15803d;
-  --panda-green-mid:   #86efac;
-  --panda-bg:          #f0fdf4;
+  --panda-green:       #16A34A;
+  --panda-green-light: #F0FDF4;
+  --panda-green-dark:  #065F46;
+  --panda-green-border:#BBF7D0;
+  --panda-text:        #1F2937;
+  --panda-muted:       #6B7280;
+  --panda-page-bg:     #F8FAF9;
+  --panda-bg:          #F0FDF4;
 }
 
 /* ── 浅色模式 ── */
 :root {
   --vp-c-bg:        #ffffff;
-  --vp-c-bg-soft:   #f9fafb;
+  --vp-c-bg-soft:   #F8FAF9;
   --vp-c-bg-mute:   #f3f4f6;
-  --vp-c-bg-alt:    #f0fdf4;
+  --vp-c-bg-alt:    #F0FDF4;
   --vp-c-divider:   #e5e7eb;
-  --vp-c-text-1:    #111827;
-  --vp-c-text-2:    #4b5563;
+  --vp-c-text-1:    #1F2937;
+  --vp-c-text-2:    #6B7280;
   --vp-c-text-3:    #9ca3af;
   --vp-c-border:    #e5e7eb;
 }
 
 /* ── 深色模式 ── */
 .dark {
-  --vp-c-bg:        #0a150a;
-  --vp-c-bg-soft:   #111f11;
-  --vp-c-bg-mute:   #162316;
-  --vp-c-bg-alt:    #0f1a0f;
-  --vp-c-divider:   rgba(34, 197, 94, 0.12);
+  --vp-c-bg:        #0b1510;
+  --vp-c-bg-soft:   #111f18;
+  --vp-c-bg-mute:   #16231c;
+  --vp-c-bg-alt:    #0f1a14;
+  --vp-c-divider:   rgba(22, 163, 74, 0.14);
   --vp-c-text-1:    #f0fdf4;
   --vp-c-text-2:    #86efac;
   --vp-c-text-3:    #4ade80;
@@ -53,12 +56,19 @@
 .VPNav {
   background: rgba(255, 255, 255, 0.92) !important;
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(34, 197, 94, 0.15) !important;
+  border-bottom: 1px solid rgba(187, 247, 208, 0.8) !important;
+  height: 64px;
+}
+
+.VPNavBar,
+.VPNavBar .container,
+.VPNavBar .content {
+  height: 64px !important;
 }
 
 .dark .VPNav {
-  background: rgba(10, 21, 10, 0.9) !important;
-  border-bottom: 1px solid rgba(34, 197, 94, 0.12) !important;
+  background: rgba(11, 21, 16, 0.92) !important;
+  border-bottom: 1px solid rgba(22, 163, 74, 0.14) !important;
 }
 
 /* 导航副标题 */
@@ -73,7 +83,7 @@
 
 /* 导航激活项绿色高亮 */
 .VPNavBarMenuLink.active {
-  color: var(--panda-green) !important;
+  color: var(--panda-green-dark) !important;
   font-weight: 600;
 }
 
@@ -84,9 +94,9 @@
 .VPNavBarMenuLink.active::after {
   content: '';
   position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
+  bottom: 8px;
+  left: 10px;
+  right: 10px;
   height: 2px;
   background: var(--panda-green);
   border-radius: 1px;
@@ -94,6 +104,32 @@
 
 .VPNavBarMenuLink {
   position: relative;
+  padding: 0 10px !important;
+}
+
+.VPNavBarMenuLink:hover {
+  background: var(--panda-green-light);
+  border-radius: 999px;
+}
+
+.VPNavBarSearch .DocSearch-Button,
+.VPNavBarSearch .VPNavBarSearchButton {
+  border: 1px solid var(--panda-green-border);
+  background: #fff;
+  border-radius: 999px;
+}
+
+.VPSwitchAppearance {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 999px !important;
+  border: 1px solid var(--panda-green-border) !important;
+  background: #fff !important;
+  cursor: pointer;
+}
+
+.VPSwitchAppearance:hover {
+  background: var(--panda-green-light) !important;
 }
 
 /* 登录按钮 */
@@ -191,7 +227,7 @@ div[class*='language-'] {
 
 /* ── 全局选中色 ── */
 ::selection {
-  background: rgba(34, 197, 94, 0.2);
+  background: rgba(22, 163, 74, 0.2);
   color: inherit;
 }
 
@@ -199,9 +235,9 @@ div[class*='language-'] {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f1f5f9; }
 ::-webkit-scrollbar-thumb {
-  background: #22c55e;
+  background: #16A34A;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #15803d;
+  background: #065F46;
 }

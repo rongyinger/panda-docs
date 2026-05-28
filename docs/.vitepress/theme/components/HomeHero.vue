@@ -11,10 +11,17 @@
         </h1>
 
         <p class="hero-desc">
-          把上手教程、工具接入、常见问题和 AI 使用经验整理成清晰路径，帮助你更快找到答案。
+          汇总新手教程、工具接入、常见问题与 AI 使用经验，帮助你快速定位答案。
         </p>
 
-        <div class="hero-search" @click="openSearch">
+        <div
+          class="hero-search"
+          role="button"
+          tabindex="0"
+          @click="openSearch"
+          @keydown.enter.prevent="openSearch"
+          @keydown.space.prevent="openSearch"
+        >
           <svg class="search-icon" viewBox="0 0 20 20" fill="none">
             <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.8"/>
             <path d="M15 15l-3-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
@@ -64,13 +71,13 @@ const quickLinks = [
 
 const heroBg = computed(() => ({
   backgroundImage: [
-    'linear-gradient(105deg, #ffffff 0%, rgba(255,255,255,0.98) 43%, rgba(245,250,246,0.72) 65%, rgba(245,250,246,0.16) 100%)',
+    'linear-gradient(105deg, #f8faf9 0%, rgba(248,250,249,0.98) 44%, rgba(240,253,244,0.76) 68%, rgba(240,253,244,0.2) 100%)',
     `url(${withBase('hero-panda.png')})`,
   ].join(', '),
-  backgroundPosition: 'left, right center',
-  backgroundSize:     'auto, min(56vw, 730px) auto',
+  backgroundPosition: 'left, right 46%',
+  backgroundSize:     'auto, min(48vw, 620px) auto',
   backgroundRepeat:   'no-repeat, no-repeat',
-  backgroundColor:    '#f8fbf7',
+  backgroundColor:    '#F8FAF9',
 }))
 
 function openSearch() {
@@ -93,8 +100,8 @@ function openSearch() {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(90deg, rgba(20, 83, 45, 0.045) 1px, transparent 1px),
-    radial-gradient(circle at 18% 25%, rgba(22, 101, 52, 0.075) 0%, transparent 30%);
+    linear-gradient(90deg, rgba(22, 163, 74, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 18% 25%, rgba(22, 163, 74, 0.08) 0%, transparent 30%);
   background-size: 88px 100%, auto;
   pointer-events: none;
   z-index: 0;
@@ -104,7 +111,7 @@ function openSearch() {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.86) 100%);
+    linear-gradient(180deg, rgba(248,250,249,0) 0%, rgba(248,250,249,0.9) 100%);
   pointer-events: none;
 }
 
@@ -114,11 +121,11 @@ function openSearch() {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 5.5rem 2rem 4.5rem;
+  padding: 4.25rem 24px 3.5rem;
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(280px, 1fr);
+  grid-template-columns: minmax(0, 0.94fr) minmax(260px, 0.86fr);
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 .hero-text {
@@ -130,10 +137,10 @@ function openSearch() {
   align-items: center;
   margin-bottom: 0.9rem;
   padding: 0.28rem 0.75rem;
-  border: 1px solid rgba(34, 197, 94, 0.22);
+  border: 1px solid #BBF7D0;
   border-radius: 999px;
-  background: rgba(247, 255, 249, 0.9);
-  color: #15803d;
+  background: rgba(240, 253, 244, 0.92);
+  color: #065F46;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0;
@@ -141,11 +148,11 @@ function openSearch() {
 
 .hero-title {
   margin: 0 0 1rem;
-  font-size: clamp(2.35rem, 5vw, 4.45rem);
+  font-size: clamp(2.55rem, 5vw, 4.2rem);
   font-weight: 800;
-  line-height: 1.05;
-  color: #14532d;
-  background: linear-gradient(135deg, #111827 0%, #14532d 46%, #16a34a 100%);
+  line-height: 1.08;
+  color: #065F46;
+  background: linear-gradient(135deg, #1F2937 0%, #065F46 52%, #16A34A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -154,7 +161,7 @@ function openSearch() {
 .hero-desc {
   margin: 0 0 1.5rem;
   font-size: 1.05rem;
-  color: #405046;
+  color: #1F2937;
   line-height: 1.75;
   max-width: 520px;
 }
@@ -165,19 +172,22 @@ function openSearch() {
   gap: 0.75rem;
   max-width: 520px;
   padding: 0.95rem 1.15rem;
-  border-radius: 10px;
-  border: 1px solid #dbeee0;
+  border-radius: 12px;
+  border: 1px solid #BBF7D0;
   background: white;
   box-shadow: 0 16px 40px rgba(17, 24, 39, 0.07);
   cursor: pointer;
-  transition: all 0.25s;
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
   margin-bottom: 1rem;
 }
 
-.hero-search:hover {
-  border-color: #22c55e;
-  box-shadow: 0 20px 46px rgba(21, 128, 61, 0.12);
+.hero-search:hover,
+.hero-search:focus,
+.hero-search:focus-visible {
+  border-color: #16A34A;
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.12), 0 18px 40px rgba(17, 24, 39, 0.08);
   transform: translateY(-1px);
+  outline: none;
 }
 
 .search-icon {
@@ -189,7 +199,7 @@ function openSearch() {
 
 .search-placeholder {
   font-size: 0.95rem;
-  color: #9ca3af;
+  color: #6B7280;
 }
 
 .hero-actions {
@@ -205,12 +215,13 @@ function openSearch() {
   align-items: center;
   justify-content: center;
   min-height: 42px;
-  padding: 0.65rem 1.05rem;
+  padding: 0.66rem 1.15rem;
   border-radius: 8px;
   font-size: 0.92rem;
   font-weight: 700;
   text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease, border-color 200ms ease;
 }
 
 .hero-btn:hover {
@@ -218,23 +229,23 @@ function openSearch() {
 }
 
 .hero-btn-primary {
-  background: #14532d;
+  background: #065F46;
   color: white;
-  box-shadow: 0 10px 24px rgba(20, 83, 45, 0.22);
+  box-shadow: 0 10px 24px rgba(6, 95, 70, 0.22);
 }
 
 .hero-btn-primary:hover {
-  background: #166534;
+  background: #064E3B;
 }
 
 .hero-btn-secondary {
-  border: 1px solid #dbeee0;
+  border: 1px solid #16A34A;
   background: rgba(255, 255, 255, 0.88);
-  color: #14532d;
+  color: #065F46;
 }
 
 .hero-btn-secondary:hover {
-  background: #f0fdf4;
+  background: #F0FDF4;
   box-shadow: 0 8px 20px rgba(21, 128, 61, 0.1);
 }
 
@@ -247,10 +258,10 @@ function openSearch() {
 
 .hero-metrics span {
   padding: 0.32rem 0.62rem;
-  border: 1px solid #e5efe7;
+  border: 1px solid #BBF7D0;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.72);
-  color: #405046;
+  color: #1F2937;
   font-size: 0.78rem;
   font-weight: 700;
 }
@@ -260,28 +271,29 @@ function openSearch() {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.55rem;
-  color: #6b7280;
+  color: #6B7280;
   font-size: 0.84rem;
 }
 
 .hero-quick span {
-  color: #15803d;
+  color: #065F46;
   font-weight: 700;
 }
 
 .hero-quick a {
-  color: #36513d;
+  color: #1F2937;
   text-decoration: none;
-  border-bottom: 1px solid rgba(34, 197, 94, 0.24);
+  border-bottom: 1px solid rgba(22, 163, 74, 0.24);
 }
 
 .hero-quick a:hover {
-  color: #15803d;
+  color: #16A34A;
 }
 
 .hero-visual {
-  min-height: 370px;
+  min-height: 330px;
   position: relative;
+  opacity: 0.72;
 }
 
 .hero-leaf {
@@ -289,8 +301,8 @@ function openSearch() {
   width: 118px;
   height: 38px;
   border-radius: 100% 0 100% 0;
-  background: linear-gradient(135deg, rgba(132, 204, 22, 0.36), rgba(21, 128, 61, 0.12));
-  border: 1px solid rgba(21, 128, 61, 0.08);
+  background: linear-gradient(135deg, rgba(187, 247, 208, 0.65), rgba(22, 163, 74, 0.14));
+  border: 1px solid rgba(22, 163, 74, 0.08);
   filter: blur(0.1px);
 }
 
@@ -310,7 +322,7 @@ function openSearch() {
 @media (max-width: 768px) {
   .hero-inner {
     grid-template-columns: 1fr;
-    padding: 3.25rem 1.5rem 2.75rem;
+    padding: 3rem 24px 2.75rem;
   }
   .hero-visual { display: none; }
   .hero {
