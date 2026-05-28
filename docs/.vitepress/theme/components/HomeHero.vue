@@ -89,11 +89,11 @@ function openSearch() {
 .hero::after {
   content: '';
   position: absolute;
-  inset: -7% -6% -10% 22%;
+  inset: -8% -12% -8% 12%;
   background-image: var(--hero-panda-image);
   background-repeat: no-repeat;
   background-position: right bottom;
-  background-size: min(1180px, 92vw) auto;
+  background-size: auto min(760px, 98vh);
   filter: drop-shadow(0 34px 58px rgba(15, 23, 42, 0.18));
   pointer-events: none;
   z-index: 0;
@@ -287,8 +287,8 @@ function openSearch() {
 
 @media (max-width: 1024px) {
   .hero::after {
-    inset: -4% -16% -8% 18%;
-    background-size: min(980px, 98vw) auto;
+    inset: -4% -28% -8% 14%;
+    background-size: auto min(700px, 92vh);
   }
 }
 
@@ -307,10 +307,10 @@ function openSearch() {
   }
 
   .hero::after {
-    inset: auto -18% -52px -18%;
-    height: 380px;
+    inset: auto -38% -80px -38%;
+    height: 470px;
     background-position: center bottom;
-    background-size: min(720px, 138vw) auto;
+    background-size: auto 470px;
   }
 
   .hero-desc {
@@ -336,8 +336,8 @@ function openSearch() {
   }
 
   .hero::after {
-    height: 330px;
-    background-size: min(620px, 148vw) auto;
+    height: 420px;
+    background-size: auto 420px;
   }
 }
 </style>
