@@ -24,28 +24,26 @@
         </div>
       </div>
 
-      <aside class="side-panel">
-        <div class="starter-card glass-green-card">
-          <div class="starter-image-wrap">
-            <img :src="readingPanda" alt="读书的熊猫" class="starter-image" />
-          </div>
-          <div class="starter-copy">
-            <span class="starter-label">新手推荐路径</span>
-            <h3>不知道从哪里开始？</h3>
-            <p>先看入门教程和 FAQ，快速完成第一次配置。</p>
-            <a :href="withBase('/guide/platform-quickstart')" class="starter-link">查看新手指南 →</a>
-          </div>
+      <aside class="quick-panel glass-green-card">
+        <div class="quick-header">
+          <span class="section-kicker">快速使用</span>
+          <h2 class="section-title">三步开始</h2>
+          <p>从注册到第一次 API 调用，只保留最短路径。</p>
         </div>
 
-        <div class="category-grid">
+        <div class="quick-steps">
           <a
-            v-for="category in categories"
-            :key="category.link"
-            :href="withBase(category.link)"
-            class="category-item glass-green-card"
+            v-for="(step, index) in steps"
+            :key="step.link"
+            :href="withBase(step.link)"
+            class="quick-step"
           >
-            <span>{{ category.title.slice(0, 2) }}</span>
-            <strong>{{ category.title }}</strong>
+            <span class="quick-number">{{ String(index + 1).padStart(2, '0') }}</span>
+            <div>
+              <strong>{{ step.title }}</strong>
+              <p>{{ step.desc }}</p>
+              <span>{{ step.linkText }} →</span>
+            </div>
           </a>
         </div>
       </aside>
@@ -54,10 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { withBase } from 'vitepress'
-
-const readingPanda = computed(() => withBase('reading-panda.png'))
 
 const latestItems = [
   {
@@ -118,17 +113,31 @@ const latestItems = [
   },
 ]
 
-const categories = [
-  { title: '工具接入', link: '/connect/chatbox' },
-  { title: '常见问题', link: '/faq/personal/' },
-  { title: 'AI 知识', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },
-  { title: '使用技巧', link: '/tips/openwolf-claude-code-memory' },
+const steps = [
+  {
+    title: '注册并充值',
+    desc: '注册账号，完成充值，准备开始调用。',
+    link: '/faq/how-to-register',
+    linkText: '注册指南',
+  },
+  {
+    title: '获取 API Key',
+    desc: '在控制台创建 API Key，复制并安全保存。',
+    link: '/faq/how-to-create-apikey',
+    linkText: '创建 Key',
+  },
+  {
+    title: '接入你的工具',
+    desc: '配置 Cursor、Claude Code 或其他客户端。',
+    link: '/connect/chatbox',
+    linkText: '查看教程',
+  },
 ]
 </script>
 
 <style scoped>
 .latest-section {
-  padding: 76px 24px 86px;
+  padding: 24px 24px 86px;
   background: linear-gradient(180deg, #FFFFFF 0%, #F7FAF8 100%);
 }
 
@@ -136,7 +145,7 @@ const categories = [
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.72fr);
+  grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.72fr);
   gap: 28px;
   align-items: start;
 }
@@ -239,118 +248,78 @@ const categories = [
   font-variant-numeric: tabular-nums;
 }
 
-.side-panel {
-  display: grid;
-  gap: 14px;
+.quick-panel {
+  padding: 24px;
+  border-radius: 24px;
 }
 
-.starter-card {
-  overflow: hidden;
-  border-radius: 22px;
+.quick-header {
+  margin-bottom: 18px;
 }
 
-.starter-image-wrap {
-  height: 158px;
-  background:
-    radial-gradient(circle at 68% 30%, rgba(22, 163, 74, 0.18), transparent 36%),
-    linear-gradient(145deg, #ECFDF3, #FFFFFF);
-  overflow: hidden;
-}
-
-.starter-image {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: 68% center;
-}
-
-.starter-copy {
-  padding: 20px;
-}
-
-.starter-label {
-  color: #16A34A;
-  font-size: 12px;
-  font-weight: 760;
-}
-
-.starter-copy h3 {
-  margin: 8px 0 8px;
-  color: #111827;
-  font-size: 19px;
-  line-height: 1.32;
-}
-
-.starter-copy p {
-  margin: 0 0 16px;
+.quick-header p {
+  margin: 10px 0 0;
   color: #6B7280;
   font-size: 14px;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
-.starter-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 38px;
-  padding: 0 13px;
-  border-radius: 12px;
-  background: #065F46;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 720;
-  text-decoration: none;
-  transition: transform 200ms ease, background 200ms ease;
-}
-
-.starter-link:hover,
-.starter-link:focus-visible {
-  transform: translateY(-1px);
-  background: #064E3B;
-  outline: none;
-}
-
-.category-grid {
+.quick-steps {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 12px;
 }
 
-.category-item {
-  min-height: 92px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 8px;
+.quick-step {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 12px;
   padding: 14px;
+  border: 1px solid rgba(187, 247, 208, 0.64);
   border-radius: 16px;
-  color: #111827;
+  background: rgba(255, 255, 255, 0.66);
+  color: inherit;
   text-decoration: none;
-  cursor: pointer;
   transition: transform 200ms ease, border-color 200ms ease, background 200ms ease;
 }
 
-.category-item:hover,
-.category-item:focus-visible {
+.quick-step:hover,
+.quick-step:focus-visible {
   transform: translateY(-3px);
+  border-color: rgba(22, 163, 74, 0.36);
+  background: rgba(255, 255, 255, 0.9);
   outline: none;
 }
 
-.category-item span {
+.quick-number {
   width: 34px;
   height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 11px;
+  border-radius: 12px;
   background: #ECFDF3;
   color: #065F46;
   font-size: 12px;
-  font-weight: 760;
+  font-weight: 800;
 }
 
-.category-item strong {
-  font-size: 14px;
+.quick-step strong {
+  display: block;
+  color: #111827;
+  font-size: 15px;
+}
+
+.quick-step p {
+  margin: 5px 0 8px;
+  color: #6B7280;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.quick-step span:last-child {
+  color: #065F46;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 @media (max-width: 900px) {
@@ -361,7 +330,7 @@ const categories = [
 
 @media (max-width: 640px) {
   .latest-section {
-    padding: 56px 24px 70px;
+    padding: 28px 24px 70px;
   }
 
   .latest-header {

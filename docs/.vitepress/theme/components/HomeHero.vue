@@ -46,7 +46,7 @@ function openSearch() {
 <style scoped>
 .hero {
   position: relative;
-  min-height: calc(100vh - 64px);
+  min-height: 520px;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -85,7 +85,7 @@ function openSearch() {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 72px 24px 64px;
+  padding: 54px 24px 74px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -239,7 +239,7 @@ function openSearch() {
   }
 
   .hero-inner {
-    padding: 48px 24px 56px;
+    padding: 42px 24px 52px;
   }
 
   .hero-inner::before {
