@@ -24,17 +24,9 @@
           <span class="search-kbd">Ctrl K</span>
         </div>
 
-        <div class="hero-quick">
-          <a
-            v-for="item in quickLinks"
-            :key="item.text"
-            :href="withBase(item.link)"
-          >{{ item.text }}</a>
-        </div>
-
         <div class="hero-actions">
           <a :href="withBase('/guide/platform-quickstart')" class="hero-btn hero-btn-primary">新手上手</a>
-          <a :href="withBase('/connect/chatbox')" class="hero-btn hero-btn-secondary">查看接入教程</a>
+          <a :href="withBase('/faq/personal/')" class="hero-btn hero-btn-secondary">常见问题</a>
         </div>
       </div>
 
@@ -44,13 +36,6 @@
 
 <script setup lang="ts">
 import { withBase } from 'vitepress'
-
-const quickLinks = [
-  { text: 'API Key', link: '/faq/how-to-create-apikey' },
-  { text: 'Cursor', link: '/connect/cursor' },
-  { text: 'Claude Code', link: '/connect/claude-code' },
-  { text: '429 报错', link: '/faq/429-too-many-requests' },
-]
 
 function openSearch() {
   const btn = document.querySelector<HTMLElement>('.DocSearch-Button, .vp-local-search-button')
@@ -103,10 +88,13 @@ function openSearch() {
   padding: 72px 24px 64px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .hero-copy {
   max-width: 620px;
+  width: 100%;
 }
 
 .hero-badge {
@@ -134,7 +122,7 @@ function openSearch() {
 
 .hero-desc {
   max-width: 560px;
-  margin: 0 0 28px;
+  margin: 0 auto 28px;
   color: #4B5563;
   font-size: 18px;
   line-height: 1.72;
@@ -153,6 +141,7 @@ function openSearch() {
   box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
   cursor: pointer;
   transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  margin: 0 auto;
 }
 
 .hero-search:hover,
@@ -191,37 +180,12 @@ function openSearch() {
   font-weight: 650;
 }
 
-.hero-quick {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 14px 0 24px;
-}
-
-.hero-quick a {
-  padding: 6px 10px;
-  border: 1px solid rgba(229, 231, 235, 0.9);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
-  color: #4B5563;
-  font-size: 13px;
-  font-weight: 550;
-  text-decoration: none;
-  transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
-}
-
-.hero-quick a:hover,
-.hero-quick a:focus-visible {
-  border-color: rgba(22, 163, 74, 0.38);
-  background: #ECFDF3;
-  color: #065F46;
-  outline: none;
-}
-
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
+  margin-top: 22px;
 }
 
 .hero-btn {
@@ -275,7 +239,7 @@ function openSearch() {
   }
 
   .hero-inner {
-    padding: 48px 24px 330px;
+    padding: 48px 24px 56px;
   }
 
   .hero-inner::before {
