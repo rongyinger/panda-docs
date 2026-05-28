@@ -137,7 +137,7 @@ const steps = [
 
 <style scoped>
 .latest-section {
-  padding: 24px 24px 86px;
+  padding: 0 24px 86px;
   background: linear-gradient(180deg, #FFFFFF 0%, #F7FAF8 100%);
 }
 
@@ -146,7 +146,7 @@ const steps = [
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.72fr);
-  gap: 28px;
+  gap: 44px;
   align-items: start;
 }
 
@@ -330,7 +330,7 @@ const steps = [
 
 @media (max-width: 640px) {
   .latest-section {
-    padding: 28px 24px 70px;
+    padding: 8px 24px 70px;
   }
 
   .latest-header {
