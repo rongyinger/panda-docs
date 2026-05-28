@@ -1,5 +1,5 @@
 <template>
-  <section class="hero" :style="{ '--hero-panda-image': `url(${pandaImage})` }">
+  <section class="hero">
     <div class="hero-inner">
       <div class="hero-copy">
         <span class="hero-badge">熊猫算力官方知识库</span>
@@ -43,10 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { withBase } from 'vitepress'
-
-const pandaImage = computed(() => withBase('hero-panda.png'))
 
 const quickLinks = [
   { text: 'API Key', link: '/faq/how-to-create-apikey' },
@@ -84,19 +81,6 @@ function openSearch() {
   background-size: 72px 72px;
   mask-image: linear-gradient(180deg, rgba(0,0,0,0.7), transparent 76%);
   pointer-events: none;
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: -8% -12% -8% 12%;
-  background-image: var(--hero-panda-image);
-  background-repeat: no-repeat;
-  background-position: right bottom;
-  background-size: auto min(760px, 98vh);
-  filter: drop-shadow(0 34px 58px rgba(15, 23, 42, 0.18));
-  pointer-events: none;
-  z-index: 0;
 }
 
 .hero-inner::before {
@@ -285,13 +269,6 @@ function openSearch() {
   background: #fff;
 }
 
-@media (max-width: 1024px) {
-  .hero::after {
-    inset: -4% -28% -8% 14%;
-    background-size: auto min(700px, 92vh);
-  }
-}
-
 @media (max-width: 768px) {
   .hero {
     min-height: auto;
@@ -304,13 +281,6 @@ function openSearch() {
   .hero-inner::before {
     background:
       linear-gradient(180deg, rgba(247,251,248,0.98) 0%, rgba(247,251,248,0.92) 48%, rgba(247,251,248,0.3) 76%, rgba(247,251,248,0.08) 100%);
-  }
-
-  .hero::after {
-    inset: auto -38% -80px -38%;
-    height: 470px;
-    background-position: center bottom;
-    background-size: auto 470px;
   }
 
   .hero-desc {
@@ -331,13 +301,5 @@ function openSearch() {
     display: none;
   }
 
-  .hero-inner {
-    padding-bottom: 290px;
-  }
-
-  .hero::after {
-    height: 420px;
-    background-size: auto 420px;
-  }
 }
 </style>
