@@ -1,6 +1,6 @@
 <template>
   <section class="home-steps">
-    <div class="steps-shell">
+    <div class="steps-shell glass-green-card">
       <div class="steps-header">
         <span class="steps-kicker">快速开始</span>
         <h2 class="steps-title">三步开始使用熊猫算力</h2>
@@ -9,7 +9,7 @@
 
       <div class="steps-container">
         <template v-for="(step, index) in steps" :key="step.link">
-          <a :href="withBase(step.link)" class="step-item">
+          <a :href="withBase(step.link)" class="step-item glass-green-card">
             <span class="step-number">{{ String(index + 1).padStart(2, '0') }}</span>
             <div class="step-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -67,12 +67,7 @@ const steps = [
   max-width: 1200px;
   margin: 0 auto;
   padding: 44px;
-  border: 1px solid rgba(229, 231, 235, 0.82);
   border-radius: 28px;
-  background:
-    radial-gradient(circle at 16% 20%, rgba(22, 163, 74, 0.1), transparent 28%),
-    linear-gradient(135deg, rgba(236, 253, 243, 0.9), rgba(255,255,255,0.92));
-  box-shadow: 0 24px 62px rgba(15, 23, 42, 0.07);
 }
 
 .steps-header {
@@ -113,12 +108,9 @@ const steps = [
   display: flex;
   flex-direction: column;
   padding: 22px;
-  border: 1px solid rgba(229, 231, 235, 0.9);
   border-radius: 20px;
-  background: rgba(255,255,255,0.9);
   color: inherit;
   text-decoration: none;
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.055);
   cursor: pointer;
   transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
 }
@@ -126,8 +118,6 @@ const steps = [
 .step-item:hover,
 .step-item:focus-visible {
   transform: translateY(-4px);
-  border-color: rgba(22, 163, 74, 0.35);
-  box-shadow: 0 20px 42px rgba(15, 23, 42, 0.08);
   outline: none;
 }
 

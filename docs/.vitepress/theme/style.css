@@ -28,6 +28,40 @@
   --panda-bg:          #ECFDF3;
 }
 
+.glass-green-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(187, 247, 208, 0.75);
+  background:
+    radial-gradient(circle at 80% 10%, rgba(187, 247, 208, 0.45), transparent 32%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 253, 244, 0.86));
+  box-shadow: 0 18px 50px rgba(15, 118, 110, 0.08);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.glass-green-card:hover,
+.glass-green-card:focus-visible {
+  border-color: rgba(22, 163, 74, 0.35);
+  box-shadow: 0 22px 60px rgba(15, 118, 110, 0.12);
+}
+
+.glass-green-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image:
+    linear-gradient(rgba(22, 163, 74, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 163, 74, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.glass-green-card > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* ── 浅色模式 ── */
 :root {
   --vp-c-bg:        #ffffff;

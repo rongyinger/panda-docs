@@ -5,7 +5,7 @@
         <span class="hero-badge">熊猫算力官方知识库</span>
         <h1 class="hero-title">熊猫知识中心</h1>
         <p class="hero-desc">
-          从 API Key 创建、工具接入到常见报错处理，帮你快速找到可执行的答案。
+          从创建 API Key、工具接入到常见报错处理，帮你快速找到可执行的答案。
         </p>
 
         <div
@@ -39,20 +39,9 @@
       </div>
 
       <div class="hero-visual" aria-hidden="true">
-        <div class="assistant-card">
+        <div class="assistant-card glass-green-card">
           <div class="assistant-card-bg"></div>
-          <div class="assistant-top">
-            <span class="assistant-dot"></span>
-            <span>Knowledge Assistant</span>
-          </div>
           <img :src="pandaImage" alt="" class="assistant-panda" />
-          <div class="assistant-panel panel-key">API Key 创建</div>
-          <div class="assistant-panel panel-cursor">Cursor 接入</div>
-          <div class="assistant-panel panel-error">429 报错排查</div>
-          <div class="assistant-summary">
-            <span>推荐路径</span>
-            <strong>新手上手指南</strong>
-          </div>
         </div>
       </div>
     </div>
@@ -287,12 +276,7 @@ function openSearch() {
 .assistant-card {
   position: relative;
   min-height: 430px;
-  border: 1px solid rgba(229, 231, 235, 0.86);
   border-radius: 28px;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,0.92), rgba(236,253,243,0.82)),
-    radial-gradient(circle at 72% 24%, rgba(22, 163, 74, 0.16), transparent 34%);
-  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.12);
   overflow: hidden;
 }
 
@@ -300,103 +284,19 @@ function openSearch() {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, transparent 0 62%, rgba(255,255,255,0.58) 62% 100%),
-    radial-gradient(ellipse at 50% 92%, rgba(6,95,70,0.14), transparent 36%);
+    radial-gradient(circle at 22% 16%, rgba(255,255,255,0.74), transparent 24%),
+    radial-gradient(ellipse at 56% 92%, rgba(6,95,70,0.13), transparent 38%);
   pointer-events: none;
-}
-
-.assistant-top {
-  position: absolute;
-  left: 24px;
-  top: 22px;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 8px 11px;
-  border: 1px solid rgba(229, 231, 235, 0.76);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.76);
-  color: #6B7280;
-  font-size: 12px;
-  font-weight: 700;
-  backdrop-filter: blur(12px);
-}
-
-.assistant-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #16A34A;
-  box-shadow: 0 0 0 5px rgba(22, 163, 74, 0.12);
 }
 
 .assistant-panda {
   position: absolute;
-  right: -24px;
-  bottom: -16px;
-  width: min(92%, 430px);
-  max-height: 390px;
+  right: 24px;
+  bottom: 18px;
+  width: min(86%, 410px);
+  max-height: 380px;
   object-fit: contain;
   filter: drop-shadow(0 26px 44px rgba(15, 23, 42, 0.16));
-}
-
-.assistant-panel {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  min-height: 42px;
-  padding: 0 14px;
-  border: 1px solid rgba(229, 231, 235, 0.9);
-  border-radius: 14px;
-  background: rgba(255,255,255,0.84);
-  color: #111827;
-  font-size: 13px;
-  font-weight: 720;
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
-  backdrop-filter: blur(14px);
-}
-
-.panel-key {
-  left: 32px;
-  top: 104px;
-}
-
-.panel-cursor {
-  right: 28px;
-  top: 156px;
-}
-
-.panel-error {
-  left: 46px;
-  bottom: 116px;
-}
-
-.assistant-summary {
-  position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 16px;
-  border: 1px solid rgba(229, 231, 235, 0.86);
-  border-radius: 18px;
-  background: rgba(255,255,255,0.82);
-  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.1);
-  backdrop-filter: blur(14px);
-}
-
-.assistant-summary span {
-  color: #6B7280;
-  font-size: 12px;
-  font-weight: 650;
-}
-
-.assistant-summary strong {
-  color: #065F46;
-  font-size: 14px;
 }
 
 @media (max-width: 1024px) {
@@ -433,11 +333,8 @@ function openSearch() {
   }
 
   .assistant-panda {
-    width: min(95%, 360px);
-  }
-
-  .panel-cursor {
-    right: 18px;
+    width: min(88%, 350px);
+    right: 20px;
   }
 }
 
@@ -456,16 +353,6 @@ function openSearch() {
 
   .assistant-card {
     min-height: 320px;
-  }
-
-  .assistant-panel {
-    font-size: 12px;
-    min-height: 36px;
-    padding: 0 11px;
-  }
-
-  .panel-error {
-    left: 22px;
   }
 }
 </style>

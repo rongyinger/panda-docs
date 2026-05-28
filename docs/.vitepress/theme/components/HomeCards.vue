@@ -11,7 +11,7 @@
         v-for="card in cards"
         :key="card.link"
         :href="withBase(card.link)"
-        class="card"
+        class="card glass-green-card"
       >
         <div class="card-icon-wrap" aria-hidden="true">
           <svg class="card-icon" viewBox="0 0 24 24" fill="none">
@@ -112,10 +112,8 @@ const cards = [
   padding: 22px;
   border: 1px solid #E5E7EB;
   border-radius: 20px;
-  background: rgba(255,255,255,0.88);
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.045);
   cursor: pointer;
   transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease, background 200ms ease;
 }
@@ -123,9 +121,6 @@ const cards = [
 .card:hover,
 .card:focus-visible {
   transform: translateY(-6px);
-  border-color: rgba(22, 163, 74, 0.35);
-  background: #fff;
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
   outline: none;
 }
 

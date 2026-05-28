@@ -1,13 +1,13 @@
 <template>
   <section class="hot-faq-section">
-    <div class="hot-faq-bar">
-      <a :href="withBase('/faq/personal/')" class="hot-faq-label">常见问题</a>
+    <div class="hot-faq-bar glass-green-card">
+      <a :href="withBase('/faq/personal/')" class="hot-faq-label glass-green-card">常见问题</a>
       <div class="hot-faq-links">
         <a
           v-for="(faq, index) in faqs"
           :key="faq.link"
           :href="withBase(faq.link)"
-          class="hot-faq-item"
+          class="hot-faq-item glass-green-card"
           :class="{ featured: index === 0 }"
         >
           {{ faq.text }}
@@ -42,18 +42,14 @@ const faqs = [
   align-items: center;
   gap: 18px;
   padding: 14px;
-  border: 1px solid rgba(229, 231, 235, 0.9);
   border-radius: 22px;
-  background: rgba(255,255,255,0.88);
-  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.06);
   overflow-x: auto;
 }
 
 .hot-faq-label {
   padding: 9px 13px;
   border-radius: 14px;
-  background: #111827;
-  color: #fff;
+  color: #065F46;
   font-size: 14px;
   font-weight: 760;
   text-decoration: none;
@@ -77,9 +73,7 @@ const faqs = [
 .hot-faq-item {
   flex: 0 0 auto;
   padding: 8px 12px;
-  border: 1px solid transparent;
   border-radius: 999px;
-  background: #F9FAFB;
   color: #4B5563;
   font-size: 13px;
   font-weight: 600;
@@ -89,15 +83,11 @@ const faqs = [
 }
 
 .hot-faq-item.featured {
-  border-color: #BBF7D0;
-  background: #ECFDF3;
   color: #065F46;
 }
 
 .hot-faq-item:hover,
 .hot-faq-item:focus-visible {
-  border-color: rgba(22, 163, 74, 0.36);
-  background: #fff;
   color: #065F46;
   transform: translateY(-1px);
   outline: none;

@@ -15,7 +15,7 @@
             v-for="item in latestItems"
             :key="item.link"
             :href="withBase(item.link)"
-            class="article-row"
+            class="article-row glass-green-card"
           >
             <span class="article-badge" :class="`tag-${item.type}`">{{ item.tag }}</span>
             <span class="article-title">{{ item.title }}</span>
@@ -25,7 +25,7 @@
       </div>
 
       <aside class="side-panel">
-        <div class="starter-card">
+        <div class="starter-card glass-green-card">
           <div class="starter-image-wrap">
             <img :src="readingPanda" alt="读书的熊猫" class="starter-image" />
           </div>
@@ -42,7 +42,7 @@
             v-for="category in categories"
             :key="category.link"
             :href="withBase(category.link)"
-            class="category-item"
+            class="category-item glass-green-card"
           >
             <span>{{ category.title.slice(0, 2) }}</span>
             <strong>{{ category.title }}</strong>
@@ -190,12 +190,9 @@ const categories = [
   align-items: center;
   gap: 14px;
   padding: 16px 18px;
-  border: 1px solid #E5E7EB;
   border-radius: 14px;
-  background: #fff;
   color: inherit;
   text-decoration: none;
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.035);
   cursor: pointer;
   transition: transform 200ms ease, background 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
@@ -203,9 +200,6 @@ const categories = [
 .article-row:hover,
 .article-row:focus-visible {
   transform: translateX(3px);
-  border-color: #BBF7D0;
-  background: #F9FFFB;
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.055);
   outline: none;
 }
 
@@ -252,10 +246,7 @@ const categories = [
 
 .starter-card {
   overflow: hidden;
-  border: 1px solid #E5E7EB;
   border-radius: 22px;
-  background: rgba(255,255,255,0.9);
-  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.07);
 }
 
 .starter-image-wrap {
@@ -332,12 +323,9 @@ const categories = [
   justify-content: center;
   gap: 8px;
   padding: 14px;
-  border: 1px solid #E5E7EB;
   border-radius: 16px;
-  background: #fff;
   color: #111827;
   text-decoration: none;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.035);
   cursor: pointer;
   transition: transform 200ms ease, border-color 200ms ease, background 200ms ease;
 }
@@ -345,8 +333,6 @@ const categories = [
 .category-item:hover,
 .category-item:focus-visible {
   transform: translateY(-3px);
-  border-color: #BBF7D0;
-  background: #F9FFFB;
   outline: none;
 }
 
