@@ -121,11 +121,12 @@ function openSearch() {
 }
 
 .hero-desc {
-  max-width: 560px;
-  margin: 0 auto 28px;
+  max-width: 760px;
+  margin: 0 auto 14px;
   color: #4B5563;
   font-size: 18px;
   line-height: 1.72;
+  white-space: nowrap;
 }
 
 .hero-search {
@@ -185,7 +186,7 @@ function openSearch() {
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  margin-top: 22px;
+  margin-top: 12px;
 }
 
 .hero-btn {
@@ -249,6 +250,7 @@ function openSearch() {
 
   .hero-desc {
     font-size: 16px;
+    white-space: normal;
   }
 }
 
