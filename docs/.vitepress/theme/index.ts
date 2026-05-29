@@ -15,6 +15,7 @@ export default {
     return h(DefaultTheme.Layout, null, {
       'nav-bar-title-after': () =>
         h('span', { class: 'nav-subtitle' }, '熊猫算力官方知识库'),
+      'nav-bar-content-before': () => h(ReturnHomeButton, { compact: true }),
       'doc-after': () => h(Feedback),
       'layout-bottom': () => [h(ReturnHomeButton), h(ContactFloat)],
     })

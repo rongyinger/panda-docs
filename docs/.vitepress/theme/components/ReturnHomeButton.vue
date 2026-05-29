@@ -1,19 +1,18 @@
 <template>
   <a
-    v-if="!isHome"
-    class="return-home-button"
+    :class="compact ? 'nav-home-link' : 'return-home-button'"
     :href="withBase('/')"
     aria-label="返回首页"
   >
-    <span class="return-home-mark">⌂</span>
-    <span>返回首页</span>
+    <span :class="compact ? 'nav-home-mark' : 'return-home-mark'">&#8962;</span>
+    <span>&#36820;&#22238;&#39318;&#39029;</span>
   </a>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute, withBase } from 'vitepress'
+import { withBase } from 'vitepress'
 
-const route = useRoute()
-const isHome = computed(() => route.path === '/' || route.path === '/index.html')
+defineProps<{
+  compact?: boolean
+}>()
 </script>
