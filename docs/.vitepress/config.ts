@@ -161,6 +161,7 @@ export default defineConfig({
         {
           text: 'AI 知识分享',
           items: [
+            { text: 'Claude Opus 4.8 深度点评：更诚实的旗舰，Agent 时代的新基准', link: '/ai-knowledge/claude-opus-4-8-review' },
             { text: '横评 DeepSeek、Claude、GPT、Kimi', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },
             { text: '文献综述哪家强：五模型引用核查实测', link: '/ai-knowledge/literature-review-model-comparison' },
             { text: 'AI 补贴时代落幕，渠道商黄金时期到来', link: '/ai-knowledge/ai-subsidy-era-channel-opportunity' },
