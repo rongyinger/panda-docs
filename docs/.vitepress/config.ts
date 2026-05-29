@@ -161,6 +161,7 @@ export default defineConfig({
         {
           text: 'AI 知识分享',
           items: [
+            { text: '2026 AI 应用学习路线图：工具 + 提示词 + 资源一文打包', link: '/ai-knowledge/ai-learning-roadmap-2026' },
             { text: 'Claude Opus 4.8 深度点评：更诚实的旗舰，Agent 时代的新基准', link: '/ai-knowledge/claude-opus-4-8-review' },
             { text: '横评 DeepSeek、Claude、GPT、Kimi', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },
             { text: '文献综述哪家强：五模型引用核查实测', link: '/ai-knowledge/literature-review-model-comparison' },
@@ -173,6 +174,8 @@ export default defineConfig({
         {
           text: '技巧分享',
           items: [
+            { text: 'Claude Code 省 Token 实战：7 个技巧把成本砍掉一半', link: '/tips/claude-code-save-token' },
+            { text: 'Claude Code 用量监控工具全攻略：再也不怕 Token 不知不觉耗光', link: '/tips/claude-code-token-monitor' },
             { text: '字节跳动开源 OpenViking：用文件系统范式重构 AI Agent 记忆中枢', link: '/tips/openviking-agent-memory-system' },
             { text: '省 80% Token！给 Claude Code 装「第二大脑」', link: '/tips/openwolf-claude-code-memory' },
             { text: '省 Token 终极指南：10 个技巧降低 50%-80% 费用', link: '/tips/save-token-ultimate-guide' },
