@@ -6,6 +6,12 @@ const BUNDLE = 'scripts/home-bundle.src.html'
 const OUT_DIR = 'docs/public/home'
 const ASSET_DIR = path.join(OUT_DIR, 'assets')
 
+// The extracted page lives at <BASE>home/, but its doc links are written
+// relative (e.g. "guide/x"), so the browser would resolve them against
+// /home/ and 404. Rewrite doc links to absolute <BASE> paths; asset paths
+// (assets/...) stay relative so they keep resolving inside /home/.
+const BASE = '/panda-docs/'
+
 const MIME_EXT = {
   'image/png': 'png',
   'image/jpeg': 'jpg',
@@ -50,6 +56,11 @@ for (const uuid of uuids) {
 template = template
   .replace(/\s+integrity="[^"]*"/gi, '')
   .replace(/\s+crossorigin="[^"]*"/gi, '')
+
+// Make doc links absolute so they resolve against the site root, not /home/.
+// Skip external, anchor, already-absolute, and asset URLs.
+template = template.replace(/href="(?!https?:|\/\/|\/|#|mailto:|tel:|data:|assets\/)\.?\/?([^"]*)"/gi,
+  (_, p) => `href="${BASE}${p}"`)
 
 fs.writeFileSync(path.join(OUT_DIR, 'index.html'), template)
 console.log(`Extracted ${uuids.length} assets -> ${ASSET_DIR}`)
