@@ -2,7 +2,7 @@
   <div class="home-page-wrap">
     <iframe
       class="home-page-frame"
-      :src="withBase('/_-_ (1).html')"
+      :src="withBase('/home/')"
       title="熊猫知识中心首页"
     />
   </div>
