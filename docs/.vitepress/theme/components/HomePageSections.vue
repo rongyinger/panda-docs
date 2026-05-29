@@ -28,8 +28,4 @@ import { withBase } from 'vitepress'
   background: #faf9f5;
 }
 
-:global(.VPNav),
-:global(.cf-wrap) {
-  display: none !important;
-}
 </style>
