@@ -16,6 +16,7 @@ export default defineConfig({
   description: '熊猫算力官方知识库',
   lastUpdated: true,
   cleanUrls: true,
+  appearance: false,
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}logo.svg` }],
@@ -23,6 +24,16 @@ export default defineConfig({
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: '熊猫知识中心' }],
     ['meta', { property: 'og:description', content: '熊猫算力官方知识库' }],
+    [
+      'script',
+      {},
+      `;(() => {
+        try {
+          localStorage.setItem('vitepress-theme-appearance', 'light')
+        } catch {}
+        document.documentElement.classList.remove('dark')
+      })();`,
+    ],
   ],
 
   themeConfig: {
