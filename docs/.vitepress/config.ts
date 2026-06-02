@@ -1,7 +1,13 @@
 import { defineConfig } from 'vitepress'
 
-// 生产构建时 Vite 自动将 NODE_ENV 设为 production
-const base = process.env.NODE_ENV === 'production' ? '/panda-docs/' : '/'
+// 部署路径（base）解析优先级：
+//   1. DOCS_BASE 环境变量（GitLab CI 设为 "/docs/" → pandatoken.com/docs）
+//   2. 生产构建默认 "/panda-docs/"（GitHub Pages，Vite 自动设 NODE_ENV=production）
+//   3. 本地开发 "/"
+// 注意：base 必须以 "/" 开头和结尾。
+const base =
+  process.env.DOCS_BASE ||
+  (process.env.NODE_ENV === 'production' ? '/panda-docs/' : '/')
 
 export default defineConfig({
   base,

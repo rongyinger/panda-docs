@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
+    "extract-home": "node scripts/extract-home.mjs",
+    "build": "node scripts/extract-home.mjs && vitepress build docs",
     "preview": "vitepress preview docs"
   },
   "devDependencies": {

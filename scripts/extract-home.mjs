@@ -10,7 +10,10 @@ const ASSET_DIR = path.join(OUT_DIR, 'assets')
 // relative (e.g. "guide/x"), so the browser would resolve them against
 // /home/ and 404. Rewrite doc links to absolute <BASE> paths; asset paths
 // (assets/...) stay relative so they keep resolving inside /home/.
-const BASE = '/panda-docs/'
+// Must match the VitePress `base` (see config.ts). Driven by DOCS_BASE so the
+// homepage's absolute doc links match the deploy path (/docs/ on GitLab,
+// /panda-docs/ on GitHub Pages by default).
+const BASE = process.env.DOCS_BASE || '/panda-docs/'
 
 const MIME_EXT = {
   'image/png': 'png',
