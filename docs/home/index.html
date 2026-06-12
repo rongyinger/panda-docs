@@ -5835,7 +5835,7 @@
   --shadow-float: 0 26px 70px rgba(28,44,72,0.16), 0 8px 24px rgba(28,44,72,0.08);
 
   /* 竹林强度 —— 由 Tweaks 覆盖 */
-  --bamboo-op: 1;
+  --bamboo-op: .42;
 
   /* 标签色（保留多彩，作为玻璃上的点缀） */
   --t-jr:#0e8a64; --t-jr-bg:rgba(16,150,110,.14);
@@ -5968,9 +5968,9 @@ body[data-motion="on"] .stalk { animation:sway 7s ease-in-out infinite; }
    导航
    ========================================================= */
 .navbar {
-  position:fixed; top:14px; left:50%; transform:translateX(-50%);
+  position:fixed; top:12px; left:50%; transform:translateX(-50%);
   z-index:100; width:min(1180px, calc(100% - 36px));
-  height:58px; padding:0 14px 0 18px;
+  height:54px; padding:0 14px 0 18px;
   display:flex; align-items:center; justify-content:space-between;
   border-radius:var(--radius-pill);
   background:rgba(255,255,255,0.42);
@@ -5980,10 +5980,10 @@ body[data-motion="on"] .stalk { animation:sway 7s ease-in-out infinite; }
   box-shadow:0 6px 24px rgba(28,44,72,0.07), inset 0 1px 0 rgba(255,255,255,0.85);
   transition:box-shadow .3s, background .3s;
 }
-.navbar.scrolled { background:rgba(255,255,255,0.62); box-shadow:0 10px 34px rgba(28,44,72,0.12), inset 0 1px 0 rgba(255,255,255,0.9); }
+.navbar.scrolled { background:rgba(255,255,255,0.70); box-shadow:0 8px 28px rgba(28,44,72,0.10), inset 0 1px 0 rgba(255,255,255,0.9); }
 
 .nav-brand { display:flex; align-items:center; gap:11px; text-decoration:none; color:inherit; }
-.nav-logo { width:42px; height:42px; flex-shrink:0; object-fit:contain; }
+.nav-logo { width:38px; height:38px; flex-shrink:0; object-fit:contain; }
 .nav-title { font-weight:700; font-size:15.5px; letter-spacing:-0.02em; }
 .nav-sub { font-size:10.5px; color:var(--ink-3); letter-spacing:.04em; margin-top:1px; }
 
@@ -6012,7 +6012,7 @@ body[data-motion="on"] .stalk { animation:sway 7s ease-in-out infinite; }
 /* =========================================================
    HERO（封面）—— 内容块共享，布局/装饰按 data-cover 切换
    ========================================================= */
-.hero { position:relative; padding:120px 32px 70px; overflow:hidden; }
+.hero { position:relative; padding:104px 32px 50px; overflow:hidden; }
 .hero-deco { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
 .hero-deco > * { position:absolute; }
 
@@ -6136,9 +6136,10 @@ body[data-motion="on"] .hero-badge .dot { animation:blink 2.4s ease-in-out infin
 .quick-tag.primary:hover { color:#fff; transform:translateY(-1px) scale(1.02); }
 
 /* ---- 方案 A 晨雾留白 ---- */
-body[data-cover="a"] .hero { padding-top:120px; }
+body[data-cover="a"] .hero { padding-top:104px; }
 body[data-cover="a"] .hero-glow { opacity:1; }
 body[data-cover="a"] .hero-inner { max-width:680px; }
+body[data-cover="a"] .bamboo { opacity:.34; }
 
 /* ---- 方案 B 悬浮玻璃卡 ---- */
 body[data-cover="b"] .hero { padding:112px 32px 78px; }
@@ -6209,7 +6210,19 @@ body[data-cover="c"] .bamboo-cluster { opacity:1; }
 .article-item:hover .article-arrow { opacity:1; transform:translateX(0); color:var(--accent); }
 
 /* 侧栏 */
-.sidebar { display:flex; flex-direction:column; gap:22px; position:sticky; top:90px; }
+.sidebar { display:flex; flex-direction:column; gap:16px; position:sticky; top:82px; }
+
+.error-card { padding:20px; position:relative; overflow:hidden; }
+.error-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, #ef4444, #f59e0b, var(--accent)); }
+.error-label { font-size:11.5px; color:#b45309; font-weight:700; text-transform:uppercase; letter-spacing:.1em; margin-bottom:7px; }
+.error-title { font-size:18px; font-weight:700; letter-spacing:-0.02em; margin-bottom:6px; }
+.error-desc { font-size:13px; color:var(--ink-2); line-height:1.55; margin-bottom:12px; }
+.error-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.error-link { min-width:0; padding:9px 10px; border-radius:12px; text-decoration:none; color:var(--ink-2);
+  background:rgba(255,255,255,0.48); border:1px solid rgba(255,255,255,0.72); font-size:12.5px; font-weight:600;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:color .15s, background .15s, transform .15s; }
+.error-link:hover { color:var(--accent-deep); background:rgba(255,255,255,0.78); transform:translateY(-1px); }
 
 .qs-card { padding:26px; position:relative; overflow:hidden; }
 .qs-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px;
@@ -6342,7 +6355,7 @@ body.anim-done .main { animation:none !important; opacity:1 !important; transfor
   <div class="nav-links">
     <a class="nav-link active" href="/docs/">首页</a>
     <a class="nav-link" href="/docs/guide/platform-quickstart">使用教程</a>
-    <a class="nav-link" href="/docs/connect/chatbox">拓展链接</a>
+    <a class="nav-link" href="/docs/connect/chatbox">工具接入</a>
     <a class="nav-link" href="/docs/faq/personal/">常见问题</a>
     <a class="nav-link" href="/docs/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi">AI 知识分享</a>
     <a class="nav-link" href="/docs/tips/openwolf-claude-code-memory">技巧分享</a>
@@ -6376,7 +6389,7 @@ body.anim-done .main { animation:none !important; opacity:1 !important; transfor
     <p class="hero-desc">从创建 API Key、工具接入到常见报错处理，帮你在最短路径里找到可执行的答案。</p>
     <div class="search-wrap">
       <svg class="search-icon" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
-      <input class="search-box" id="searchInput" type="text" placeholder="搜索 API Key、Cursor、429 报错…">
+      <input class="search-box" id="searchInput" type="text" placeholder="搜索报错、模型名、客户端配置…">
       <button class="search-go" type="button"><span>搜索</span>
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
       </button>
@@ -6384,6 +6397,7 @@ body.anim-done .main { animation:none !important; opacity:1 !important; transfor
     <div class="quick-tags">
       <a class="quick-tag primary" href="/docs/guide/platform-quickstart">🚀 新手上手</a>
       <a class="quick-tag" href="/docs/faq/personal/">常见问题</a>
+      <a class="quick-tag" href="/docs/faq/429-too-many-requests">我遇到报错</a>
       <a class="quick-tag" href="/docs/connect/cursor">Cursor 接入</a>
       <a class="quick-tag" href="/docs/connect/cherry-studio">Cherry Studio</a>
       <a class="quick-tag" href="/docs/changelog/2026-05">模型定价</a>
@@ -6399,6 +6413,24 @@ body.anim-done .main { animation:none !important; opacity:1 !important; transfor
       <a class="section-more" href="/docs/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi">查看全部 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></a>
     </div>
     <div class="article-list glass">
+      <a class="article-item" href="/docs/ai-knowledge/claude-fable-5-explained">
+        <span class="article-tag" data-tag="知识">知识</span>
+        <span class="article-text">Claude Fable 5 是什么？</span>
+        <span class="article-date">06-11</span>
+        <svg class="article-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+      <a class="article-item" href="/docs/faq/claude-code-messages-null-500">
+        <span class="article-tag" data-tag="常见">常见</span>
+        <span class="article-text">Claude Code 报 messages is null / status_code=500 怎么解决？</span>
+        <span class="article-date">06-11</span>
+        <svg class="article-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+      <a class="article-item" href="/docs/faq/claude-code-invalid-beta-flag">
+        <span class="article-tag" data-tag="常见">常见</span>
+        <span class="article-text">Claude Code 报 invalid beta flag 怎么解决？</span>
+        <span class="article-date">06-11</span>
+        <svg class="article-arrow" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
       <a class="article-item" href="/docs/tips/claude-code-save-token">
         <span class="article-tag" data-tag="技巧">技巧</span>
         <span class="article-text">Claude Code 省 Token 实战：7 个技巧把成本砍掉一半</span>
@@ -6469,6 +6501,19 @@ body.anim-done .main { animation:none !important; opacity:1 !important; transfor
   </div>
 
   <aside class="sidebar">
+    <div class="error-card glass">
+      <div class="error-label">高频报错</div>
+      <h3 class="error-title">快速排查</h3>
+      <p class="error-desc">先判断错误类型，再按对应页面处理。</p>
+      <div class="error-grid">
+        <a class="error-link" href="/docs/faq/401-unauthorized">401 Unauthorized</a>
+        <a class="error-link" href="/docs/faq/403-forbidden">403 Forbidden</a>
+        <a class="error-link" href="/docs/faq/429-too-many-requests">429 / 503</a>
+        <a class="error-link" href="/docs/faq/500-internal-server-error">500 Error</a>
+        <a class="error-link" href="/docs/faq/claude-code-invalid-beta-flag">invalid beta flag</a>
+        <a class="error-link" href="/docs/faq/claude-code-messages-null-500">messages is null</a>
+      </div>
+    </div>
     <div class="qs-card glass">
       <div class="qs-label">快速使用</div>
       <h3 class="qs-title">三步开始</h3>
@@ -6517,7 +6562,7 @@ body.anim-done .main { animation:none !important; opacity:1 !important; transfor
     <a class="cat-card glass" href="/docs/connect/chatbox">
       <div class="cat-illo"><img src="assets/7fdf9a76-a9a8-4029-85ba-bce5ff155286.png" alt=""></div>
       <div class="cat-meta">
-        <div class="cat-name">拓展链接</div>
+        <div class="cat-name">工具接入</div>
         <div class="cat-count">8 篇文章</div>
       </div>
     </a>
