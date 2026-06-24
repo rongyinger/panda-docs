@@ -1,6 +1,6 @@
 <template>
   <div class="home-page-wrap">
-    正在前往首页...
+    ??????...
   </div>
 </template>
 
@@ -25,5 +25,4 @@ onMounted(() => {
   font-size: 14px;
   font-weight: 700;
 }
-
 </style>

@@ -65,7 +65,7 @@ export default defineConfig({
 
     // ── 顶部导航栏 ─────────────────────────────────────────────
     nav: [
-      { text: '首页', link: '/home/index.html' },
+      { text: '首页', link: '/' },
       { text: '使用教程', link: '/guide/platform-quickstart' },
       { text: '工具接入', link: '/connect/chatbox' },
       { text: '常见问题', link: '/faq/personal/' },
