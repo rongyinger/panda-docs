@@ -1,15 +1,16 @@
 <template>
   <div class="home-page-wrap">
-    <iframe
-      class="home-page-frame"
-      :src="withBase('/home/')"
-      title="熊猫知识中心首页"
-    />
+    正在前往首页...
   </div>
 </template>
 
 <script setup lang="ts">
 import { withBase } from 'vitepress'
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  window.location.replace(withBase('/home/index.html'))
+})
 </script>
 
 <style scoped>
@@ -18,14 +19,11 @@ import { withBase } from 'vitepress'
   inset: 0;
   z-index: 2147483000;
   background: #faf9f5;
-}
-
-.home-page-frame {
-  width: 100%;
-  height: 100%;
-  display: block;
-  border: 0;
-  background: #faf9f5;
+  display: grid;
+  place-items: center;
+  color: #065f46;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 </style>

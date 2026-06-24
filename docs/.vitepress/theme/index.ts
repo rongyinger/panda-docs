@@ -6,6 +6,7 @@ import ReturnHomeButton from './components/ReturnHomeButton.vue'
 import HomePageSections from './components/HomePageSections.vue'
 import HomeSteps from './components/HomeSteps.vue'
 import HomeHotFaq from './components/HomeHotFaq.vue'
+import ModelStrategyPage from './components/model-strategy/ModelStrategyPage.vue'
 import './style.css'
 
 export default {
@@ -25,5 +26,6 @@ export default {
     app.component('HomePageSections', HomePageSections)
     app.component('HomeSteps', HomeSteps)
     app.component('HomeHotFaq', HomeHotFaq)
+    app.component('ModelStrategyPage', ModelStrategyPage)
   },
 }

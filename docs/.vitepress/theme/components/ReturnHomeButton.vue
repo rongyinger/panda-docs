@@ -1,7 +1,7 @@
 <template>
   <a
     :class="compact ? 'nav-home-link' : 'return-home-button'"
-    href="/"
+    :href="homeUrl"
     aria-label="返回首页"
     @click.prevent="goHome"
   >
@@ -11,15 +11,15 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vitepress'
+import { withBase } from 'vitepress'
 
 defineProps<{
   compact?: boolean
 }>()
 
-const router = useRouter()
+const homeUrl = withBase('/home/index.html')
 
 function goHome() {
-  router.go('/')
+  window.location.href = homeUrl
 }
 </script>

@@ -36,16 +36,40 @@ export default defineConfig({
     ],
   ],
 
+  vite: {
+    plugins: [
+      {
+        name: 'panda-root-home-redirect',
+        transformIndexHtml(html) {
+          const script = `<script>;(() => {
+  const base = ${JSON.stringify(base)}
+  const normalizedBase = base.endsWith('/') ? base : base + '/'
+  const baseNoSlash = normalizedBase.replace(/\\/$/, '')
+  const home = normalizedBase + 'home/index.html'
+  const path = window.location.pathname
+
+  if (path === normalizedBase || path === baseNoSlash || path === normalizedBase + 'index.html') {
+    window.location.replace(home + window.location.search + window.location.hash)
+  }
+})();</script>`
+
+          return html.replace('<head>', `<head>\n    ${script}`)
+        },
+      },
+    ],
+  },
+
   themeConfig: {
     logo: '/logo.svg',
     siteTitle: '熊猫知识中心',
 
     // ── 顶部导航栏 ─────────────────────────────────────────────
     nav: [
-      { text: '首页', link: '/' },
+      { text: '首页', link: '/home/index.html' },
       { text: '使用教程', link: '/guide/platform-quickstart' },
-      { text: '拓展链接', link: '/connect/chatbox' },
+      { text: '工具接入', link: '/connect/chatbox' },
       { text: '常见问题', link: '/faq/personal/' },
+      { text: '模型策略', link: '/model-strategy' },
       { text: 'AI 知识分享', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },
       { text: '技巧分享', link: '/tips/openwolf-claude-code-memory' },
     ],
@@ -57,6 +81,7 @@ export default defineConfig({
     //      { text: '显示标题', link: '/目录/文件名' }（不含 .md）
     // ──────────────────────────────────────────────────────────
     sidebar: {
+      '/model-strategy': [],
       '/guide/': [
         {
           text: '使用教程',
@@ -136,6 +161,8 @@ export default defineConfig({
             { text: '403 Forbidden', link: '/faq/403-forbidden' },
             { text: '429 Too Many Requests', link: '/faq/429-too-many-requests' },
             { text: '500 Internal Server Error', link: '/faq/500-internal-server-error' },
+            { text: 'Claude Code 报 invalid beta flag', link: '/faq/claude-code-invalid-beta-flag' },
+            { text: 'Claude Code 报 messages is null / 500', link: '/faq/claude-code-messages-null-500' },
             { text: 'context_length_exceeded', link: '/faq/context-length-exceeded' },
           ],
         },
@@ -178,6 +205,7 @@ export default defineConfig({
         {
           text: 'AI 知识分享',
           items: [
+            { text: 'Claude Fable 5 是什么？', link: '/ai-knowledge/claude-fable-5-explained' },
             { text: '2026 AI 应用学习路线图：工具 + 提示词 + 资源一文打包', link: '/ai-knowledge/ai-learning-roadmap-2026' },
             { text: 'Claude Opus 4.8 深度点评：更诚实的旗舰，Agent 时代的新基准', link: '/ai-knowledge/claude-opus-4-8-review' },
             { text: '横评 DeepSeek、Claude、GPT、Kimi', link: '/ai-knowledge/model-comparison-deepseek-claude-gpt-kimi' },

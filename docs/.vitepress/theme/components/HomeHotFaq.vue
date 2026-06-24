@@ -21,10 +21,10 @@
 import { withBase } from 'vitepress'
 
 const faqs = [
+  { text: 'Claude Code 报 invalid beta flag？', link: '/faq/claude-code-invalid-beta-flag' },
   { text: '为什么报 429？',         link: '/faq/429-too-many-requests' },
   { text: 'Token 消耗为什么这么快？', link: '/faq/token-consumption-high' },
   { text: '怎么接入 Cursor？',       link: '/connect/cursor' },
-  { text: 'Claude Code 怎么配置？',  link: '/connect/claude-code' },
   { text: 'API Key 怎么创建？',      link: '/faq/how-to-create-apikey' },
 ]
 </script>

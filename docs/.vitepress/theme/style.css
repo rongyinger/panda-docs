@@ -467,8 +467,44 @@ div[class*='language-'] {
   }
 }
 
+@media (max-width: 768px) {
+  .VPNavBarTitle {
+    min-width: 0;
+  }
+
+  .nav-subtitle,
+  .nav-home-link,
+  .VPNavBarSearch {
+    display: none !important;
+  }
+}
+
 /* ── page 布局：首页全宽 ── */
 .VPPage {
+  padding-top: 0 !important;
+}
+
+.model-strategy-route .VPPage {
+  padding: 0 !important;
+}
+
+.model-strategy-route .VPContent {
+  padding: 0 !important;
+}
+
+.model-strategy-route .VPPage > .container {
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.model-strategy-route .VPNav,
+.model-strategy-route .return-home-button,
+.model-strategy-route .contact-float,
+.model-strategy-route .cf-wrap {
+  display: none !important;
+}
+
+.model-strategy-route .VPContent {
   padding-top: 0 !important;
 }
 

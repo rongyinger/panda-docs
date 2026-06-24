@@ -25,6 +25,21 @@
       </div>
 
       <aside class="quick-panel glass-green-card">
+        <div class="error-panel">
+          <span class="section-kicker">高频报错</span>
+          <h2 class="section-title">快速排查</h2>
+          <p>先判断错误类型，再按对应页面处理。</p>
+          <div class="error-links">
+            <a
+              v-for="item in errorItems"
+              :key="item.link"
+              :href="withBase(item.link)"
+            >
+              {{ item.text }}
+            </a>
+          </div>
+        </div>
+
         <div class="quick-header">
           <span class="section-kicker">快速使用</span>
           <h2 class="section-title">三步开始</h2>
@@ -55,6 +70,27 @@
 import { withBase } from 'vitepress'
 
 const latestItems = [
+  {
+    title: 'Claude Fable 5 是什么？',
+    tag: '知识',
+    type: 'knowledge',
+    date: '2026-06-11',
+    link: '/ai-knowledge/claude-fable-5-explained',
+  },
+  {
+    title: 'Claude Code 报 messages is null / status_code=500 怎么解决？',
+    tag: 'FAQ',
+    type: 'guide',
+    date: '2026-06-11',
+    link: '/faq/claude-code-messages-null-500',
+  },
+  {
+    title: 'Claude Code 报 invalid beta flag 怎么解决？',
+    tag: 'FAQ',
+    type: 'guide',
+    date: '2026-06-11',
+    link: '/faq/claude-code-invalid-beta-flag',
+  },
   {
     title: 'Codex 桌面版接入熊猫算力 · 完整教程',
     tag: '接入',
@@ -90,27 +126,15 @@ const latestItems = [
     date: '2026-05-18',
     link: '/ai-knowledge/literature-review-model-comparison',
   },
-  {
-    title: '省 Token 终极指南：10 个技巧降低 50%-80% 费用',
-    tag: '技巧',
-    type: 'tips',
-    date: '2026-05-18',
-    link: '/tips/save-token-ultimate-guide',
-  },
-  {
-    title: 'Spring AI 接入熊猫算力教程',
-    tag: '接入',
-    type: 'connect',
-    date: '2026-05-18',
-    link: '/connect/spring-ai',
-  },
-  {
-    title: '熊猫算力 · 快速上手指南（12 步完整流程）',
-    tag: '新手',
-    type: 'guide',
-    date: '2026-05-18',
-    link: '/guide/platform-quickstart',
-  },
+]
+
+const errorItems = [
+  { text: '401 Unauthorized', link: '/faq/401-unauthorized' },
+  { text: '403 Forbidden', link: '/faq/403-forbidden' },
+  { text: '429 / 503', link: '/faq/429-too-many-requests' },
+  { text: '500 Error', link: '/faq/500-internal-server-error' },
+  { text: 'invalid beta flag', link: '/faq/claude-code-invalid-beta-flag' },
+  { text: 'messages is null', link: '/faq/claude-code-messages-null-500' },
 ]
 
 const steps = [
@@ -252,6 +276,47 @@ const steps = [
 .quick-panel {
   padding: 24px;
   border-radius: 24px;
+}
+
+.error-panel {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(187, 247, 208, 0.64);
+}
+
+.error-panel p {
+  margin: 10px 0 14px;
+  color: #6B7280;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.error-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.error-links a {
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid rgba(187, 247, 208, 0.64);
+  border-radius: 12px;
+  color: #4B5563;
+  background: rgba(255, 255, 255, 0.66);
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.error-links a:hover,
+.error-links a:focus-visible {
+  color: #065F46;
+  border-color: rgba(22, 163, 74, 0.36);
+  outline: none;
 }
 
 .quick-header {
