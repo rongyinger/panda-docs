@@ -4,6 +4,5 @@ node_modules
 tools
 .claude
 docs/.vitepress/cache
-docs/.vitepress/dist
 npm-debug.log
 pnpm-debug.log

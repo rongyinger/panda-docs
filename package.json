@@ -7,6 +7,7 @@
     "dev": "vitepress dev docs",
     "extract-home": "node scripts/extract-home.mjs",
     "build": "node scripts/extract-home.mjs && vitepress build docs",
+    "build:opsbox": "node scripts/extract-home.mjs && vitepress build docs && node scripts/sync-dist-to-docs.mjs",
     "preview": "vitepress preview docs"
   },
   "devDependencies": {
